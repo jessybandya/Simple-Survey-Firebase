@@ -7,7 +7,7 @@ function Registerinstitution() {
         <div>
         <Header />
   <div>
-<div class="center1">
+<div class="center2">
       <div><span>Register</span></div>
       <div><input type="text" /></div>
       <div><button>Create Account</button></div>
