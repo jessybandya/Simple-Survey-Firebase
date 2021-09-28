@@ -1,0 +1,21 @@
+.center1 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 5px solid #FFFF00;
+  padding: 10px;
+  }
+
+  .main_body{
+    background-color: #fff;
+  }
+
+  body{
+    height: calc(100vh - 50px);
+
+
+    background: 
+      url("");
+    background-size: cover;
+}

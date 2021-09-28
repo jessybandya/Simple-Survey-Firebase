@@ -4,6 +4,8 @@ import { useState,useEffect } from 'react';
 import Home from './components/Home';
 import Login from "./components/Login"
 
+import Test from "./components/Test"
+import Registerinstitution from './components/Registerinstitution';
 
 
 function App() {
@@ -13,6 +15,10 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route exact path="/signIn" component={Login}/>
+          <Route exact path="/test" component={Test}/>
+          <Route exact path="/registerInstitution" component={Registerinstitution}/>
+
+          
         </Switch>
       </Router>
     </div>
