@@ -20,7 +20,7 @@ import PriceChangeIcon from '@mui/icons-material/PriceChange';
 import img from "../../assets/jedd.jpg"
 import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
-
+import "./styles.css"
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -162,7 +162,9 @@ export default function Header() {
             <VpnKeyIcon />
           </Badge>
         </IconButton>
-        <span>SIGN IN</span>
+        <a href="/signIn">
+        <span style={{color: "#000"}}>SIGN IN</span>
+        </a>
       </MenuItem>
       
       <MenuItem onClick={handleProfileMenuOpen}>
@@ -184,9 +186,10 @@ export default function Header() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar style={{backgroundColor: "#000"}} position="static">
         <Toolbar>
+            <a href={`/`}>
         <img src={img} style={{height:60,width:120,marginLeft:-15, objectFit:"cover"}}/>
 
-
+        </a>
           <Search style={{marginLeft:10}}>
             <SearchIconWrapper>
               <SearchIcon />
@@ -231,7 +234,9 @@ export default function Header() {
               color="inherit"
             >
               {/* <AccountCircle /> */}
-              <span style={{fontSize:20}}>SIGN IN</span>
+              <a href="/signIn">
+              <span style={{fontSize:20,color:"#fff"}}>SIGN IN</span>
+              </a>
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
