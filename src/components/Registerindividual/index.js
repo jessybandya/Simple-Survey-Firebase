@@ -2,7 +2,7 @@ import React from 'react'
 import Header from '../Header'
 import "./styles.css"
 import img from "../../assets/jedd.jpg"
-function Registerinstitution() {
+function Registerindividual() {
     return (
         <div>
         <Header />
@@ -19,8 +19,8 @@ function Registerinstitution() {
 <div className="main_body">
 <div class="parent">
   <div class="child"><div class="center2">
-      <div style={{marginBottom:15}}><span style={{fontSize:20,fontWeight:"600"}}>Register as an academic institution</span></div>
-      <div style={{marginBottom:15}}><input  style={{width: 250,height:35,border:"2px solid #2E2EFF",textAlign: "center"}}type="text" placeholder="Institution E mail"/></div>
+      <div style={{marginBottom:15}}><span style={{fontSize:20,fontWeight:"600"}}>Register with your email address</span></div>
+      <div style={{marginBottom:15}}><input  style={{width: 250,height:35,border:"2px solid #2E2EFF",textAlign: "center"}}type="text" placeholder="E mail"/></div>
       <div style={{marginBottom:15}}><input  style={{width: 250,height:35,border:"2px solid #2E2EFF",textAlign: "center"}}type="text" placeholder="Create Password"/></div>
       <div><button style={{backgroundColor: "#2E2EFF",width:250,height:40,color: "#fff",fontSize:20,border: "none"}}>CREATE FREE ACCOUNT</button></div>
       <div style={{marginTop:15,fontWeight:"600"}}><div class="hr-theme-slash-2"><div class="hr-line"></div><div class="hr-icon"><div class="circle"><span style={{color: "#000"}}>OR</span></div></div><div class="hr-line"></div></div></div>
@@ -47,4 +47,4 @@ function Registerinstitution() {
     )
 }
 
-export default Registerinstitution
+export default Registerindividual

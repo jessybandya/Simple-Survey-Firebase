@@ -6,6 +6,8 @@ import Login from "./components/Login"
 
 import Test from "./components/Test"
 import Registerinstitution from './components/Registerinstitution';
+import Registerstudent from './components/Registerstudent';
+import Registerindividual from './components/Registerindividual';
 
 
 function App() {
@@ -17,7 +19,8 @@ function App() {
           <Route exact path="/signIn" component={Login}/>
           <Route exact path="/test" component={Test}/>
           <Route exact path="/registerInstitution" component={Registerinstitution}/>
-
+          <Route exact path="/registerstudent" component={Registerstudent}/>
+          <Route exact path="/registerindividual" component={Registerindividual}/>
           
         </Switch>
       </Router>

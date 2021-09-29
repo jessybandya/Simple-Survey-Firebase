@@ -138,7 +138,7 @@ function Login() {
                 Register as an institution
         
             </a>
-            <a href="#">
+            <a href="/registerstudent">
         
         <span></span>
 
@@ -151,7 +151,7 @@ function Login() {
         Register as a student
 
     </a>
-    <a href="#">
+    <a href="/registerindividual">
         
         <span></span>
 
