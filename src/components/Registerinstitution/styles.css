@@ -75,6 +75,10 @@
   margin-top: 10px;
   
 }
+.socialDiv1{
+  margin-top: 15px;
+  
+}
 
   }
   
@@ -84,6 +88,10 @@
       display: flex;
       margin-top: 15px;
       justify-content: space-between;
+      
+    }
+    .socialDiv1{
+      cursor: pointer;;
       
     }
 

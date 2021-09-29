@@ -26,10 +26,10 @@ function Registerindividual() {
       <div style={{marginTop:15,fontWeight:"600"}}><div class="hr-theme-slash-2"><div class="hr-line"></div><div class="hr-icon"><div class="circle"><span style={{color: "#000"}}>OR</span></div></div><div class="hr-line"></div></div></div>
       <div style={{marginTop:10,fontWeight:"600",fontSize:25}}>Create free account with</div>
       <div className="socialDiv">
-      <img src="https://image.similarpng.com/thumbnail/2020/12/Flat-design-Google-logo-design-Vector-PNG.png" style={{height:40,objectFit: "contain"}}/>
-      <img src="https://www.pngkit.com/png/detail/22-221036_follow-us-facebook-icon-flat-png.png" style={{height:40,objectFit: "contain"}}/>     
-      <img src="https://detailedcapital.com/wp-content/uploads/2017/05/LinkedIn-Logo-500x500.png" style={{height:40,objectFit: "contain"}}/>     
-      <img src="https://image.similarpng.com/thumbnail/2020/06/Popular-icon-Twitter-clipart-PNG.png" style={{height:40,objectFit: "contain"}}/>      
+      <div className="socialDiv1"><img src="https://image.similarpng.com/thumbnail/2020/12/Flat-design-Google-logo-design-Vector-PNG.png" style={{height:40,objectFit: "contain"}}/></div>
+      <div className="socialDiv1"><img src="https://www.pngkit.com/png/detail/22-221036_follow-us-facebook-icon-flat-png.png" style={{height:40,objectFit: "contain"}}/></div>      
+      <div className="socialDiv1"><img src="https://detailedcapital.com/wp-content/uploads/2017/05/LinkedIn-Logo-500x500.png" style={{height:40,objectFit: "contain"}}/></div>      
+      <div className="socialDiv1"><img src="https://image.similarpng.com/thumbnail/2020/06/Popular-icon-Twitter-clipart-PNG.png" style={{height:40,objectFit: "contain"}}/></div>        
       </div>
       <div style={{marginTop:15,fontWeight:"500"}}>
           <span style={{fontSize:18,color: "#AEAEAE"}}>
