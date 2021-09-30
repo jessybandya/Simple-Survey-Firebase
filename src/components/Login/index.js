@@ -62,10 +62,12 @@ function Login() {
 
 
     return (
+      <body>
         <>
     <Header/>
-<body>
-<div class="container">
+
+<div className="loginbody">
+<div  class="container">
 	<div class="d-flex justify-content-center h-100">
 		<div class="card">
 			<div class="card-header">
@@ -170,8 +172,10 @@ function Login() {
         </DialogContent>
 
       </BootstrapDialog>
-</body>
+      </div>
 </>
+
+</body>
     )
 }
 

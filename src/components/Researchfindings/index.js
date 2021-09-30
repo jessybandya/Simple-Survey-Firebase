@@ -144,7 +144,7 @@ function Researchfindings() {
     return (
         <body >
             <Header/>
-            <div className="OngoingBody">
+            <div className="ResearchBody">
                 <div style={{textAlign: "center",fontSize:30,fontWeight:"600"}}><span>RESEARCH FINDINGS</span></div>
                 <div>
                 <Paper sx={{ width: '100%', overflow: 'hidden' }}>

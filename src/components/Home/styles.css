@@ -335,6 +335,7 @@
       ),
       url("https://westsiderc.org/wp-content/uploads/2020/08/Survey.jpg");
     background-size: cover;
+    margin-top: 50px;
   }
   
   .loginTitle {

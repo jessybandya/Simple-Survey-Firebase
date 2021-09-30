@@ -183,8 +183,8 @@ export default function Header() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar style={{backgroundColor: "#000"}} position="static">
+    <Box sx={{ flexGrow: 1 }} >
+      <AppBar style={{position: "fixed",zIndex:1,top:0,backgroundColor:"#000"}} position="static">
         <Toolbar>
             <a href={`/`}>
         <img src={img} style={{height:60,width:120,marginLeft:-15, objectFit:"cover"}}/>

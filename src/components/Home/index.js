@@ -73,7 +73,7 @@ function Home() {
              <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,cursor: "pointer"}}><span ><a style={{color: "#000"}} onClick={handleClickOpen}>START NEW SURVEY</a></span></div>
                 <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,marginTop:10,cursor: "pointer"}}><span><a style={{color: "#000"}} href="/Ongoingsurveys">ONGOING SURVEYS</a></span></div>
                 <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,marginTop:10,cursor: "pointer"}}><span><a style={{color: "#000"}} href="/researchfindings">RESEARCH FINDINGS</a></span></div>
-                <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,marginTop:10,cursor: "pointer"}}><span><a style={{color: "#000"}} href="/">RECOMMENDED BOOKS</a></span></div>
+                <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,marginTop:10,cursor: "pointer"}}><span><a style={{color: "#000"}} href="/recommendedbooks">RECOMMENDED BOOKS</a></span></div>
                 <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,marginTop:10,cursor: "pointer"}}><span><a style={{color: "#000"}} href="/">BUY RESEARCH AUDIENCE</a></span></div>
                 </div>
              </div>
@@ -86,7 +86,7 @@ function Home() {
         TransitionComponent={Transition}
         style={{justifyContent: "center",margin:  "auto"}}
       >
-        <AppBar sx={{ position: 'relative' }} style={{backgroundColor: "#000"}}>
+        <AppBar sx={{ position: 'relative' }} style={{backgroundColor: "#000",marginTop:65}}>
         <Header/>
 
           <Toolbar style={{borderTop: "2px solid #fff"}}>
