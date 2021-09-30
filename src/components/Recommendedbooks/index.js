@@ -238,16 +238,16 @@ function Recommendedbooks() {
                 <TableContainer sx={{ maxHeight: 440 }}>
       <Table aria-label="collapsible table"
       stickyHeader aria-label="sticky table">
-      
         <TableHead 
+        
         >
           <TableRow >
-            <TableCell sx={{backgroundColor: ""}}/>
-            <TableCell sx={{backgroundColor: "",fontWeight:"900"}}>ACADEMIC FIELD</TableCell>
-            <TableCell sx={{backgroundColor: "",fontWeight:"900"}} align="right">TOPIC</TableCell>
-            <TableCell sx={{backgroundColor: "",fontWeight:"900"}} align="right">BOOK TITLE</TableCell>
-            <TableCell sx={{backgroundColor: "",fontWeight:"900"}} align="right">TIME ADDED</TableCell>
-            <TableCell sx={{backgroundColor: ""}}/>
+            <TableCell sx={{borderBottom: "2px solid #980DFF"}}/>
+            <TableCell sx={{backgroundColor: "",fontWeight:"900",borderBottom: "2px solid #980DFF"}}>ACADEMIC FIELD</TableCell>
+            <TableCell sx={{backgroundColor: "",fontWeight:"900",borderBottom: "2px solid #980DFF"}} align="right">TOPIC</TableCell>
+            <TableCell sx={{backgroundColor: "",fontWeight:"900",borderBottom: "2px solid #980DFF"}} align="right">BOOK TITLE</TableCell>
+            <TableCell sx={{backgroundColor: "",fontWeight:"900",borderBottom: "2px solid #980DFF"}} align="right">TIME ADDED</TableCell>
+            <TableCell sx={{backgroundColor: "",borderBottom: "2px solid #980DFF"}}/>
           </TableRow>
         </TableHead>
         <TableBody>
