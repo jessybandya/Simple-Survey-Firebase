@@ -88,7 +88,7 @@ function Row(props) {
         <TableCell align="right">{row.protein}</TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0,border:"1px solid #980DFF" }} colSpan={6}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
@@ -97,10 +97,10 @@ function Row(props) {
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell style={{fontWeight:"600",color:"#980DFF"}}>Date Modified</TableCell>
-                    <TableCell style={{fontWeight:"600",color:"#980DFF"}}>Owner Email</TableCell>
-                    <TableCell style={{fontWeight:"600",color:"#980DFF"}} align="right">Status</TableCell>
-                    <TableCell style={{fontWeight:"600",color:"#980DFF"}} align="right">Participate</TableCell>
+                    <TableCell style={{fontWeight:"600",color:""}}>Date Modified</TableCell>
+                    <TableCell style={{fontWeight:"600",color:""}}>Owner Email</TableCell>
+                    <TableCell style={{fontWeight:"600",color:""}} align="right">Status</TableCell>
+                    <TableCell style={{fontWeight:"600",color:""}} align="right">Participate</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -259,12 +259,12 @@ function Recommendedbooks() {
         <TableHead 
         >
           <TableRow >
-            <TableCell sx={{backgroundColor: "#980DFF"}}/>
-            <TableCell sx={{backgroundColor: "#980DFF",fontWeight:"900"}}>ACADEMIC FIELD</TableCell>
-            <TableCell sx={{backgroundColor: "#980DFF",fontWeight:"900"}} align="right">TOPIC</TableCell>
-            <TableCell sx={{backgroundColor: "#980DFF",fontWeight:"900"}} align="right">BOOK TITLE</TableCell>
-            <TableCell sx={{backgroundColor: "#980DFF",fontWeight:"900"}} align="right">TIME ADDED</TableCell>
-            <TableCell sx={{backgroundColor: "#980DFF"}}/>
+            <TableCell sx={{backgroundColor: ""}}/>
+            <TableCell sx={{backgroundColor: "",fontWeight:"900"}}>ACADEMIC FIELD</TableCell>
+            <TableCell sx={{backgroundColor: "",fontWeight:"900"}} align="right">TOPIC</TableCell>
+            <TableCell sx={{backgroundColor: "",fontWeight:"900"}} align="right">BOOK TITLE</TableCell>
+            <TableCell sx={{backgroundColor: "",fontWeight:"900"}} align="right">TIME ADDED</TableCell>
+            <TableCell sx={{backgroundColor: ""}}/>
           </TableRow>
         </TableHead>
         <TableBody>
