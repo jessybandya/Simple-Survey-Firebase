@@ -9,6 +9,7 @@ import Registerinstitution from './components/Registerinstitution';
 import Registerstudent from './components/Registerstudent';
 import Registerindividual from './components/Registerindividual';
 import Ongoingsurvey from './components/Ongoingsurvey';
+import Researchfindings from './components/Researchfindings';
 
 
 function App() {
@@ -23,6 +24,9 @@ function App() {
           <Route exact path="/registerstudent" component={Registerstudent}/>
           <Route exact path="/registerindividual" component={Registerindividual}/>
           <Route exact path="/ongoingsurveys" component={Ongoingsurvey}/>
+          <Route exact path="/researchfindings" component={Researchfindings}/>
+
+          
         </Switch>
       </Router>
     </div>
