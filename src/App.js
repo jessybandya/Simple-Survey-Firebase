@@ -8,6 +8,7 @@ import Test from "./components/Test"
 import Registerinstitution from './components/Registerinstitution';
 import Registerstudent from './components/Registerstudent';
 import Registerindividual from './components/Registerindividual';
+import Startsurvey from './components/Startsurvey';
 
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
           <Route exact path="/registerInstitution" component={Registerinstitution}/>
           <Route exact path="/registerstudent" component={Registerstudent}/>
           <Route exact path="/registerindividual" component={Registerindividual}/>
-          
+          <Route exact path="/startsurvey" component={Startsurvey}/>
         </Switch>
       </Router>
     </div>
