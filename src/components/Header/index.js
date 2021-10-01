@@ -240,7 +240,7 @@ export default function Header() {
                 aria-haspopup="true"
                 color="inherit"
               >
-            <Avatar {...stringAvatar(user.email)} />
+                              <Avatar {...stringAvatar(user.email)} />
               </IconButton>
               <span>{user.email.split('@')[0]}</span>
             </MenuItem>

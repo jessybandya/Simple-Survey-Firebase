@@ -17,6 +17,7 @@ import { toast, ToastContainer } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"
 import { useDispatch } from 'react-redux';
 import CircularProgress from '@mui/material/CircularProgress';
+import TextField from '@mui/material/TextField';
 
 
 
@@ -62,6 +63,7 @@ BootstrapDialogTitle.propTypes = {
 
 function Login() {
     const [open, setOpen] = React.useState(false);
+    const [open1, setOpen1] = React.useState(false);
 
     const handleClickOpen = () => {
       setOpen(true);
@@ -69,6 +71,14 @@ function Login() {
     const handleClose = () => {
       setOpen(false);
     };
+
+    const handleClickOpen1 = () => {
+      setOpen1(true);
+    };
+    const handleClose1 = () => {
+      setOpen1(false);
+    };
+
     const [email, setEmail] = useState('');
     const history = useHistory('');
     const [password, setPassword] = useState('');
@@ -176,7 +186,7 @@ function Login() {
                     <a href="#" onClick={handleClickOpen}>Sign Up</a>
     				</div>
 				<div class="d-flex justify-content-center">
-					<a href="#">Forgot your password?</a>
+					<a href="#" onClick={handleClickOpen1}>Forgot your password?</a>
 				</div>
 			</div>
 		</div>
@@ -239,6 +249,41 @@ function Login() {
 
         </DialogContent>
 
+      </BootstrapDialog>
+
+
+
+
+      <BootstrapDialog
+        onClose={handleClose1}
+        aria-labelledby="customized-dialog-title"
+        open={open1}
+      >
+        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose1}>
+        PASSWORD RESET FORM
+        </BootstrapDialogTitle>
+        <DialogContent dividers>
+
+
+
+          <Typography gutterBottom style={{marginTop:20}}>
+        <TextField
+          id="outlined-textarea"
+          label="Kindly add the email address to reset a new password..."
+          placeholder="Placeholder"
+          style={{width: "100%"}}
+          multiline
+        />
+          </Typography>
+          <Typography gutterBottom style={{marginTop:20}}>
+          <i style={{fontWeight:"600"}}>" Survey and test a prospective action before undertaking it. Before you proceed, step back and look at the big picture, lest you act rashly on raw impulse."</i>
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button style={{fontWeight:"600"}} autoFocus onClick={handleClose1}>
+            Submit
+          </Button>
+        </DialogActions>
       </BootstrapDialog>
       </div>
 </>

@@ -14,7 +14,7 @@ function Registerstudent() {
 
     
     const [email, setStudenEmail] = useState('')
-
+    const emailRegex = /\S+@\S+\.\S+/;
 
     const verifyEmail = async(event)=>{
         event.preventDefault();
@@ -23,7 +23,10 @@ function Registerstudent() {
 
         if(!email){
             toast.error("Student E mail field is empty!")
-        }else{
+        }else if (!emailRegex.test(email)) {
+            toast.error('Please enter a valid email!');
+          }
+        else{
             const config ={
                 url: 'https://simple-academic-survey.web.app/registerstudent/complete',
                 handleCodeInApp: true

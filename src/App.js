@@ -13,6 +13,8 @@ import Researchfindings from './components/Researchfindings';
 import Recommendedbooks from './components/Recommendedbooks';
 import Buyresearchaudience from './components/Buyresearchaudience';
 import Registerstudentcomplete from './components/Registerstudentcomplete';
+import RegisterInstitutioncomplete from './components/RegisterInstitutioncomplete';
+
 import { auth } from "./components/firebase"
 import {useDispatch} from "react-redux"
 
@@ -45,11 +47,15 @@ function App() {
   
   return (
     <div className="App">
+      <h1></h1>
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route exact path="/signIn" component={Login}/>
           <Route exact path="/test" component={Test}/>
+          
           <Route exact path="/registerInstitution" component={Registerinstitution}/>
+          <Route exact path="/registerInstitution/complete" component={RegisterInstitutioncomplete}/>
+
           <Route exact path="/registerstudent" component={Registerstudent}/>
           <Route exact path="/registerindividual" component={Registerindividual}/>
           <Route exact path="/ongoingsurveys" component={Ongoingsurvey}/>

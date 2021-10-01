@@ -1,28 +1,97 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import Header from '../Header'
 import "./styles.css"
 import img from "../../assets/jedd.jpg"
-function Registerindividual() {
+import { auth, db } from "../firebase";
+import { toast, ToastContainer } from 'react-toastify'
+import "react-toastify/dist/ReactToastify.css"
+
+
+
+function Registerindividual({history}) {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+
+
+    const emailRegex = /\S+@\S+\.\S+/;
+
+    const register = async(event)=>{
+        event.preventDefault();
+        let errors = {};
+
+
+        if(!email || !password){
+            toast.error("Email and Password is required!")
+        }else if (!emailRegex.test(email)) {
+            toast.error('Please enter a valid email!');
+
+        }else if(password.length < 6){
+            toast.error("Password should have at least 6 characters.")
+        }else{
+            //logic
+
+            db.collection('users').where("email", "==", email).get().then((resultSnapShot) => {
+
+                // resultSnapShot is an array of docs where "email" === "user_mail"
+          
+                if (resultSnapShot.size == 0) {
+                    //Proceed
+          
+                    auth
+                    .createUserWithEmailAndPassword(email, password)
+                    .then((auth) => {
+                        if (auth.user) {
+                            auth.user.updateProfile({
+                                displayName: "",
+                                photoURL: ""
+                            }).then((s) => {
+                                db.collection('users').doc(auth.user.uid).set({
+                                    uid: auth.user.uid,
+                                    displayName: "",
+                                    email: auth.user.email,
+                                    photoURL: "",
+                                    read: true,
+                                    timestamp: Date.now()
+                                })
+                                    .then((r) => {
+                                        history.push("/")
+                                    })
+                            })
+                        }
+                    })
+                    .catch((e) => {
+                       toast.error(e.message)
+                    });
+          
+                } else {
+                    //Already registered
+                    toast.error("The email you enterd already in use")
+                }
+          
+            })
+        }
+
+    }
     return (
         <div>
         <Header />
-  {/* <div className="main_body">
-<div class="center2">
-      <div><span>Register</span></div>
-      <div><input type="text" /></div>
-      <div><button>Create Account</button></div>
-      <div><hr/></div>
-      <div>icons</div>
-      </div>
-
-      </div> */}
+    <ToastContainer/>
 <div className="main_body">
 <div class="parent">
   <div class="child"><div class="center2">
       <div style={{marginBottom:15}}><span style={{fontSize:20,fontWeight:"600"}}>Register with your email address</span></div>
-      <div style={{marginBottom:15}}><input  style={{width: 250,height:35,border:"2px solid #2E2EFF",textAlign: "center"}}type="text" placeholder="E mail"/></div>
-      <div style={{marginBottom:15}}><input  style={{width: 250,height:35,border:"2px solid #2E2EFF",textAlign: "center"}}type="text" placeholder="Create Password"/></div>
-      <div><button style={{backgroundColor: "#2E2EFF",width:250,height:40,color: "#fff",fontSize:20,border: "none"}}>CREATE FREE ACCOUNT</button></div>
+      <div style={{marginBottom:15}}><input  style={{width: 250,height:35,border:"2px solid #2E2EFF",textAlign: "center"}} 
+      onChange={(e) => {
+        setEmail(e.target.value)
+    }}
+      type="email" placeholder="E mail"/></div>
+      <div style={{marginBottom:15}}><input  style={{width: 250,height:35,border:"2px solid #2E2EFF",textAlign: "center"}}
+      onChange={(e) => {
+        setPassword(e.target.value)
+    }}
+      type="password" placeholder="Create Password"/></div>
+      <div><button onClick={register} style={{backgroundColor: "#2E2EFF",width:250,height:40,color: "#fff",fontSize:20,border: "none"}}>CREATE FREE ACCOUNT</button></div>
       <div style={{marginTop:15,fontWeight:"600"}}><div class="hr-theme-slash-2"><div class="hr-line"></div><div class="hr-icon"><div class="circle"><span style={{color: "#000"}}>OR</span></div></div><div class="hr-line"></div></div></div>
       <div style={{marginTop:10,fontWeight:"600",fontSize:25}}>Create free account with</div>
       <div className="socialDiv">
