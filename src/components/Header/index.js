@@ -27,6 +27,13 @@ import { useHistory } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 
+
+
+
+
+
+
+
 function stringToColor(string) {
   let hash = 0;
   let i;
@@ -216,21 +223,23 @@ export default function Header() {
         </IconButton>
         <span>REQUEST INFO</span>
       </MenuItem>
-
+   {!user &&(
       <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={0} color="error">
-            <VpnKeyIcon />
-          </Badge>
-        </IconButton>
-        <a href="/signIn">
-        <span style={{color: "#000"}}>SIGN IN</span>
-        </a>
-      </MenuItem>
+      <IconButton
+        size="large"
+        aria-label="show 17 new notifications"
+        color="inherit"
+      >
+        <Badge badgeContent={0} color="error">
+          <VpnKeyIcon />
+        </Badge>
+      </IconButton>
+      <a href="/signIn">
+      <span style={{color: "#000"}}>SIGN IN</span>
+      </a>
+    </MenuItem>
+   )}
+
       {user &&(
               <MenuItem onClick={handleProfileMenuOpen}>
               <IconButton

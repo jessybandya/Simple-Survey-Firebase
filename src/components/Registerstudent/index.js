@@ -53,7 +53,7 @@ function Registerstudent() {
 
       <div style={{marginBottom:15}}><span style={{fontSize:20,fontWeight:"600"}}>Register as a student</span></div>
       <div></div> 
-      <div style={{marginBottom:15}}><input  style={{width: 250,height:35,border:"2px solid #2E2EFF",textAlign: "center"}}type="email"
+      <div style={{marginBottom:15}}><input  style={{width: 250,height:35,border:"2px solid #2E2EFF",textAlign: "center"}} value={email} type="email"
             onChange={(e) => {
                 setStudenEmail(e.target.value)
             }}

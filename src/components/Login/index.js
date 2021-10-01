@@ -18,7 +18,7 @@ import "react-toastify/dist/ReactToastify.css"
 import { useDispatch } from 'react-redux';
 import CircularProgress from '@mui/material/CircularProgress';
 import TextField from '@mui/material/TextField';
-
+import { useSelector } from 'react-redux';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -64,7 +64,11 @@ BootstrapDialogTitle.propTypes = {
 function Login() {
     const [open, setOpen] = React.useState(false);
     const [open1, setOpen1] = React.useState(false);
-
+    const [email1, setEmail1] = useState("")
+    const [loadind,setLoadind] = useState(false)
+    const [rem,setRem] = useState("")
+    let {user} = useSelector((state)=> ({...state}));
+ 
     const handleClickOpen = () => {
       setOpen(true);
     };
@@ -86,29 +90,33 @@ function Login() {
     const [loading, setLoading] = useState(false);
 
 
-
+    if(user !== null){
+      history.push("/")
+    }
 
     const login = async(e)=> {
       e.preventDefault();
       setLoading(true)
-     try{
-      const result = await auth.signInWithEmailAndPassword(email, password)
-      const {user} = result;
-      const idTokenResult = await user.getIdTokenResult();
-      dispatch({
-        type: 'LOGGED_IN_USER',
-        payload: {
-          email: user.email,
-          token: idTokenResult.token,
-        }
+        try{
+          const result = await auth.signInWithEmailAndPassword(email, password)
+          const {user} = result;
+          const idTokenResult = await user.getIdTokenResult();
+          dispatch({
+            type: 'LOGGED_IN_USER',
+            payload: {
+              email: user.email,
+              token: idTokenResult.token,
+            }
+    
+          });
+          history.push('/')
+         }catch(error){
+           toast.error(error.message)
+           setLoading(false)
+    
+         }
+   
 
-      });
-      history.push('/')
-     }catch(error){
-       toast.error(error.message)
-       setLoading(false)
-
-     }
     }
 
 
@@ -129,6 +137,30 @@ function Login() {
       history.push('/')
       })
       .catch((err) => toast.err(err.message))
+    }
+
+
+
+    const resetPasword = async(e) =>{
+      e.preventDefault();
+      setLoading(true)
+
+      const config ={
+        url: 'https://simple-academic-survey.web.app/signIn',
+        handleCodeInApp: true
+    };
+
+      await auth
+      .sendPasswordResetEmail(email1,config)
+      .then(() => {
+       setEmail1('')
+       setLoading(false)
+       toast.success("Check your email for password reset")
+      })
+      .catch((error)=>{
+        setLoading(false)
+       toast.error(error.message)
+      })
     }
     return (
       <body>
@@ -173,10 +205,12 @@ function Login() {
             placeholder="password"/>
 					</div>
 					<div class="row align-items-center remember">
-						<input type="checkbox"/>Remember Me   
+						<input type="checkbox" onChange={(e) => {
+              setRem(e.target.value)
+          }}/>Remember Me   
 					</div>
 					<div class="form-group">
-						<button  onClick={login}  class="btn float-right login_btn">{loading ? <CircularProgress style={{height:25,width:25,color:"blue"}}/> : <span>Login</span>}</button>
+						<button  onClick={login} disabled={!rem}   class="btn float-right login_btn">{loading ? <CircularProgress style={{height:25,width:25,color:"blue"}}/> : <span>Login</span>}</button>
 					</div>
 				</form>
 			</div>
@@ -271,7 +305,11 @@ function Login() {
           id="outlined-textarea"
           label="Kindly add the email address to reset a new password..."
           placeholder="Placeholder"
+          value={email1}
           style={{width: "100%"}}
+          onChange={(e) => {
+            setEmail1(e.target.value)
+        }}
           multiline
         />
           </Typography>
@@ -280,9 +318,8 @@ function Login() {
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button style={{fontWeight:"600"}} autoFocus onClick={handleClose1}>
-            Submit
-          </Button>
+        <button onClick={resetPasword}  disabled={!email1} style={{backgroundColor: "#088FFA",color:"#fff",fontWeight:"600"}}  class="btn float-right login_btn">Submit </button>
+
         </DialogActions>
       </BootstrapDialog>
       </div>
