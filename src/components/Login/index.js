@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./styles.css"
 import Header from '../Header'
 import PropTypes from 'prop-types';
@@ -11,6 +11,12 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
+import { useHistory } from 'react-router';
+import { auth } from '../firebase';
+import { toast, ToastContainer } from 'react-toastify'
+import "react-toastify/dist/ReactToastify.css"
+
+
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuDialogContent-root': {
@@ -20,6 +26,8 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     padding: theme.spacing(1),
   },
 }));
+
+
 
 const BootstrapDialogTitle = (props) => {
   const { children, onClose, ...other } = props;
@@ -59,12 +67,33 @@ function Login() {
     const handleClose = () => {
       setOpen(false);
     };
+    const [email, setEmail] = useState('');
+    const history = useHistory('');
+    const [password, setPassword] = useState('');
 
-
+    const login = (e)=> {
+      e.preventDefault();
+    
+      auth.signInWithEmailAndPassword(email,password)
+      .then((auth) =>{
+        history.push(`/`); 
+      })
+      .catch((e) =>{
+          if (
+              e.message ===
+              toast.error(e.message)
+              
+              
+              ) {
+                  toast.error('Invalid password entered!')
+          }
+      })
+    }
     return (
       <body>
         <>
     <Header/>
+    <ToastContainer/>
 
 <div className="loginbody">
 <div  class="container">
@@ -85,20 +114,28 @@ function Login() {
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="Enter email"/>
+						<input type="text" class="form-control"
+            onChange={(e) => {
+              setEmail(e.target.value)
+          }}
+            placeholder="Enter email"/>
 						
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="password" class="form-control" placeholder="password"/>
+						<input type="password" class="form-control" 
+            onChange={(e) => {
+              setPassword(e.target.value)
+          }}
+            placeholder="password"/>
 					</div>
 					<div class="row align-items-center remember">
 						<input type="checkbox"/>Remember Me
 					</div>
 					<div class="form-group">
-						<input type="submit" value="Login" class="btn float-right login_btn"/>
+						<input type="submit" onClick={login} value="Login" class="btn float-right login_btn"/>
 					</div>
 				</form>
 			</div>
