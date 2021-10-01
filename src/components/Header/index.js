@@ -24,6 +24,37 @@ import "./styles.css"
 import firebase from 'firebase'
 import { useDispatch,useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+
+function stringToColor(string) {
+  let hash = 0;
+  let i;
+
+  /* eslint-disable no-bitwise */
+  for (i = 0; i < string.length; i += 1) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  let color = '#';
+
+  for (i = 0; i < 3; i += 1) {
+    const value = (hash >> (i * 8)) & 0xff;
+    color += `00${value.toString(16)}`.substr(-2);
+  }
+  /* eslint-enable no-bitwise */
+
+  return color;
+}
+
+function stringAvatar(name) {
+  return {
+    sx: {
+      bgcolor: stringToColor(name),
+    },
+    children: `${name.split(' ')[0][0]}`,
+  };
+}
 
 
 
@@ -136,7 +167,7 @@ export default function Header() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      {/* <MenuItem onClick={handleMenuClose}>{user.email.split('@')[0]}</MenuItem> */}
       <MenuItem onClick={handleMenuClose}>My Account</MenuItem>
       <MenuItem onClick={logout}><span>Logout</span></MenuItem>
     </Menu>
@@ -209,9 +240,9 @@ export default function Header() {
                 aria-haspopup="true"
                 color="inherit"
               >
-                <AccountCircle />
+            <Avatar {...stringAvatar(user.email)} />
               </IconButton>
-              <span>Profile</span>
+              <span>{user.email.split('@')[0]}</span>
             </MenuItem>
       )}
 
@@ -280,6 +311,18 @@ export default function Header() {
             </IconButton>
             )}
             {user &&(
+              <>
+                          <IconButton
+                          size="large"
+                          aria-label="show 17 new notifications"
+                          color="inherit"
+                          style={{marginRight:-20}}
+                        >
+                          {/* <Badge badgeContent={17} color="error">
+                            <NotificationsIcon />
+                          </Badge> */}
+                          <span style={{fontSize:18}}>{user.email.split('@')[0]}</span>
+                        </IconButton>
             <IconButton
               size="large"
               edge="end"
@@ -289,10 +332,11 @@ export default function Header() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              <Avatar {...stringAvatar(user.email)} />
 
               
             </IconButton>
+            </>
             )}
 
           </Box>
