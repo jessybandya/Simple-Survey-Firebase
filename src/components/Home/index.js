@@ -25,6 +25,7 @@ import Select from '@mui/material/Select';
 import { Form, FormGroup, Label, Input , Modal, ModalHeader, ModalBody,Table} from 'reactstrap';
 import Toolbar from '@mui/material/Toolbar';
 import Slide from '@mui/material/Slide';
+import { useDispatch,useSelector } from 'react-redux';
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -33,6 +34,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 function Home() {
 
   const [open, setOpen] = React.useState(false);
+  let {user} = useSelector((state)=> ({...state}));
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -58,7 +60,9 @@ function Home() {
       <div className="loginForm">
       <div >
             <div class="center" >
-                {/* <div>
+              {!user &&(
+                <>
+                                <div>
                 <img className="imgHome" src={img} alt="" style={{borderRadius:10,border:"2px solid #999999"}}/>
                 </div>
                 <div style={{marginLeft:30}}>
@@ -67,17 +71,24 @@ function Home() {
              <p>Expand your market research capabilities to keep track of your brand, test your ideas, or get a gut check with your target audience.</p>
 
                     </span>
-                </div> */}
-             </div>
-             <div>
-             <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,cursor: "pointer"}}><span ><a style={{color: "#000"}} onClick={handleClickOpen}>START NEW SURVEY</a></span></div>
-                <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,marginTop:10,cursor: "pointer"}}><span><a style={{color: "#000"}} href="/Ongoingsurveys">ONGOING SURVEYS</a></span></div>
-                <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,marginTop:10,cursor: "pointer"}}><span><a style={{color: "#000"}} href="/researchfindings">RESEARCH FINDINGS</a></span></div>
-                <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,marginTop:10,cursor: "pointer"}}><span><a style={{color: "#000"}} href="/recommendedbooks">RECOMMENDED BOOKS</a></span></div>
-                <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,marginTop:10,cursor: "pointer"}}><span><a style={{color: "#000"}} href="/buyresearchaudience">BUY RESEARCH AUDIENCE</a></span></div>
                 </div>
-             </div>
+                </>
+              )}
 
+            
+
+             {user &&(
+                            <div>
+                            <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,cursor: "pointer"}}><span ><a style={{color: "#000"}} onClick={handleClickOpen}>START NEW SURVEY</a></span></div>
+                               <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,marginTop:10,cursor: "pointer"}}><span><a style={{color: "#000"}} href="/Ongoingsurveys">ONGOING SURVEYS</a></span></div>
+                               <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,marginTop:10,cursor: "pointer"}}><span><a style={{color: "#000"}} href="/researchfindings">RESEARCH FINDINGS</a></span></div>
+                               <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,marginTop:10,cursor: "pointer"}}><span><a style={{color: "#000"}} href="/recommendedbooks">RECOMMENDED BOOKS</a></span></div>
+                               <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,marginTop:10,cursor: "pointer"}}><span><a style={{color: "#000"}} href="/buyresearchaudience">BUY RESEARCH AUDIENCE</a></span></div>
+                               </div>
+             )}
+
+             </div>
+             </div>
 
              <Dialog
         fullScreen

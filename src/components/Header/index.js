@@ -21,6 +21,16 @@ import img from "../../assets/jedd.jpg"
 import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import "./styles.css"
+import firebase from 'firebase'
+import { useDispatch,useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
+
+
+
+
+
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -65,6 +75,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const history = useHistory()
+
+
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -86,6 +99,26 @@ export default function Header() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+
+  
+  let dispatch = useDispatch()
+
+
+  //Rendering selectively
+  let {user} = useSelector((state)=> ({...state}));
+
+// logout
+  const logout = () =>{
+    firebase.auth().signOut()
+
+    dispatch({
+      type: "LOGOUT",
+      payload: null,
+    });
+    history.push("/signIn")
+  }
+
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -104,7 +137,8 @@ export default function Header() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My Account</MenuItem>
+      <MenuItem onClick={logout}><span>Logout</span></MenuItem>
     </Menu>
   );
 
@@ -166,21 +200,25 @@ export default function Header() {
         <span style={{color: "#000"}}>SIGN IN</span>
         </a>
       </MenuItem>
-      
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <span>Profile</span>
-      </MenuItem>
+      {user &&(
+              <MenuItem onClick={handleProfileMenuOpen}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="primary-search-account-menu"
+                aria-haspopup="true"
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <span>Profile</span>
+            </MenuItem>
+      )}
+
     </Menu>
   );
+
+
 
   return (
     <Box sx={{ flexGrow: 1 }} >
@@ -224,6 +262,7 @@ export default function Header() {
               </Badge> */}
               <span style={{fontSize:20}}>REQUEST INFO</span>
             </IconButton>
+            {!user &&(
             <IconButton
             //   size="large"
             //   edge="end"
@@ -237,7 +276,25 @@ export default function Header() {
               <a href="/signIn">
               <span style={{fontSize:20,color:"#fff"}}>SIGN IN</span>
               </a>
+              
             </IconButton>
+            )}
+            {user &&(
+            <IconButton
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
+              color="inherit"
+            >
+              <AccountCircle />
+
+              
+            </IconButton>
+            )}
+
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton

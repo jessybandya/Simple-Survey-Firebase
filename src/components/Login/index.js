@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import "./styles.css"
 import Header from '../Header'
 import PropTypes from 'prop-types';
@@ -12,9 +12,11 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import { useHistory } from 'react-router';
-import { auth } from '../firebase';
+import { auth, googleProvider } from '../firebase';
 import { toast, ToastContainer } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"
+import { useDispatch } from 'react-redux';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 
@@ -70,24 +72,53 @@ function Login() {
     const [email, setEmail] = useState('');
     const history = useHistory('');
     const [password, setPassword] = useState('');
+    let dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
 
-    const login = (e)=> {
+
+
+
+    const login = async(e)=> {
       e.preventDefault();
-    
-      auth.signInWithEmailAndPassword(email,password)
-      .then((auth) =>{
-        history.push(`/`); 
+      setLoading(true)
+     try{
+      const result = await auth.signInWithEmailAndPassword(email, password)
+      const {user} = result;
+      const idTokenResult = await user.getIdTokenResult();
+      dispatch({
+        type: 'LOGGED_IN_USER',
+        payload: {
+          email: user.email,
+          token: idTokenResult.token,
+        }
+
+      });
+      history.push('/')
+     }catch(error){
+       toast.error(error.message)
+       setLoading(false)
+
+     }
+    }
+
+
+    const googleLogin = async () =>{
+      auth
+      .signInWithPopup(googleProvider)
+      .then( async(result)=>{
+       const {user} = result;
+       const idTokenResult = await user.getIdTokenResult();
+       dispatch({
+        type: 'LOGGED_IN_USER',
+        payload: {
+          email: user.email,
+          token: idTokenResult.token,
+        },
+
+      });
+      history.push('/')
       })
-      .catch((e) =>{
-          if (
-              e.message ===
-              toast.error(e.message)
-              
-              
-              ) {
-                  toast.error('Invalid password entered!')
-          }
-      })
+      .catch((err) => toast.err(err.message))
     }
     return (
       <body>
@@ -102,8 +133,8 @@ function Login() {
 			<div class="card-header">
 				<h3>Sign In</h3>
 				<div class="d-flex justify-content-end social_icon">
-					<span><i class="fab fa-facebook-square"></i></span>
-					<span><i class="fab fa-google-plus-square"></i></span>
+					<span ><i class="fab fa-facebook-square"></i></span>
+					<span onClick={googleLogin}><i class="fab fa-google-plus-square"></i></span>
 					<span><i class="fab fa-twitter-square"></i></span>
                     <span><i class="fab fa-linkedin-in"></i></span>
 				</div>
@@ -132,10 +163,10 @@ function Login() {
             placeholder="password"/>
 					</div>
 					<div class="row align-items-center remember">
-						<input type="checkbox"/>Remember Me
+						<input type="checkbox"/>Remember Me   
 					</div>
 					<div class="form-group">
-						<input type="submit" onClick={login} value="Login" class="btn float-right login_btn"/>
+						<button  onClick={login}  class="btn float-right login_btn">{loading ? <CircularProgress style={{height:25,width:25,color:"blue"}}/> : <span>Login</span>}</button>
 					</div>
 				</form>
 			</div>

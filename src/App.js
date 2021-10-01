@@ -13,12 +13,38 @@ import Researchfindings from './components/Researchfindings';
 import Recommendedbooks from './components/Recommendedbooks';
 import Buyresearchaudience from './components/Buyresearchaudience';
 import Registerstudentcomplete from './components/Registerstudentcomplete';
+import { auth } from "./components/firebase"
+import {useDispatch} from "react-redux"
+
+
+
 
 
 function App() {
+   const dispatch = useDispatch()
+
+   useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if(user){
+        const idTokenResult = await user.getIdTokenResult()
+        console.log("user", user)
+        dispatch({
+          type: 'LOGGED_IN_USER',
+          payload: {
+            email: user.email,
+            token: idTokenResult.token,
+          }
+
+        })
+      }
+    });
+    //cleanup
+    return () => unsubscribe();
+   }, [])
+
+  
   return (
     <div className="App">
-      <Router>
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route exact path="/signIn" component={Login}/>
@@ -34,7 +60,6 @@ function App() {
 
           
         </Switch>
-      </Router>
     </div>
   );
 }
