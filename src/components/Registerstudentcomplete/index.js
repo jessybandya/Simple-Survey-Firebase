@@ -6,11 +6,19 @@ import img from "../../assets/jedd.jpg"
 import { auth } from "../firebase";
 import { toast, ToastContainer } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"
+import { useSelector,useDispatch } from 'react-redux';
+
+
 
 function Registerstudentcomplete({history}) {
 //props.history
 
-    
+let {user} = useSelector((state)=> ({...state}));
+let dispatch = useDispatch();
+
+if(user !== null){
+    history.push("/")
+  }
     const [email, setStudenEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -56,19 +64,6 @@ function Registerstudentcomplete({history}) {
 
 
 
-
-    //     if (!email.trim()) {
-    //         errors.email = alert(`Student Email field is empty!`)
-    //   }else{
-    //     auth.createUserWithEmailAndPassword(email , password)
-    //     .then((userCredential)=>{
-    //         // send verification mail.
-    //       userCredential.user.sendEmailVerification();
-    //       auth.signOut();
-    //       alert(`Verification link has been sent to ${email}\nThank you.`);
-    //     })
-    //     .catch(alert);
-    //   }
 
 
     }

@@ -6,6 +6,7 @@ import img from "../../assets/jedd.jpg"
 import { auth } from "../firebase";
 import { toast, ToastContainer } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"
+import { useSelector,useDispatch } from 'react-redux';
 
 function RegisterInstitutioncomplete({history}) {
 //props.history
@@ -13,7 +14,12 @@ function RegisterInstitutioncomplete({history}) {
     
     const [email, setStudenEmail] = useState('')
     const [password, setPassword] = useState('')
+    let {user} = useSelector((state)=> ({...state}));
+    let dispatch = useDispatch();
 
+    if(user !== null){
+        history.push("/")
+      }
     useEffect(()=>{
        setStudenEmail(window.localStorage.getItem("institutionEmailForRegistration"));
     }, [])

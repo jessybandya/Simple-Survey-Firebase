@@ -6,11 +6,19 @@ import img from "../../assets/jedd.jpg"
 import { auth } from "../firebase";
 import { toast, ToastContainer } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"
+import {  googleProvider,facebookProvider,GithubProvider, TwitterProvider } from '../firebase';
+import { useSelector,useDispatch } from 'react-redux';
 
-function Registerstudent() {
+
+function Registerstudent({history}) {
 
 
+    let {user} = useSelector((state)=> ({...state}));
+    let dispatch = useDispatch();
 
+    if(user !== null){
+        history.push("/")
+      }
 
     
     const [email, setStudenEmail] = useState('')
@@ -43,6 +51,98 @@ function Registerstudent() {
         }
 
     }
+
+
+
+
+    
+    const googleLogin = async () =>{
+        auth
+        .signInWithPopup(googleProvider)
+        .then( async(result)=>{
+         const {user} = result;
+         const idTokenResult = await user.getIdTokenResult();
+         dispatch({
+          type: 'LOGGED_IN_USER',
+          payload: {
+            email: user.email,
+            token: idTokenResult.token,
+          },
+  
+        });
+        history.push('/')
+        })
+        .catch((err) => {
+          toast.error(err.message)
+        })
+      }
+  
+  
+      const twitterLogin = async () =>{
+        auth
+        .signInWithPopup(TwitterProvider)
+        .then( async(result)=>{
+         const {user} = result;
+         const idTokenResult = await user.getIdTokenResult();
+         dispatch({
+          type: 'LOGGED_IN_USER',
+          payload: {
+            email: user.email,
+            token: idTokenResult.token,
+          },
+  
+        });
+        history.push('/')
+        })
+        .catch((err) => {
+          toast.error(err.message)
+        })
+      }
+  
+      const facebookLogin = async () =>{
+        auth
+        .signInWithPopup(facebookProvider)
+        .then( async(result)=>{
+         const {user} = result;
+         const idTokenResult = await user.getIdTokenResult();
+         dispatch({
+          type: 'LOGGED_IN_USER',
+          payload: {
+            email: user.email,
+            token: idTokenResult.token,
+          },
+  
+        });
+        history.push('/')
+        })
+        .catch((err) => {
+          toast.error(err.message)
+        })
+      }
+  
+  
+      const githubLogin = async () =>{
+        auth
+        .signInWithPopup(GithubProvider)
+        .then( async(result)=>{
+         const {user} = result;
+         const idTokenResult = await user.getIdTokenResult();
+         dispatch({
+          type: 'LOGGED_IN_USER',
+          payload: {
+            email: user.email,
+            token: idTokenResult.token,
+          },
+  
+        });
+        history.push('/')
+        })
+        .catch((err) => {
+          toast.error(err.message)
+        })
+      }
+
+
     return (
         <div>
         <Header />
@@ -63,10 +163,10 @@ function Registerstudent() {
       <div style={{marginTop:15,fontWeight:"600"}}><div class="hr-theme-slash-2"><div class="hr-line"></div><div class="hr-icon"><div class="circle"><span style={{color: "#000"}}>OR</span></div></div><div class="hr-line"></div></div></div>
       <div style={{marginTop:10,fontWeight:"600",fontSize:25}}>Create free account with</div>
       <div className="socialDiv">
-      <div className="socialDiv1"><img src="https://image.similarpng.com/thumbnail/2020/12/Flat-design-Google-logo-design-Vector-PNG.png" style={{height:40,objectFit: "contain"}}/></div>
-      <div className="socialDiv1"><img src="https://www.pngkit.com/png/detail/22-221036_follow-us-facebook-icon-flat-png.png" style={{height:40,objectFit: "contain"}}/></div>      
-      <div className="socialDiv1"><img src="https://detailedcapital.com/wp-content/uploads/2017/05/LinkedIn-Logo-500x500.png" style={{height:40,objectFit: "contain"}}/></div>      
-      <div className="socialDiv1"><img src="https://image.similarpng.com/thumbnail/2020/06/Popular-icon-Twitter-clipart-PNG.png" style={{height:40,objectFit: "contain"}}/></div>        
+      <div onClick={googleLogin} className="socialDiv1"><img src="https://image.similarpng.com/thumbnail/2020/12/Flat-design-Google-logo-design-Vector-PNG.png" style={{height:40,objectFit: "contain"}}/></div>
+      <div onClick={facebookLogin} className="socialDiv1"><img src="https://www.pngkit.com/png/detail/22-221036_follow-us-facebook-icon-flat-png.png" style={{height:40,objectFit: "contain"}}/></div>      
+      <div onClick={githubLogin} className="socialDiv1"><img src="https://iconape.com/wp-content/png_logo_vector/github-square.png" style={{height:40,objectFit: "contain"}}/></div>      
+      <div onClick={()=> toast.error("Oops!\nThere may be a delay on working with this authentication due to twitter developers regulations")} className="socialDiv1"><img src="https://image.similarpng.com/thumbnail/2020/06/Popular-icon-Twitter-clipart-PNG.png" style={{height:40,objectFit: "contain"}}/></div>        
       </div>
       <div style={{marginTop:15,fontWeight:"500"}}>
           <span style={{fontSize:18,color: "#AEAEAE"}}>

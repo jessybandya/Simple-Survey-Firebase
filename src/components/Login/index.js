@@ -12,7 +12,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import { useHistory } from 'react-router';
-import { auth, googleProvider } from '../firebase';
+import { auth, googleProvider,facebookProvider,GithubProvider, TwitterProvider } from '../firebase';
 import { toast, ToastContainer } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"
 import { useDispatch } from 'react-redux';
@@ -136,10 +136,75 @@ function Login() {
       });
       history.push('/')
       })
-      .catch((err) => toast.err(err.message))
+      .catch((err) => {
+        toast.error(err.message)
+      })
     }
 
 
+    const twitterLogin = async () =>{
+      auth
+      .signInWithPopup(TwitterProvider)
+      .then( async(result)=>{
+       const {user} = result;
+       const idTokenResult = await user.getIdTokenResult();
+       dispatch({
+        type: 'LOGGED_IN_USER',
+        payload: {
+          email: user.email,
+          token: idTokenResult.token,
+        },
+
+      });
+      history.push('/')
+      })
+      .catch((err) => {
+        toast.error(err.message)
+      })
+    }
+
+    const facebookLogin = async () =>{
+      auth
+      .signInWithPopup(facebookProvider)
+      .then( async(result)=>{
+       const {user} = result;
+       const idTokenResult = await user.getIdTokenResult();
+       dispatch({
+        type: 'LOGGED_IN_USER',
+        payload: {
+          email: user.email,
+          token: idTokenResult.token,
+        },
+
+      });
+      history.push('/')
+      })
+      .catch((err) => {
+        toast.error(err.message)
+      })
+    }
+
+
+    const githubLogin = async () =>{
+      auth
+      .signInWithPopup(GithubProvider)
+      .then( async(result)=>{
+       const {user} = result;
+       const idTokenResult = await user.getIdTokenResult();
+       dispatch({
+        type: 'LOGGED_IN_USER',
+        payload: {
+          email: user.email,
+          token: idTokenResult.token,
+        },
+
+      });
+      history.push('/')
+      })
+      .catch((err) => {
+        toast.error(err.message)
+      })
+    }
 
     const resetPasword = async(e) =>{
       e.preventDefault();
@@ -175,10 +240,10 @@ function Login() {
 			<div class="card-header">
 				<h3>Sign In</h3>
 				<div class="d-flex justify-content-end social_icon">
-					<span ><i class="fab fa-facebook-square"></i></span>
-					<span onClick={googleLogin}><i class="fab fa-google-plus-square"></i></span>
-					<span><i class="fab fa-twitter-square"></i></span>
-                    <span><i class="fab fa-linkedin-in"></i></span>
+					<span onClick={facebookLogin}><i class="fab fa-facebook-square"></i></span>
+					<span onClick={googleLogin}><i class="fab fa-google"></i></span>
+					<span onClick={()=> toast.error("Oops!\nThere may be a delay on working with this authentication due to twitter developers regulations")}><i class="fab fa-twitter-square"></i></span>
+                    <span onClick={githubLogin}><i class="fab fa-github"></i></span>
 				</div>
 			</div>
 			<div class="card-body">
