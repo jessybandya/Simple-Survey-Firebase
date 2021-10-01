@@ -26,14 +26,20 @@ import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
+import { useSelector,useDispatch } from 'react-redux';
 
 
 
 
-function Ongoingsurvey() {
+function Ongoingsurvey({history}) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState('');
+  let {user} = useSelector((state)=> ({...state}));
+  let dispatch = useDispatch();
 
+  if(!user){
+      history.push("/signIn")
+    }
   const handleChange = (event) => {
     setValue(event.target.value);
   };

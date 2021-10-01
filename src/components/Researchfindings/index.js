@@ -16,6 +16,7 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { useSelector,useDispatch } from 'react-redux';
 
 
 function createData(name, calories, fat, carbs, protein, price) {
@@ -140,7 +141,13 @@ function createData(name, calories, fat, carbs, protein, price) {
 
 
   ];
-function Researchfindings() {
+function Researchfindings({history}) {
+  let {user} = useSelector((state)=> ({...state}));
+  let dispatch = useDispatch();
+
+  if(!user){
+      history.push("/signIn")
+    }
     return (
         <body >
             <Header/>

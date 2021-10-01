@@ -1,8 +1,15 @@
 import React from 'react'
 import Header from '../Header'
 import "./styles.css"
+import { useSelector,useDispatch } from 'react-redux';
 
-function Buyresearchaudience() {
+function Buyresearchaudience({history}) {
+    let {user} = useSelector((state)=> ({...state}));
+    let dispatch = useDispatch();
+  
+    if(!user){
+        history.push("/signIn")
+      }
     return (
         <body>
             <Header />

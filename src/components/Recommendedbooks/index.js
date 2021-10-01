@@ -26,6 +26,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { useSelector,useDispatch } from 'react-redux';
 
 
 
@@ -195,10 +196,16 @@ BootstrapDialogTitle.propTypes = {
 //   );
 // }
 
-function Recommendedbooks() {
+function Recommendedbooks({history}) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState('');
 
+  let {user} = useSelector((state)=> ({...state}));
+  let dispatch = useDispatch();
+
+  if(!user){
+      history.push("/signIn")
+    }
   const handleChange = (event) => {
     setValue(event.target.value);
   };
