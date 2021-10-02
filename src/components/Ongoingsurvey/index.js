@@ -21,27 +21,11 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import CloseIcon from '@mui/icons-material/Close';
-import PostAddIcon from '@mui/icons-material/PostAdd';
-import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { useSelector,useDispatch } from 'react-redux';
-import CssBaseline from '@mui/material/CssBaseline';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ArchiveIcon from '@mui/icons-material/Archive';
-import Avatar from '@mui/material/Avatar';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import HomeIcon from '@mui/icons-material/Home';
-import PresentToAllIcon from '@mui/icons-material/PresentToAll';
-import CancelPresentationIcon from '@mui/icons-material/CancelPresentation';
-import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 
-import SpeedIcon from '@mui/icons-material/Speed';
-import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 
 
 
@@ -60,25 +44,6 @@ function Ongoingsurvey({history}) {
       history.push("/signIn")
     }
 
-
-    const home = () =>{
-      history.push("/")
-    }
-    const ongoingsurveys = () =>{
-      history.push("/ongoingsurveys")
-    }
-    const researchFindings = (e) =>{
-      e.preventDefault()
-      history.push("/researchfindings")
-    }
-    const recommendedBooks = (e) =>{
-      e.preventDefault()
-      history.push("/recommendedbooks")
-    }
-    const buyAudience = (e) =>{
-      e.preventDefault()
-      history.push("/buyresearchaudience")
-    }
 
 
   const handleChange = (event) => {
@@ -348,30 +313,7 @@ function Ongoingsurvey({history}) {
           </Button>
         </DialogActions>
       </BootstrapDialog>
-
-{user &&(
-  <Box sx={{ pb: 7 }} ref={ref}>
-      <CssBaseline />
-
-      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-        <BottomNavigation
-          showLabels
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-        >
-          
-          <BottomNavigationAction style={{color: "gray"}} onClick={home} label="Home" icon={<HomeIcon/>} onClick={home}/>
-          <BottomNavigationAction style={{color: "gray"}} onClick={ongoingsurveys} label="Ongoing Surveys" icon={<SpeedIcon onClick={ongoingsurveys}/>}  onClick={ongoingsurveys}/>
-          <BottomNavigationAction style={{color: "gray"}} onClick={researchFindings} label="Research Findings" icon={<CancelPresentationIcon />} onClick={researchFindings}/>
-          <BottomNavigationAction  style={{color: "gray"}} onClick={recommendedBooks} label="Recommended Books"  icon={<LocalLibraryIcon />} onClick={recommendedBooks}/>
-          <BottomNavigationAction style={{color: "gray"}} onClick={buyAudience} label="Buy Audience" icon={<ShoppingBasketIcon />} onClick={buyAudience}/>
-        </BottomNavigation>
-      </Paper>
-    </Box>
-)}
-      
+ 
             </div>
         </body>
     )

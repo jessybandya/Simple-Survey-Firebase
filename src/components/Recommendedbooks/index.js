@@ -27,21 +27,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { useSelector,useDispatch } from 'react-redux';
-import CssBaseline from '@mui/material/CssBaseline';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ArchiveIcon from '@mui/icons-material/Archive';
-import Avatar from '@mui/material/Avatar';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import HomeIcon from '@mui/icons-material/Home';
-import PresentToAllIcon from '@mui/icons-material/PresentToAll';
-import CancelPresentationIcon from '@mui/icons-material/CancelPresentation';
-import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 
-import SpeedIcon from '@mui/icons-material/Speed';
-import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 
 
 function createData(name, calories, fat, carbs, protein, price) {
@@ -208,18 +194,10 @@ function Recommendedbooks({history}) {
   const [open, setOpen] = React.useState(false);
 
   let {user} = useSelector((state)=> ({...state}));
-  let dispatch = useDispatch();
 
-
-
-  const [value, setValue] = React.useState(0);
-  const ref = React.useRef(null);
   if(!user){
       history.push("/signIn")
     }
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -228,24 +206,7 @@ function Recommendedbooks({history}) {
     setOpen(false);
   };
 
-  const home = () =>{
-    history.push("/")
-  }
-  const ongoingsurveys = () =>{
-    history.push("/ongoingsurveys")
-  }
-  const researchFindings = (e) =>{
-    e.preventDefault()
-    history.push("/researchfindings")
-  }
-  const recommendedBooks = (e) =>{
-    e.preventDefault()
-    history.push("/recommendedbooks")
-  }
-  const buyAudience = (e) =>{
-    e.preventDefault()
-    history.push("/buyresearchaudience")
-  }
+
   const actions = [
     { icon: <PostAddIcon onClick={handleClickOpen}/>, name: 'Recommend a book' },
     { icon: <QueryBuilderIcon onClick={()=> alert("Oops!, sorry we're still working on this\nBear with us kindly and thank you.")}/>, name: 'Querry/Help' },
@@ -253,14 +214,6 @@ function Recommendedbooks({history}) {
     // { icon: <ShareIcon />, name: 'Share' },
   ];
 
-    // const [value, setValue] = React.useState(0);
-    // const ref = React.useRef(null);
-    // const [messages, setMessages] = React.useState(() => refreshMessages());
-  
-    // React.useEffect(() => {
-    //   ref.current.ownerDocument.body.scrollTop = 0;
-    //   setMessages(refreshMessages());
-    // }, [value, setMessages]);
     return (
         <body>
        <Header/>
@@ -365,28 +318,7 @@ function Recommendedbooks({history}) {
           </Button>
         </DialogActions>
       </BootstrapDialog>
-      {user &&(
-  <Box sx={{ pb: 7 }} ref={ref}>
-      <CssBaseline />
 
-      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-        <BottomNavigation
-          showLabels
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-        >
-          
-          <BottomNavigationAction style={{color: "gray"}} onClick={home} label="Home" icon={<HomeIcon/>} onClick={home}/>
-          <BottomNavigationAction style={{color: "gray"}} onClick={ongoingsurveys} label="Ongoing Surveys" icon={<SpeedIcon onClick={ongoingsurveys}/>}  onClick={ongoingsurveys}/>
-          <BottomNavigationAction style={{color: "gray"}} onClick={researchFindings} label="Research Findings" icon={<CancelPresentationIcon />} onClick={researchFindings}/>
-          <BottomNavigationAction  style={{color: "gray"}} onClick={recommendedBooks} label="Recommended Books"  icon={<LocalLibraryIcon />} onClick={recommendedBooks}/>
-          <BottomNavigationAction style={{color: "gray"}} onClick={buyAudience} label="Buy Audience" icon={<ShoppingBasketIcon />} onClick={buyAudience}/>
-        </BottomNavigation>
-      </Paper>
-    </Box>
-)}
             </div>
         </body>
     )
