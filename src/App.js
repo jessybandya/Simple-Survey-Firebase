@@ -122,11 +122,11 @@ function App() {
           }}
         >
           
-          <BottomNavigationAction style={{color: "gray"}} onClick={home} label="Home" icon={<HomeIcon/>} onClick={home}/>
-          <BottomNavigationAction style={{color: "gray"}} onClick={ongoingsurveys} label="Ongoing Surveys" icon={<SpeedIcon onClick={ongoingsurveys}/>}  onClick={ongoingsurveys}/>
-          <BottomNavigationAction style={{color: "gray"}} onClick={researchFindings} label="Research Findings" icon={<CancelPresentationIcon />} onClick={researchFindings}/>
-          <BottomNavigationAction  style={{color: "gray"}} onClick={recommendedBooks} label="Recommended Books"  icon={<LocalLibraryIcon />} onClick={recommendedBooks}/>
-          <BottomNavigationAction style={{color: "gray"}} onClick={buyAudience} label="Buy Audience" icon={<ShoppingBasketIcon />} onClick={buyAudience}/>
+          <BottomNavigationAction  onClick={home} label="Home" icon={<HomeIcon/>} onClick={home}/>
+          <BottomNavigationAction  onClick={ongoingsurveys} label="Ongoing Surveys" icon={<SpeedIcon onClick={ongoingsurveys}/>}  onClick={ongoingsurveys}/>
+          <BottomNavigationAction  onClick={researchFindings} label="Research Findings" icon={<CancelPresentationIcon />} onClick={researchFindings}/>
+          <BottomNavigationAction   onClick={recommendedBooks} label="Recommended Books"  icon={<LocalLibraryIcon />} onClick={recommendedBooks}/>
+          <BottomNavigationAction  onClick={buyAudience} label="Buy Audience" icon={<ShoppingBasketIcon />} onClick={buyAudience}/>
 
         </BottomNavigation>
       </Paper>
