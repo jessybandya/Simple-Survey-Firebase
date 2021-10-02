@@ -147,7 +147,7 @@ function Ongoingsurvey({history}) {
             <TableCell align="right">{row.protein}</TableCell>
           </TableRow>
           <TableRow>
-            <TableCell style={{ paddingBottom: 0, paddingTop: 0,border:"1px solid #980DFF" }} colSpan={6}>
+            <TableCell style={{ paddingBottom: 0, paddingTop: 0,border:"1px solid #0476D0" }} colSpan={6}>
               <Collapse in={open} timeout="auto" unmountOnExit>
                 <Box sx={{ margin: 1 }}>
                   <Typography variant="h6" gutterBottom component="div">
@@ -156,10 +156,10 @@ function Ongoingsurvey({history}) {
                   <Table size="small" aria-label="purchases">
                     <TableHead>
                       <TableRow>
-                        <TableCell style={{fontWeight:"600",color:"#980DFF"}}>Date Modified</TableCell>
-                        <TableCell style={{fontWeight:"600",color:"#980DFF"}}>Owner Email</TableCell>
-                        <TableCell style={{fontWeight:"600",color:"#980DFF"}} align="right">Status</TableCell>
-                        <TableCell style={{fontWeight:"600",color:"#980DFF"}} align="right">Participate</TableCell>
+                        <TableCell style={{fontWeight:"600",color:"#0476D0"}}>Date Modified</TableCell>
+                        <TableCell style={{fontWeight:"600",color:"#0476D0"}}>Owner Email</TableCell>
+                        <TableCell style={{fontWeight:"600",color:"#0476D0"}} align="right">Status</TableCell>
+                        <TableCell style={{fontWeight:"600",color:"#0476D0"}} align="right">Participate</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -170,7 +170,7 @@ function Ongoingsurvey({history}) {
                           <TableCell>jessy.bandya5@gmail.com</TableCell>
                           <TableCell align="right">Open</TableCell>
                           <TableCell align="right">
-                              <button onClick={handleClickOpen}  style={{width:80,backgroundColor:"#980DFF",color:"#fff"}}>Respond</button>
+                              <button onClick={handleClickOpen}  style={{width:80,backgroundColor:"#0476D0",color:"#fff"}}>Respond</button>
                           </TableCell>
                         </TableRow>
                     </TableBody>
@@ -245,12 +245,12 @@ function Ongoingsurvey({history}) {
         <TableHead 
         >
           <TableRow >
-            <TableCell sx={{backgroundColor: "#980DFF"}}/>
-            <TableCell sx={{backgroundColor: "#980DFF",fontWeight:"900"}}>SURVEY NAME</TableCell>
-            <TableCell sx={{backgroundColor: "#980DFF",fontWeight:"900"}} align="right">RESPONSES</TableCell>
-            <TableCell sx={{backgroundColor: "#980DFF"}}/>
-            <TableCell sx={{backgroundColor: "#980DFF"}}/>
-            <TableCell sx={{backgroundColor: "#980DFF"}}/>
+            <TableCell sx={{backgroundColor: "#0476D0"}}/>
+            <TableCell sx={{backgroundColor: "#0476D0",fontWeight:"900"}}>SURVEY NAME</TableCell>
+            <TableCell sx={{backgroundColor: "#0476D0",fontWeight:"900"}} align="right">RESPONSES</TableCell>
+            <TableCell sx={{backgroundColor: "#0476D0"}}/>
+            <TableCell sx={{backgroundColor: "#0476D0"}}/>
+            <TableCell sx={{backgroundColor: "#0476D0"}}/>
           </TableRow>
         </TableHead>
         <TableBody>

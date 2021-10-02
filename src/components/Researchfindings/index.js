@@ -67,7 +67,7 @@ function createData(name, calories, fat, carbs, protein, price) {
           <TableCell align="right">{row.protein}</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell style={{ paddingBottom: 0, paddingTop: 0,border:"1px solid #980DFF" }} colSpan={6}>
+          <TableCell style={{ paddingBottom: 0, paddingTop: 0,border:"1px solid #0476D0" }} colSpan={6}>
             <Collapse in={open} timeout="auto" unmountOnExit>
               <Box sx={{ margin: 1 }}>
                 <Typography variant="h6" gutterBottom component="div">
@@ -76,10 +76,10 @@ function createData(name, calories, fat, carbs, protein, price) {
                 <Table size="small" aria-label="purchases">
                   <TableHead>
                     <TableRow>
-                      <TableCell style={{fontWeight:"600",color:"#980DFF"}}>Date Modified</TableCell>
-                      <TableCell style={{fontWeight:"600",color:"#980DFF"}}>Owner Email</TableCell>
-                      <TableCell style={{fontWeight:"600",color:"#980DFF"}} align="right">Status</TableCell>
-                      <TableCell style={{fontWeight:"600",color:"#980DFF"}} align="right">No participation</TableCell>
+                      <TableCell style={{fontWeight:"600",color:"#0476D0"}}>Date Modified</TableCell>
+                      <TableCell style={{fontWeight:"600",color:"#0476D0"}}>Owner Email</TableCell>
+                      <TableCell style={{fontWeight:"600",color:"#0476D0"}} align="right">Status</TableCell>
+                      <TableCell style={{fontWeight:"600",color:"#0476D0"}} align="right">No participation</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -164,12 +164,12 @@ function Researchfindings({history}) {
         <TableHead 
         >
           <TableRow >
-            <TableCell sx={{backgroundColor: "#980DFF"}}/>
-            <TableCell sx={{backgroundColor: "#980DFF",fontWeight:"900"}}>SURVEY NAME</TableCell>
-            <TableCell sx={{backgroundColor: "#980DFF",fontWeight:"900"}} align="right">RESPONSES</TableCell>
-            <TableCell sx={{backgroundColor: "#980DFF"}}/>
-            <TableCell sx={{backgroundColor: "#980DFF"}}/>
-            <TableCell sx={{backgroundColor: "#980DFF"}}/>
+            <TableCell sx={{backgroundColor: "#0476D0"}}/>
+            <TableCell sx={{backgroundColor: "#0476D0",fontWeight:"900"}}>SURVEY NAME</TableCell>
+            <TableCell sx={{backgroundColor: "#0476D0",fontWeight:"900"}} align="right">RESPONSES</TableCell>
+            <TableCell sx={{backgroundColor: "#0476D0"}}/>
+            <TableCell sx={{backgroundColor: "#0476D0"}}/>
+            <TableCell sx={{backgroundColor: "#0476D0"}}/>
           </TableRow>
         </TableHead>
         <TableBody>
