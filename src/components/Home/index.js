@@ -81,8 +81,14 @@ function Home({history}) {
              {user &&(
                             <div>
                             {/* <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,cursor: "pointer"}}><span ><a style={{color: "#000"}} onClick={handleClickOpen}>START NEW SURVEY</a></span></div> */}
+                            <div>
                             <button onClick={handleClickOpen} style={{marginLeft: 10,marginTop:10,width:300}} class="custom-btn btn-3"><span style={{fontSize:13,fontWeight:"900"}}>START NEW SURVEY</span></button>
-
+                            </div>
+                            <div>
+                           <a href="">
+                           <button onClick={handleClickOpen} style={{marginLeft: 10,marginTop:10,width:300}} class="custom-btn btn-3"><span style={{fontSize:13,fontWeight:"900"}}>BUY RESEARCH AUDIENCE</span></button>
+                           </a>
+                           </div>
                                {/* <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,marginTop:10,cursor: "pointer"}}><span><a style={{color: "#000"}} href="/Ongoingsurveys">ONGOING SURVEYS</a></span></div>
                                <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,marginTop:10,cursor: "pointer"}}><span><a style={{color: "#000"}} href="/researchfindings">RESEARCH FINDINGS</a></span></div>
                                <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,marginTop:10,cursor: "pointer"}}><span><a style={{color: "#000"}} href="/recommendedbooks">RECOMMENDED BOOKS</a></span></div>
