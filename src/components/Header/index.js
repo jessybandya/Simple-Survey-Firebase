@@ -631,7 +631,7 @@ const handleClose = () => {
           {auth?.currentUser?.email ? (
   <span>{auth?.currentUser?.email}</span>
             ):(
-  <span>{user.email}</span>
+  <span>{`${user?.email}`}</span>
             )}
           </span>
         </div>
@@ -643,7 +643,7 @@ const handleClose = () => {
           {auth?.currentUser?.displayName ? (
   <span>{auth?.currentUser?.displayName}</span>
             ):(
-  <span>{user.email.split('@')[0]}</span>
+  <span>{`${user?.email?.split('@')[0]}`}</span>
             )}
           </span>
         </div>
