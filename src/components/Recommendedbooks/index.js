@@ -232,12 +232,12 @@ function Recommendedbooks({history}) {
         
         >
           <TableRow >
-            <TableCell sx={{borderBottom: "2px solid #980DFF"}}/>
-            <TableCell sx={{backgroundColor: "",fontWeight:"900",borderBottom: "2px solid #980DFF"}}>ACADEMIC FIELD</TableCell>
-            <TableCell sx={{backgroundColor: "",fontWeight:"900",borderBottom: "2px solid #980DFF"}} align="right">TOPIC</TableCell>
-            <TableCell sx={{backgroundColor: "",fontWeight:"900",borderBottom: "2px solid #980DFF"}} align="right">BOOK TITLE</TableCell>
-            <TableCell sx={{backgroundColor: "",fontWeight:"900",borderBottom: "2px solid #980DFF"}} align="right">TIME ADDED</TableCell>
-            <TableCell sx={{backgroundColor: "",borderBottom: "2px solid #980DFF"}}/>
+            <TableCell sx={{borderBottom: "2px solid #0476D0"}}/>
+            <TableCell sx={{backgroundColor: "",fontWeight:"900",borderBottom: "2px solid #0476D0"}}>ACADEMIC FIELD</TableCell>
+            <TableCell sx={{backgroundColor: "",fontWeight:"900",borderBottom: "2px solid #0476D0"}} align="right">TOPIC</TableCell>
+            <TableCell sx={{backgroundColor: "",fontWeight:"900",borderBottom: "2px solid #0476D0"}} align="right">BOOK TITLE</TableCell>
+            <TableCell sx={{backgroundColor: "",fontWeight:"900",borderBottom: "2px solid #0476D0"}} align="right">TIME ADDED</TableCell>
+            <TableCell sx={{backgroundColor: "",borderBottom: "2px solid #0476D0"}}/>
           </TableRow>
         </TableHead>
         <TableBody>
