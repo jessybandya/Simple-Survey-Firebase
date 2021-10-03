@@ -18,7 +18,7 @@ import { useDispatch,useSelector } from 'react-redux';
 import TextField from '@mui/material/TextField';
 import { toast, ToastContainer } from 'react-toastify'
 import { db, auth } from "../firebase"
-
+import Survey from "../Survey"
 
 
 
@@ -153,20 +153,9 @@ function Home({history}) {
       >
         <AppBar sx={{ position: 'relative' }} style={{backgroundColor: "#000",marginTop:63}}>
         <Header/>
-          <Toolbar style={{borderTop: "2px solid #fff"}}>
-            <IconButton
-              edge="start"
-              color="inherit"
-              onClick={handleClose}
-              aria-label="close"
-            >
-              <CloseIcon />
-            </IconButton>
 
-          </Toolbar>
         </AppBar>
-        <ToastContainer/>
-        <List >
+        {/* <List >
           <div style={{textAlign: "center"}}><span><h2 style={{fontWeight: "600"}}>START NEW SURVEY</h2></span></div>
        <div className="ListHomeModal">
        <Box sx={{ minWidth: 120 }} >
@@ -323,7 +312,12 @@ function Home({history}) {
    </>
         </div> 
        )}
-        </List>
+        </List> */}
+
+
+
+
+        <Survey handleClose1={handleClose}/>
       </Dialog>
       </div>
 
