@@ -70,7 +70,9 @@ function Home({history}) {
           questions,
           ownerId:auth?.currentUser?.uid,
           ownerEmail: user?.email || auth?.currentUser?.email,
-          ownerUsername: `${user.email.split('@')[0]}` || auth?.currentUser?.displayName
+          ownerUsername: `${user.email.split('@')[0]}` || auth?.currentUser?.displayName,
+          active:true,
+          reade:false,
      
         }).then(ref => toast.success("Survey Form submitted successfully"))
         setAcademicField("");
@@ -90,7 +92,9 @@ function Home({history}) {
       questions,
       ownerId:auth?.currentUser?.uid,
       ownerEmail: user?.email || auth?.currentUser?.email,
-      ownerUsername: `${user.email.split('@')[0]}` || auth?.currentUser?.displayName
+      ownerUsername: `${user.email.split('@')[0]}` || auth?.currentUser?.displayName,
+      active:true,
+      reade:false,
  
     }).then(ref => toast.success("Survey Form submitted successfully"))
     setAcademicField("");
@@ -230,6 +234,7 @@ function Home({history}) {
           label="If other, kindly indicate which other topic you are interested in"
           placeholder="Placeholder"
           multiline
+          value={academicTopicOther}
           variant="filled"
           onChange={(e) => {
             setAcademicTopicOther(e.target.value)
