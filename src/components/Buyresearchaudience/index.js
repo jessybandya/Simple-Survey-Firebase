@@ -9,10 +9,7 @@ function Buyresearchaudience({history}) {
     let {user} = useSelector((state)=> ({...state}));
 
   
-    if(!user){
-        history.push("/signIn")
-      }
-
+ 
 
     return (
         <body>

@@ -15,7 +15,7 @@ import Select from '@mui/material/Select';
 import Toolbar from '@mui/material/Toolbar';
 import Slide from '@mui/material/Slide';
 import { useDispatch,useSelector } from 'react-redux';
-
+import TextField from '@mui/material/TextField';
 
 
 
@@ -46,7 +46,7 @@ function Home({history}) {
   const [academicTopic, setAcademicTopic] = React.useState('');
   const [academicTopicOther, setAcademicTopicOther] = React.useState('');
   const [surveyName, setSurveyName] = React.useState('');
-
+  const [questions, setQuestions] = React.useState('');
 
   const handleChange = (event) => {
     setAcademicField(event.target.value);
@@ -81,14 +81,8 @@ function Home({history}) {
              {user &&(
                             <div>
                             {/* <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,cursor: "pointer"}}><span ><a style={{color: "#000"}} onClick={handleClickOpen}>START NEW SURVEY</a></span></div> */}
-                            <div>
                             <button onClick={handleClickOpen} style={{marginLeft: 10,marginTop:10,width:300}} class="custom-btn btn-3"><span style={{fontSize:13,fontWeight:"900"}}>START NEW SURVEY</span></button>
-                            </div>
-                            <div>
-                           <a href="">
-                           <button onClick={handleClickOpen} style={{marginLeft: 10,marginTop:10,width:300}} class="custom-btn btn-3"><span style={{fontSize:13,fontWeight:"900"}}>BUY RESEARCH AUDIENCE</span></button>
-                           </a>
-                           </div>
+                           
                                {/* <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,marginTop:10,cursor: "pointer"}}><span><a style={{color: "#000"}} href="/Ongoingsurveys">ONGOING SURVEYS</a></span></div>
                                <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,marginTop:10,cursor: "pointer"}}><span><a style={{color: "#000"}} href="/researchfindings">RESEARCH FINDINGS</a></span></div>
                                <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,marginTop:10,cursor: "pointer"}}><span><a style={{color: "#000"}} href="/recommendedbooks">RECOMMENDED BOOKS</a></span></div>
@@ -182,15 +176,19 @@ function Home({history}) {
         <div className="ListHomeModal">
   <>
       <Box sx={{ minWidth: 120 }} style={{marginTop:10}}>
-       <div>
-         <span style={{fontSize:18,fontWeight:"600",color:"#696969"}}>If other, kindly indicate which other topic you are interested in</span>
-      </div> 
+
       <div>
-        <input type="text"
-                  onChange={(e) => {
-                    setAcademicTopicOther(e.target.value)
-                }}
-          style={{width: "100%",height:50,border: "2px solid #AEAEAE"}}/>
+      <TextField
+          id="filled-textarea"
+          label="If other, kindly indicate which other topic you are interested in"
+          placeholder="Placeholder"
+          multiline
+          variant="filled"
+          onChange={(e) => {
+            setAcademicTopicOther(e.target.value)
+        }}
+  style={{width: "100%"}}
+        />
       </div>      
     </Box>
   </>
@@ -201,32 +199,58 @@ function Home({history}) {
         <div className="ListHomeModal">
   <>
       <Box sx={{ minWidth: 120 }} style={{marginTop:50}}>
-       <div>
-       <span style={{fontSize:18,fontWeight:"600",color:"#696969"}}>Kindly give a name to your survey</span>
-      </div> 
+
       <div>
-        <input type="text"
-                  onChange={(e) => {
-                    setSurveyName(e.target.value)
-                }}
-          style={{width: "100%",height:50,border: "2px solid #AEAEAE"}}/>
+      <TextField
+          id="filled-textarea"
+          label="Kindly give your question here..."
+          placeholder="Placeholder"
+          multiline
+          variant="filled"
+          onChange={(e) => {
+            setQuestions(e.target.value)
+        }}
+  style={{width: "100%"}}
+        />
       </div>      
     </Box>
+    {questions !== '' ? (
+          <Box sx={{ minWidth: 120 }} style={{marginTop:50}}>
+
+          <div>
+          <TextField
+              id="filled-textarea"
+              label="Kindly give a name to your survey"
+              placeholder="Placeholder"
+              multiline
+              variant="filled"
+              onChange={(e) => {
+                setSurveyName(e.target.value)
+            }}
+      style={{width: "100%"}} />
+          </div>      
+        </Box>
+    ):(
+      <h1></h1> 
+    )}
   </>
        </div>
 ): (academicTopic !== '' && academicTopic !== 'Other') ?(
   <div className="ListHomeModal">
   <>
       <Box sx={{ minWidth: 120 }} style={{marginTop:50}}>
-       <div>
-       <span style={{fontSize:18,fontWeight:"600",color:"#696969"}}>Kindly give a name to your survey</span>
-      </div> 
+
       <div>
-        <input type="text"
-                  onChange={(e) => {
-                    setSurveyName(e.target.value)
-                }}
-          style={{width: "100%",height:50,border: "2px solid #AEAEAE"}}/>
+      <TextField
+          id="filled-textarea"
+          label="Kindly give a name to your survey"
+          placeholder="Placeholder"
+          multiline
+          variant="filled"
+          onChange={(e) => {
+            setSurveyName(e.target.value)
+        }}
+  style={{width: "100%"}} />
       </div>      
     </Box>
   </>

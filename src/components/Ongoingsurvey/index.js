@@ -151,7 +151,6 @@ function Ongoingsurvey({history}) {
               <Collapse in={open} timeout="auto" unmountOnExit>
                 <Box sx={{ margin: 1 }}>
                   <Typography variant="h6" gutterBottom component="div">
-                    More
                   </Typography>
                   <Table size="small" aria-label="purchases">
                     <TableHead>
@@ -159,7 +158,7 @@ function Ongoingsurvey({history}) {
                         <TableCell style={{fontWeight:"600",color:"#0476D0"}}>Date Modified</TableCell>
                         <TableCell style={{fontWeight:"600",color:"#0476D0"}}>Owner Email</TableCell>
                         <TableCell style={{fontWeight:"600",color:"#0476D0"}} align="right">Status</TableCell>
-                        <TableCell style={{fontWeight:"600",color:"#0476D0"}} align="right">Participate</TableCell>
+                        <TableCell style={{fontWeight:"600",color:"#0476D0"}} align="right">More</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
