@@ -16,7 +16,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Slide from '@mui/material/Slide';
 import { useDispatch,useSelector } from 'react-redux';
 import TextField from '@mui/material/TextField';
-
+import { toast, ToastContainer } from 'react-toastify'
+import { db, auth } from "../firebase"
 
 
 
@@ -52,6 +53,52 @@ function Home({history}) {
     setAcademicField(event.target.value);
   };
 
+
+  const addSurvey = (e) =>{
+    e.preventDefault();
+
+    if(academicTopicOther === ''){
+
+  
+
+        db.collection('surveys').add({
+            //
+          timestamp:  Date.now(),
+          surveyName,
+          academicField,
+          academicTopic,
+          questions,
+          ownerId:auth?.currentUser?.uid,
+          ownerEmail: user?.email || auth?.currentUser?.email,
+          ownerUsername: `${user.email.split('@')[0]}` || auth?.currentUser?.displayName
+     
+        }).then(ref => toast.success("Survey Form submitted successfully"))
+        setAcademicField("");
+        setAcademicTopic("");
+        setSurveyName("");
+        setQuestions("");
+
+    
+    }else{
+
+      db.collection('surveys').add({
+        //
+      timestamp:  Date.now(),
+      surveyName,
+      academicField,
+      academicTopic: academicTopicOther,
+      questions,
+      ownerId:auth?.currentUser?.uid,
+      ownerEmail: user?.email || auth?.currentUser?.email,
+      ownerUsername: `${user.email.split('@')[0]}` || auth?.currentUser?.displayName
+ 
+    }).then(ref => toast.success("Survey Form submitted successfully"))
+    setAcademicField("");
+    setAcademicTopicOther("");
+    setSurveyName("");
+    setQuestions("");
+    }
+  }
  
     return (
         <body>
@@ -102,7 +149,6 @@ function Home({history}) {
       >
         <AppBar sx={{ position: 'relative' }} style={{backgroundColor: "#000",marginTop:63}}>
         <Header/>
-
           <Toolbar style={{borderTop: "2px solid #fff"}}>
             <IconButton
               edge="start"
@@ -115,6 +161,7 @@ function Home({history}) {
 
           </Toolbar>
         </AppBar>
+        <ToastContainer/>
         <List >
           <div style={{textAlign: "center"}}><span><h2 style={{fontWeight: "600"}}>START NEW SURVEY</h2></span></div>
        <div className="ListHomeModal">
@@ -265,7 +312,7 @@ function Home({history}) {
        <Box sx={{ minWidth: 120 }} style={{marginTop:50}}>
   
        <div>
-       <button className="surveySubmitBtn">Submit Survey</button>
+       <button onClick={addSurvey} className="surveySubmitBtn">Submit Survey</button>
        </div>      
      </Box>
    </>
