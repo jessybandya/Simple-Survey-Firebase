@@ -389,8 +389,10 @@ const handleClose = () => {
       onClose={handleMenuClose}
     >
       {/* <MenuItem onClick={handleMenuClose}>{user.email.split('@')[0]}</MenuItem> */}
-      <MenuItem onClick={handleClickOpen}>My Account</MenuItem>
-      <MenuItem onClick={logout}><span>Logout</span></MenuItem>
+      <div style={{flexDirection: "column"}}>
+      <MenuItem onClick={handleClickOpen}><div>My Account</div></MenuItem>
+      <MenuItem onClick={logout}><div>Logout</div></MenuItem>
+      </div>
     </Menu>
   );
 
