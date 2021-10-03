@@ -193,7 +193,7 @@ function Registerindividual({history}) {
       <div className="socialDiv">
       <div onClick={googleLogin} className="socialDiv1"><img src="https://image.similarpng.com/thumbnail/2020/12/Flat-design-Google-logo-design-Vector-PNG.png" style={{height:40,objectFit: "contain"}}/></div>
       <div onClick={facebookLogin} className="socialDiv1"><img src="https://www.pngkit.com/png/detail/22-221036_follow-us-facebook-icon-flat-png.png" style={{height:40,objectFit: "contain"}}/></div>      
-      <div onClick={githubLogin} className="socialDiv1"><img src="https://iconape.com/wp-content/png_logo_vector/github-square.png" style={{height:40,objectFit: "contain"}}/></div>      
+      {/* <div onClick={githubLogin} className="socialDiv1"><img src="https://iconape.com/wp-content/png_logo_vector/github-square.png" style={{height:40,objectFit: "contain"}}/></div>       */}
       <div onClick={()=> toast.error("Oops!\nThere may be a delay on working with this authentication due to twitter developers regulations")} className="socialDiv1"><img src="https://image.similarpng.com/thumbnail/2020/06/Popular-icon-Twitter-clipart-PNG.png" style={{height:40,objectFit: "contain"}}/></div>        
       </div>
       <div style={{marginTop:15,fontWeight:"500"}}>

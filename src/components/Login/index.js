@@ -243,7 +243,7 @@ function Login() {
 					<span onClick={facebookLogin}><i class="fab fa-facebook-square"></i></span>
 					<span onClick={googleLogin}><i class="fab fa-google"></i></span>
 					<span onClick={()=> toast.error("Oops!\nThere may be a delay on working with this authentication due to twitter developers regulations")}><i class="fab fa-twitter-square"></i></span>
-                    <span onClick={githubLogin}><i class="fab fa-github"></i></span>
+                    {/* <span onClick={githubLogin}><i class="fab fa-github"></i></span> */}
 				</div>
 			</div>
 			<div class="card-body">
@@ -275,17 +275,17 @@ function Login() {
           }}/>Remember Me   
 					</div>
 					<div class="form-group">
-						<button  onClick={login} disabled={!rem}   class="btn float-right login_btn">{loading ? <CircularProgress style={{height:25,width:25,color:"blue"}}/> : <span>Login</span>}</button>
+						<button  onClick={login}  class="btn float-right login_btn">{loading ? <CircularProgress style={{height:25,width:25,color:"blue"}}/> : <span>Login</span>}</button>
 					</div>
 				</form>
 			</div>
 			<div class="card-footer">
 				<div class="d-flex justify-content-center links">
 					Don't have an account?
-                    <a href="#" onClick={handleClickOpen}>Sign Up</a>
+                    <a href="#" style={{color: "#7DF9FF"}} onClick={handleClickOpen}>Sign Up</a>
     				</div>
 				<div class="d-flex justify-content-center">
-					<a href="#" onClick={handleClickOpen1}>Forgot your password?</a>
+					<a href="#" style={{color: "#7DF9FF"}} onClick={handleClickOpen1}>Forgot your password?</a>
 				</div>
 			</div>
 		</div>
