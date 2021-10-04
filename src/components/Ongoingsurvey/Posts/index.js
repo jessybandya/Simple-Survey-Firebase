@@ -32,6 +32,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
+import {Grid} from '@material-ui/core';
 
 
 
@@ -170,30 +171,41 @@ function Posts({ postId,  ownerEmail, ownerId, ownerUsername, questions, timesta
         open={open1}
       >
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose1}>
-        RESPONSE FORM FOR SURVEY
+
+        SURVEY RESPONDING MODAL FORM
         </BootstrapDialogTitle>
         <DialogContent dividers>
+        <Typography gutterBottom>
+        
+        <Grid style={{borderTop: '10px solid teal', borderRadius: 10,marginTop:0}}
 
-       <Typography gutterBottom style={{marginTop:20}}>
-          <TextField
-          id="outlined-textarea"
-          label="Descriptions"
-          defaultValue={formDescription}
-          InputProps={{
-            readOnly: true,
-          }}
-          style={{width: "100%"}}
-        />
-          </Typography>
+>
+    <div>
+        <div>
+          <Paper elevation={2} style={{width:'100%'}}>
+            <div style={{display: 'flex',flexDirection:'column', alignItems:'flex-start', marginLeft: '10px', paddingTop: '10px', paddingBottom: '30px'}}>
+              <Typography variant="h4" style={{fontFamily:'sans-serif Roboto', marginBottom:"15px"}}>
+                {formTitle}
+              </Typography>
+              <Typography variant="subtitle1">
+                  {formDescription}
+              </Typography>
+            </div>
+          </Paper>
+        </div> 
+    </div>       
+</Grid>  
 
+        </Typography>
+  
+  <hr/>
 
-  <br />
-  <hr />
 
 {questions.map((item,i) =>
 <div>
     
-    <Typography gutterBottom style={{marginTop:20}}>
+    <Typography gutterBottom>
+        
           <TextField
           id="outlined-textarea"
           label="Question"
@@ -226,22 +238,15 @@ function Posts({ postId,  ownerEmail, ownerId, ownerUsername, questions, timesta
 </div>
 
 )}
-          <Typography gutterBottom style={{marginTop:20}}>
-        <TextField
-          id="outlined-textarea"
-          label="Kindly write your response here..."
-          placeholder="Placeholder"
-          style={{width: "100%"}}
-          multiline
-        />
-          </Typography>
-          <Typography gutterBottom style={{marginTop:20}}>
+ 
+
+        </DialogContent>
+        <DialogActions style={{flexDirection: "column"}}>
+        <Typography gutterBottom style={{marginTop:20}}>
           <i style={{fontWeight:"600"}}>" Survey and test a prospective action before undertaking it. Before you proceed, step back and look at the big picture, lest you act rashly on raw impulse."</i>
           </Typography>
-        </DialogContent>
-        <DialogActions>
-          <Button style={{fontWeight:"600"}} autoFocus onClick={handleClose}>
-            Submit
+          <Button style={{fontWeight:"600",marginTop:0}} autoFocus onClick={handleClose}>
+            Respond
           </Button>
         </DialogActions>
       </BootstrapDialog>
