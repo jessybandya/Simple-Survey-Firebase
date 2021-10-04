@@ -1,233 +1,37 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import Header from '../Header'
 import "./styles.css"
-import img from "../../assets/jedd.jpg"
-import PropTypes from 'prop-types';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
-import CloseIcon from '@mui/icons-material/Close';
-import TextField from '@mui/material/TextField';
-import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
 import { useSelector,useDispatch } from 'react-redux';
-
+import Posts from './Posts';
+import {auth,db} from './../firebase'
 
 
 
 
 
 function Ongoingsurvey({history}) {
-  const [open, setOpen] = React.useState(false);
   let {user} = useSelector((state)=> ({...state}));
-  let dispatch = useDispatch();
-
-  const [value, setValue] = React.useState(0);
-  const ref = React.useRef(null);
-
+  const [posts, setPosts] = useState([]);
 
   if(!user){
       history.push("/signIn")
     }
 
-
-
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-
-
-
-
-  const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-    '& .MuDialogContent-root': {
-      padding: theme.spacing(2),
-    },
-    '& .MuDialogActions-root': {
-      padding: theme.spacing(1),
-    },
-  }));
-  
-  const BootstrapDialogTitle = (props) => {
-    const { children, onClose, ...other } = props;
-  
-    return (
-      <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
-        {children}
-        {onClose ? (
-          <IconButton
-            aria-label="close"
-            onClick={onClose}
-            sx={{
-              position: 'absolute',
-              right: 8,
-              top: 8,
-              color: (theme) => theme.palette.grey[500],
-            }}
-          >
-            <CloseIcon />
-          </IconButton>
-        ) : null}
-      </DialogTitle>
-    );
-  };
-  
-  BootstrapDialogTitle.propTypes = {
-    children: PropTypes.node,
-    onClose: PropTypes.func.isRequired,
-  };
-  
-  function createData(name, calories, fat, carbs, protein, price) {
-      return {
-        name,
-        calories,
-        fat,
-        carbs,
-        protein,
-        price,
-        history: [
-          {
-            date: '2020-01-05',
-            customerId: '11091700',
-            amount: 3,
-          },
-          {
-            date: '2020-01-02',
-            customerId: 'Anonymous',
-            amount: 1,
-          },
-        ],
-      };
-    }
-    
-    function Row(props) {
-      const { row } = props;
-      const [open, setOpen] = React.useState(false);
-    
-      return (
-        <React.Fragment>
-          <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-            <TableCell>
-              <IconButton
-                aria-label="expand row"
-                size="small"
-                onClick={() => setOpen(!open)}
-              >
-                {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-              </IconButton>
-            </TableCell>
-            <TableCell component="th" scope="row">
-              {row.name}
-            </TableCell>
-            <TableCell align="right">{row.calories}</TableCell>
-            <TableCell align="right">{row.fat}</TableCell>
-            <TableCell align="right">{row.carbs}</TableCell>
-            <TableCell align="right">{row.protein}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell style={{ paddingBottom: 0, paddingTop: 0,border:"1px solid #0476D0" }} colSpan={6}>
-              <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box sx={{ margin: 1 }}>
-                  <Typography variant="h6" gutterBottom component="div">
-                  </Typography>
-                  <Table size="small" aria-label="purchases">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell style={{fontWeight:"600",color:"#0476D0"}}>Date Modified</TableCell>
-                        <TableCell style={{fontWeight:"600",color:"#0476D0"}}>Owner Email</TableCell>
-                        <TableCell style={{fontWeight:"600",color:"#0476D0"}} align="right">Status</TableCell>
-                        <TableCell style={{fontWeight:"600",color:"#0476D0"}} align="right">More</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        <TableRow >
-                          <TableCell component="th" scope="row">
-                            Fri, 22nd Jan 11.09 PM
-                          </TableCell>
-                          <TableCell>jessy.bandya5@gmail.com</TableCell>
-                          <TableCell align="right">Open</TableCell>
-                          <TableCell align="right">
-                              <button onClick={handleClickOpen}  style={{width:80,backgroundColor:"#0476D0",color:"#fff"}}>Respond</button>
-                          </TableCell>
-                        </TableRow>
-                    </TableBody>
-                  </Table>
-                </Box>
-              </Collapse>
-            </TableCell>
-          </TableRow>
-        </React.Fragment>
-      );
-    }
-    
-    Row.propTypes = {
-      row: PropTypes.shape({
-        calories: PropTypes.number.isRequired,
-        carbs: PropTypes.number.isRequired,
-        fat: PropTypes.number.isRequired,
-        history: PropTypes.arrayOf(
-          PropTypes.shape({
-            amount: PropTypes.number.isRequired,
-            customerId: PropTypes.string.isRequired,
-            date: PropTypes.string.isRequired,
-          }),
-        ).isRequired,
-        name: PropTypes.string.isRequired,
-        responses: PropTypes.number.isRequired,
-      }).isRequired,
-    };
-    
-    const rows = [
-      createData('DREAM SCHOOLS', 401),
-      createData('WILDLIFE', 237),
-      createData('HEALTH', 262),
-      createData('CAMPUS LIFE', 305),
-      createData('CAMPUS LIFE', 305),
-      createData('CAMPUS LIFE', 305),
-      createData('CAMPUS LIFE', 305),
-      createData('CAMPUS LIFE', 305),
-      createData('CAMPUS LIFE', 305),
-      createData('CAMPUS LIFE', 305),
-      createData('CAMPUS LIFE', 305),
-      createData('CAMPUS LIFE', 305),
-      createData('CAMPUS LIFE', 305),
-      createData('CAMPUS LIFE', 305),
-      createData('CAMPUS LIFE', 305),
-      createData('CAMPUS LIFE', 305),
-      createData('CAMPUS LIFE', 305),
-      createData('CAMPUS LIFE', 305),
-  
-  
-    ];
-
-
-
-
-
-
-
+    useEffect(() => {
+      db.collection('surveys').where("active","==", true).orderBy("timestamp", "desc").onSnapshot(snapshot => {
+          setPosts(snapshot.docs.map(doc => ({
+              id: doc.id,
+              post: doc.data(),
+          })));
+      })
+  }, []);
 
 
     return (
@@ -253,65 +57,32 @@ function Ongoingsurvey({history}) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <Row key={row.name} row={row} />
-          ))}
+
+        {
+    posts.map(({ id, post }) => (
+        < Posts 
+        key={id} 
+        postId={id} 
+        ownerEmail={post.ownerEmail} 
+        ownerId={post.ownerId} 
+        ownerUsername={post.ownerUsername}
+        questions={post.questions} 
+        timestamp={post.timestamp}        
+        formDescription={post.formDescription}
+        formTitle={post.formTitle}
+        read={post.read}
+ 
+        />
+
+    ))
+}
+
         </TableBody>
       </Table>
     </TableContainer>
     </Paper>
                 </div>
-                <BootstrapDialog
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
-        open={open}
-      >
-        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-        RESPONSE FORM FOR SURVEY
-        </BootstrapDialogTitle>
-        <DialogContent dividers>
-          <Typography gutterBottom>
-          <TextField
-          id="outlined-textarea"
-          label="Academic Field"
-          defaultValue="Engineering"
-          InputProps={{
-            readOnly: true,
-          }}
-          style={{width: "100%"}}
-        />
-              </Typography>
-       <Typography gutterBottom style={{marginTop:20}}>
-          <TextField
-          id="outlined-textarea"
-          label="Academic Field Topic"
-          defaultValue="How long is your course ?"
-          InputProps={{
-            readOnly: true,
-          }}
-          style={{width: "100%"}}
-        />
-          </Typography>
-
-          <Typography gutterBottom style={{marginTop:20}}>
-        <TextField
-          id="outlined-textarea"
-          label="Kindly write your response here..."
-          placeholder="Placeholder"
-          style={{width: "100%"}}
-          multiline
-        />
-          </Typography>
-          <Typography gutterBottom style={{marginTop:20}}>
-          <i style={{fontWeight:"600"}}>" Survey and test a prospective action before undertaking it. Before you proceed, step back and look at the big picture, lest you act rashly on raw impulse."</i>
-          </Typography>
-        </DialogContent>
-        <DialogActions>
-          <Button style={{fontWeight:"600"}} autoFocus onClick={handleClose}>
-            Submit
-          </Button>
-        </DialogActions>
-      </BootstrapDialog>
+              
  
             </div>
         </body>
