@@ -584,7 +584,7 @@ function QuestionsTab({handleClose1, formDescription, formTitle, handleClickOpen
                           onClick={addData}
                           style={{margin: '5px'}}
                           endIcon={<PublishIcon />}
-                        >Submit Questions </Button>
+                        >Submit </Button>
                       </div>
                     </motion.div>
                   </Grid>        
