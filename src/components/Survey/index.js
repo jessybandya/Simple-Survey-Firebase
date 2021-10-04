@@ -168,6 +168,7 @@ function Survey({ handleClose1 }) {
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
     const [open, setOpen] = React.useState(false);
 
+
     const [formTitle, setFormTitle] = React.useState("");
     const [formDescription, setFormDescription] = React.useState("");
 
@@ -215,6 +216,10 @@ function Survey({ handleClose1 }) {
       setFormTitle("");
       setFormDescription("");
     }
+    const AddForm = ()=>{
+        handleClose();
+
+      }
 
     const createForm = ()=>{
       var data = {
@@ -269,8 +274,8 @@ function Survey({ handleClose1 }) {
         open={isMenuOpen}
         onClose={handleMenuClose}
       >
-        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+        {/* <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+        <MenuItem onClick={handleMenuClose}>My account</MenuItem> */}
       </Menu>
     );
   
@@ -381,7 +386,7 @@ function Survey({ handleClose1 }) {
                 <Button onClick={cancelAddForm} color="primary">
                   Cancel
                 </Button>
-                <Button onClick={createForm} color="primary">
+                <Button disabled={(!formTitle) || (!formDescription)} onClick={AddForm} color="primary">
                   Create
                 </Button>
               </DialogActions>
@@ -401,12 +406,17 @@ function Survey({ handleClose1 }) {
         centered
         className={classes.tabs}
       >
-        <Tab label="Start New Survey" className={classes.tab} {...a11yProps(0)} />
+                  {formTitle === ''  &&(
+        <Tab onClick={handleClickOpen} label="Start New Survey" className={classes.tab} {...a11yProps(0)} />
+        )}
+                {formTitle !== '' &&(
+        <Tab onClick={handleClickOpen} label="Cancel" className={classes.tab} {...a11yProps(0)} />
+        )}
 
       </Tabs>
       <TabPanel value={value} index={0}>
         {/* <Question_form /> */}
-   <QuestionsTab/>        
+   <QuestionsTab handleClose1={handleClose1} formTitle={formTitle} formDescription={formDescription} handleClickOpen1={handleClickOpen}/>        
          
       </TabPanel>
       {/* <TabPanel value={value} index={1}>

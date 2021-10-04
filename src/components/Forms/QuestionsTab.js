@@ -27,15 +27,46 @@ import ImageUplaodModel from './ImageUplaodModel';
 // import formService from '../../services/formService';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import SaveIcon from '@material-ui/icons/Save';
+import { toast, ToastContainer } from 'react-toastify'
+import { db, auth } from "../firebase"
+// import { motion } from "framer-motion"
+import { useDispatch,useSelector } from 'react-redux';
+import PublishIcon from '@mui/icons-material/Publish';
 
-function QuestionsTab(props) {
+
+function QuestionsTab({handleClose1, formDescription, formTitle, handleClickOpen1}) {
 
   const [questions, setQuestions]= React.useState([]);
   const [openUploadImagePop, setOpenUploadImagePop] = React.useState(false);
   const [imageContextData, setImageContextData] = React.useState({question: null, option: null});
   const [formData, setFormData] = React.useState({});
   const [loadingFormData, setLoadingFormData] = React.useState(true);
-  
+  let {user} = useSelector((state)=> ({...state}));
+
+
+  const addData = (e) =>{
+      e.preventDefault();
+
+      if(!questions[0]){
+        toast.error("You cannot add a survey without any question!")
+      }else{
+        db.collection('surveys').add({
+            //
+           questions,
+           timestamp:  Date.now(),
+           formTitle,
+           formDescription,
+           ownerId:auth?.currentUser?.uid,
+           ownerEmail: user?.email || auth?.currentUser?.email,
+           ownerUsername: `${user.email.split('@')[0]}` || auth?.currentUser?.displayName,
+           active:true,
+           read:false,
+     
+        }).then(ref => alert("Survey Form submitted successfully"))
+        
+        handleClose1(false)
+      }
+  }
 
 //   React.useEffect(()=>{
     
@@ -289,11 +320,11 @@ function QuestionsTab(props) {
                       } />
                    </div>
 
-                  <div>
+                  {/* <div>
                     {op.optionImage !==""?(
                       <img src={op.optionImage} width="160px" height="auto" />
                     ): "" }
-                  </div>
+                  </div> */}
                  </div>
                 ))}  
               </div>            
@@ -316,13 +347,13 @@ function QuestionsTab(props) {
                         variant="filled"
                       onChange={(e)=>{handleQuestionValue(e.target.value, i)}}
                   />
-                  <IconButton aria-label="upload image" onClick={()=>{uploadImage(i, null)}}>
+                  {/* <IconButton aria-label="upload image" onClick={()=>{uploadImage(i, null)}}>
                         <CropOriginalIcon />
-                  </IconButton>
+                  </IconButton> */}
                 </div>
 
                 <div>
-                     {
+                     {/* {
                        checkImageHereOrNotForQuestion(ques.questionImage) ? (
                         <div>
                             <div style={{width:'150px', display: 'flex', alignItems:'flex-start', paddingLeft:'20px'}}>
@@ -337,7 +368,7 @@ function QuestionsTab(props) {
                             </div>
                         </div>
                        ): ""
-                     }
+                     } */}
                 </div>
                 
                 <div style={{width: '100%'}}>
@@ -355,9 +386,9 @@ function QuestionsTab(props) {
                             onChange={(e)=>{handleOptionValue(e.target.value, i, j)}}
                           />
 
-                          <IconButton aria-label="upload image" onClick={()=>{uploadImage(i, j)}}>
+                          {/* <IconButton aria-label="upload image" onClick={()=>{uploadImage(i, j)}}>
                             <CropOriginalIcon />
-                          </IconButton>
+                          </IconButton> */}
 
                           <IconButton aria-label="delete" onClick={()=>{removeOption(i, j)}}>
                             <CloseIcon />
@@ -443,8 +474,13 @@ function QuestionsTab(props) {
 
 
   return (
+      <>
+                      <ToastContainer/>
+
        <div style={{marginTop:'15px', marginBottom: '7px', paddingBottom:"30px"}}>
-           <Grid
+           
+           {formDescription !== '' && formTitle !== '' &&(
+            <Grid
             container
             direction="column"
             justify="center"
@@ -459,12 +495,10 @@ function QuestionsTab(props) {
                             <Paper elevation={2} style={{width:'100%'}}>
                               <div style={{display: 'flex',flexDirection:'column', alignItems:'flex-start', marginLeft: '15px', paddingTop: '20px', paddingBottom: '20px'}}>
                                 <Typography variant="h4" style={{fontFamily:'sans-serif Roboto', marginBottom:"15px"}}>
-                                  {/* {formData.name} */}
-                                  Form Name
+                                  {formTitle}
                                 </Typography>
                                 <Typography variant="subtitle1">
-                                    {/* {formData.description} */}
-                                    Form description
+                                    {formDescription}
                                 </Typography>
                               </div>
                             </Paper>
@@ -499,19 +533,22 @@ function QuestionsTab(props) {
                           style={{margin: '5px'}}
                         >Add Question </Button>
 
-                        {/* <Button
+                        <Button
                           variant="contained"
                           color="primary"
-                          onClick={saveQuestions}
+                          onClick={addData}
                           style={{margin: '15px'}}
-                          endIcon={<SaveIcon />}
-                        >Save Questions </Button> */}
+                          endIcon={<PublishIcon />}
+                        >Submit Questions </Button>
                       </div>
                     </div>
                   </Grid>        
               </Grid>           
            </Grid>
+           )}
+           
        </div>
+       </>
   );
 }
 export default QuestionsTab
