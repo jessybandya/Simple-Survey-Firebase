@@ -36,7 +36,7 @@ import Switch from '@material-ui/core/Switch';
 
 import Box from '@material-ui/core/Box';
 // import Question_form from './Question_form';
-
+import  { motion } from "framer-motion"
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 
@@ -325,7 +325,6 @@ function Survey({ handleClose1 }) {
           <CloseIcon onClick={handleClose1}/>
         </IconButton>
         
-        <span>Start Survey</span>
 
         <div className={classes.grow} />
         <div className={classes.sectionDesktop}>
@@ -352,7 +351,7 @@ function Survey({ handleClose1 }) {
     {renderMobileMenu}
     {renderMenu}
     <div>
-            <div>
+            <motion.div animate={{ rotateZ: 360 }}>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
               <DialogTitle id="form-dialog-title">Create Form</DialogTitle>
               <DialogContent>
@@ -391,7 +390,7 @@ function Survey({ handleClose1 }) {
                 </Button>
               </DialogActions>
             </Dialog>   
-            </div>
+            </motion.div>
             <div style={{marginTop:"10px"}}>
 
                 {/* <Forms userId={user.id}/> */}

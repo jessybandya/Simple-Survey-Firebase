@@ -29,10 +29,47 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import SaveIcon from '@material-ui/icons/Save';
 import { toast, ToastContainer } from 'react-toastify'
 import { db, auth } from "../firebase"
-// import { motion } from "framer-motion"
+import { motion } from "framer-motion"
 import { useDispatch,useSelector } from 'react-redux';
 import PublishIcon from '@mui/icons-material/Publish';
 
+
+
+const containerVariants = {
+    hidden:{
+     opacity:0,
+      x: '100vw',
+    },
+    visible:{
+      opacity:1,
+      x: 0,
+      transition: {
+        type: 'spring',
+        stiffness: 300
+      }
+    }
+  }
+
+  const submitBtns = {
+    hidden:{
+      opacity:0,
+       x: '-100vw',
+     },
+     visible:{
+       opacity:1,
+       x: 0,
+       transition: {
+         type: 'spring',
+         delay: 2.0
+       }
+     },
+     exit:{
+       x: '-100vw',
+       transition:{
+         ease: 'easeOut'
+       }
+     }
+  }
 
 function QuestionsTab({handleClose1, formDescription, formTitle, handleClickOpen1}) {
 
@@ -48,7 +85,7 @@ function QuestionsTab({handleClose1, formDescription, formTitle, handleClickOpen
       e.preventDefault();
 
       if(!questions[0]){
-        toast.error("You cannot add a survey without any question!")
+        toast.error("You cannot submit a survey without any question!")
       }else{
         db.collection('surveys').add({
             //
@@ -488,8 +525,14 @@ function QuestionsTab({handleClose1, formDescription, formTitle, handleClickOpen
             >
               
              <Grid item xs={12} sm={5} style={{width: '100%'}}>
-                 
-                  <Grid style={{borderTop: '10px solid teal', borderRadius: 10}}>
+                  <motion.div
+                                    variants={containerVariants}
+                                    initial="hidden"
+                                    animate="visible"
+                  >
+                  <Grid style={{borderTop: '10px solid teal', borderRadius: 10}}
+
+                  >
                       <div>
                           <div>
                             <Paper elevation={2} style={{width:'100%'}}>
@@ -505,9 +548,11 @@ function QuestionsTab({handleClose1, formDescription, formTitle, handleClickOpen
                           </div> 
                       </div>       
                   </Grid>  
-
+                 </motion.div>
                   <Grid style={{paddingTop: '10px'}}>
-                    <div>
+                    <motion.div
+                    variants={submitBtns}
+                    >
                     <ImageUplaodModel handleImagePopOpen={openUploadImagePop} handleImagePopClose={()=>{setOpenUploadImagePop(false)}} updateImageLink={updateImageLink} contextData={imageContextData}/>
 
                     <DragDropContext onDragEnd={onDragEnd}>
@@ -537,11 +582,11 @@ function QuestionsTab({handleClose1, formDescription, formTitle, handleClickOpen
                           variant="contained"
                           color="primary"
                           onClick={addData}
-                          style={{margin: '15px'}}
+                          style={{margin: '5px'}}
                           endIcon={<PublishIcon />}
                         >Submit Questions </Button>
                       </div>
-                    </div>
+                    </motion.div>
                   </Grid>        
               </Grid>           
            </Grid>
