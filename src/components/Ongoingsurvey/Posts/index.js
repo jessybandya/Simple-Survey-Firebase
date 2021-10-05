@@ -43,7 +43,7 @@ function Posts({ postId,  ownerEmail, ownerId, ownerUsername, questions, timesta
     const [reply, setReply] = useState([]);
     let {user} = useSelector((state)=> ({...state}));
   const [value, setValue] = React.useState('female');
-const [answers, setAnswer] = React.useState([])
+const [answers, setAnswer] = React.useState({})
 
 
 function onRadio(questionId) {
