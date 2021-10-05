@@ -15,7 +15,7 @@ function Buyresearchaudience({history}) {
         <body>
             <Header />
             <div className="buyResearchAudience">
-            <div style={{textAlign: "center",fontSize:30,fontWeight:"600",marginBottom:50}}><span>BUY RESEARCH AUDIENCE</span></div>
+            <div style={{textAlign: "center",fontSize:30,fontWeight:"600",marginBottom:50}}><span>BUY TARGETED AUDIENCE</span></div>
             
               <div style={{display: "flex",flexWrap: "wrap"}}>
                   <div style={{marginLeft:50,display:"flex",alignItems:"center",objectFit:"contain"}}>

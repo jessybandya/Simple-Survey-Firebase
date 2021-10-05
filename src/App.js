@@ -114,8 +114,9 @@ function App() {
 
       <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
         <BottomNavigation
-        style={{padding: 10}}
+        style={{height: 70}}
           showLabels
+
           value={value}
           onChange={(event, newValue) => {
             setValue(newValue);
@@ -123,10 +124,10 @@ function App() {
         >
           
           <BottomNavigationAction  onClick={home} label="Home" icon={<HomeIcon/>} onClick={home}/>
-          <BottomNavigationAction  onClick={ongoingsurveys} label="Ongoing Surveys" icon={<SpeedIcon onClick={ongoingsurveys}/>}  onClick={ongoingsurveys}/>
+          <BottomNavigationAction  onClick={ongoingsurveys} label="Ongoing Surveys"   onClick={ongoingsurveys}/>
           <BottomNavigationAction  onClick={researchFindings} label="Research Findings" icon={<CancelPresentationIcon />} onClick={researchFindings}/>
-          <BottomNavigationAction   onClick={recommendedBooks} label="Research papers and Books"  icon={<LocalLibraryIcon />} onClick={recommendedBooks}/>
-          <BottomNavigationAction  onClick={buyAudience} label="Buy Audience" icon={<ShoppingBasketIcon />} onClick={buyAudience}/>
+          <BottomNavigationAction   onClick={recommendedBooks} label="Papers and Books"  icon={<LocalLibraryIcon />} onClick={recommendedBooks}/>
+          <BottomNavigationAction  onClick={buyAudience} label="Targetted Audience" icon={<ShoppingBasketIcon />} onClick={buyAudience}/>
 
         </BottomNavigation>
       </Paper>
