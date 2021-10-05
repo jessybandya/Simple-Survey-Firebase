@@ -124,7 +124,7 @@ function App() {
         >
           
           <BottomNavigationAction  onClick={home} label="Home" icon={<HomeIcon/>} onClick={home}/>
-          <BottomNavigationAction  onClick={ongoingsurveys} label="Ongoing Surveys"   onClick={ongoingsurveys}/>
+          <BottomNavigationAction  onClick={ongoingsurveys} label="Ongoing Surveys"   icon={<SpeedIcon onClick={ongoingsurveys}/>}/>
           <BottomNavigationAction  onClick={researchFindings} label="Research Findings" icon={<CancelPresentationIcon />} onClick={researchFindings}/>
           <BottomNavigationAction   onClick={recommendedBooks} label="Papers and Books"  icon={<LocalLibraryIcon />} onClick={recommendedBooks}/>
           <BottomNavigationAction  onClick={buyAudience} label="Targetted Audience" icon={<ShoppingBasketIcon />} onClick={buyAudience}/>

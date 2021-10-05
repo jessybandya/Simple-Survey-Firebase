@@ -42,12 +42,22 @@ function Posts({ postId,  ownerEmail, ownerId, ownerUsername, questions, timesta
     const [ans, setAns] = React.useState([])
     const [reply, setReply] = useState([]);
     let {user} = useSelector((state)=> ({...state}));
-
   const [value, setValue] = React.useState('female');
+const [answers, setAnswer] = React.useState([])
 
+
+function onRadio(questionId) {
+   return function(event) {
+         var tmpAns = answers;
+          tmpAns[questionId] = event.target.value;
+           setAnswer(tmpAns)
+    }
+}
   const handleChange = (event) => {
+    event.preventDefault()
     setValue(event.target.value);
   };
+
 
     
    const responseReturn = (event) => {
@@ -66,7 +76,7 @@ function Posts({ postId,  ownerEmail, ownerId, ownerUsername, questions, timesta
               fromUsername: `${user.email.split('@')[0]}` || auth?.currentUser?.displayName,
               fromEmail: user?.email || auth?.currentUser?.email,
               fromId:auth?.currentUser?.uid,
-              reply,
+              answers,
                   read: false,
                   read1: true,
                   formId: postId,
@@ -148,6 +158,10 @@ function Posts({ postId,  ownerEmail, ownerId, ownerUsername, questions, timesta
           
            console.log(questions[i][j]);
         }
+     }
+
+     const add = (reply,quiz) =>{
+     setReply(...[reply])
      }
       
   return (
@@ -260,20 +274,19 @@ function Posts({ postId,  ownerEmail, ownerId, ownerUsername, questions, timesta
     <ul>
         {
         item.options.map((subRowData,k) =>
-        <div key={subRowData.id}>
-    <FormControl component="fieldset">
-      <RadioGroup
-        aria-label="gender"
-        name="controlled-radio-buttons-group"
-               onChange={(e) => {
-                setReply(e.target.value)
-            }}
-          value={subRowData.optionText}
-      >
-        <FormControlLabel   control={<Radio />} label={subRowData.optionText} />
-      </RadioGroup>
-    </FormControl>
+        <div >
  
+ <div class="form-check">
+
+  <input class="form-check-input" 
+  type="radio" onChange={onRadio(subRowData.optionText)} 
+  name="flexRadioDefault" id="flexRadioDefault1"/>
+
+  <label class="form-check-label" for="flexRadioDefault1">
+    {subRowData.optionText}
+  </label>
+</div>
+
         </div>
         )
    

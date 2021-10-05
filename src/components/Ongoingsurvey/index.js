@@ -62,6 +62,9 @@ function Ongoingsurvey({history}) {
         </TableHead>
         <TableBody>
 
+
+
+
         {
     posts.map(({ id, post }) => (
         < Posts 
@@ -80,6 +83,10 @@ function Ongoingsurvey({history}) {
 
     ))
 }
+
+
+
+
 
         </TableBody>
       </Table>

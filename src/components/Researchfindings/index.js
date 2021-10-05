@@ -41,15 +41,7 @@ function Ongoingsurvey({history}) {
             <Header/>
             <div className="OngoingBody">
                 <div style={{textAlign: "center",fontSize:30,fontWeight:"600"}}><span>RESEARCH FINDINGS</span></div>
-                   <SearchBar
-      dataSource={input.dataSource}
-      onChange={(value) => setInput({dataSource: [ value, value+value, value+value+value]})}
-      onRequestSearch={() => console.log('onRequestSearch')}
-      style={{
-        margin: '0 auto',
-        maxWidth: 800
-      }}
-    />
+                   
                 <div style={{marginTop:10}}>
                 <Paper sx={{ width: '100%', overflow: 'hidden' }}>
                 <TableContainer sx={{ maxHeight: 440 }}>
