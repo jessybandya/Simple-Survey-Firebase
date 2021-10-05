@@ -181,7 +181,7 @@ function Posts({ postId,  ownerEmail, ownerId, ownerUsername, questions, timesta
                             <TableCell style={{fontWeight:"600",color:"#0476D0"}}>Date Modified</TableCell>
                             <TableCell style={{fontWeight:"600",color:"#0476D0"}}>Owner Username</TableCell>
                             <TableCell style={{fontWeight:"600",color:"#0476D0"}} align="right">Status</TableCell>
-                            <TableCell style={{fontWeight:"600",color:"#0476D0"}} align="right">More</TableCell>
+                            <TableCell style={{fontWeight:"600",color:"#0476D0"}} align="right">No more participation</TableCell>
                           </TableRow>
                         </TableHead>
                         <TableBody>
@@ -190,9 +190,8 @@ function Posts({ postId,  ownerEmail, ownerId, ownerUsername, questions, timesta
                                 {date.toDateString()}, {date.toLocaleTimeString()}
                               </TableCell>
                               <TableCell>{ownerUsername}</TableCell>
-                              <TableCell align="right">Open</TableCell>
+                              <TableCell align="right">Closed</TableCell>
                               <TableCell align="right">
-                                  <button onClick={handleClickOpen1}  style={{width:80,backgroundColor:"#0476D0",color:"#fff",border:"none"}}>Respond</button>
                               </TableCell>
                             </TableRow>
                         </TableBody>
@@ -209,7 +208,7 @@ function Posts({ postId,  ownerEmail, ownerId, ownerUsername, questions, timesta
       >
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose1}>
 
-        MODAL FORM
+        RESPONDING MODAL FORM
         </BootstrapDialogTitle>
         <DialogContent dividers>
         <Typography gutterBottom>

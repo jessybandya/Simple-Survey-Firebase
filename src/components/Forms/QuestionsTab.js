@@ -105,19 +105,7 @@ function QuestionsTab({handleClose1, formDescription, formTitle, handleClickOpen
       }
   }
 
-//   React.useEffect(()=>{
-    
-//     if(props.formData.questions !== undefined){
-//       //console.log(props.formData.questions.length);
-//       if(props.formData.questions.length === 0){
-//         setQuestions([{questionText: "Question", options : [{optionText: "Option 1"}], open: false}]);
-//       } else{
-//         setQuestions(props.formData.questions)
-//       }
-//       setLoadingFormData(false)
-//     } 
-//     setFormData(props.formData)
-//   }, [props.formData])
+
   
 
   function saveQuestions(){
@@ -128,22 +116,6 @@ function QuestionsTab({handleClose1, formDescription, formTitle, handleClickOpen
       description: formData.description,
       questions: questions
     }
-
-    // formService.autoSave(data)
-    // .then((result) => {     
-    //      console.log(result);
-    //      setQuestions(result.questions)
-    //     },
-    //     error => {
-    //     const resMessage =
-    //         (error.response &&
-    //         error.response.data &&
-    //         error.response.data.message) ||
-    //         error.message ||
-    //         error.toString();
-    //         console.log(resMessage);
-    //     }
-    // );
     
   }
 
@@ -357,11 +329,7 @@ function QuestionsTab({handleClose1, formDescription, formTitle, handleClickOpen
                       } />
                    </div>
 
-                  {/* <div>
-                    {op.optionImage !==""?(
-                      <img src={op.optionImage} width="160px" height="auto" />
-                    ): "" }
-                  </div> */}
+
                  </div>
                 ))}  
               </div>            
@@ -384,28 +352,11 @@ function QuestionsTab({handleClose1, formDescription, formTitle, handleClickOpen
                         variant="filled"
                       onChange={(e)=>{handleQuestionValue(e.target.value, i)}}
                   />
-                  {/* <IconButton aria-label="upload image" onClick={()=>{uploadImage(i, null)}}>
-                        <CropOriginalIcon />
-                  </IconButton> */}
+
                 </div>
 
                 <div>
-                     {/* {
-                       checkImageHereOrNotForQuestion(ques.questionImage) ? (
-                        <div>
-                            <div style={{width:'150px', display: 'flex', alignItems:'flex-start', paddingLeft:'20px'}}>
-                            <img src={ques.questionImage} width="150px" height="auto"/>
-                            <IconButton style={{marginLeft: '-15px', marginTop: '-15px',zIndex:999, backgroundColor: 'lightgrey', color:'grey'}} 
-                                        size="small"
-                                        onClick={()=>{
-                                          updateImageLink("", {question: i, option: null})
-                                        }}>
-                              <CloseIcon />
-                            </IconButton>
-                            </div>
-                        </div>
-                       ): ""
-                     } */}
+
                 </div>
                 
                 <div style={{width: '100%'}}>

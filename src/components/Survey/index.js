@@ -187,28 +187,18 @@ function Survey({ handleClose1 }) {
     setValue(newValue);
   };
 
-    // React.useEffect(()=>{
-    //   setUser(auth.getCurrentUser())
-    // }, []);
   
 
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-    // const addForm = ()=>{
-    //   var x = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-    //   console.log(x);
-    //   history.push("/form/"+x);
-    // }
+
 
     const logout =()=>{
       var logoutConfirmation = window.confirm("Really want to logout?");
 
-    //   if(logoutConfirmation){
-    //     auth.logout();
-    //     history.push("/login");
-    //   }
+
     }
 
     const cancelAddForm = ()=>{
@@ -227,25 +217,7 @@ function Survey({ handleClose1 }) {
         description: formDescription,
         createdBy: user.id
       }
-    //   if (data.name !=="") {
-    //     formService.createForm(data)
-    //     .then((result) => { 
-    //       console.log(result);
-    //       history.push("/form/"+result._id);
-          
-    //        },
 
-    //        error => {
-    //        const resMessage =
-    //            (error.response &&
-    //            error.response.data &&
-    //            error.response.data.message) ||
-    //            error.message ||
-    //            error.toString();
-    //            console.log(resMessage);
-    //        }
-    //    );
-    //   } 
     }
   
     
@@ -299,15 +271,6 @@ function Survey({ handleClose1 }) {
           <span>Add Form </span>
         </MenuItem>
 
-        {/* <MenuItem>
-          <IconButton
-            aria-label="account of current user"
-            color="inherit"
-          >
-            <AccountCircle />
-          </IconButton>
-          <p>Profile</p>
-        </MenuItem> */}
       </Menu>
     );
   
@@ -393,7 +356,6 @@ function Survey({ handleClose1 }) {
             </motion.div>
             <div style={{marginTop:"10px"}}>
 
-                {/* <Forms userId={user.id}/> */}
 
 
                 <Paper className={classes.root}>

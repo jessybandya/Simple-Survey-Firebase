@@ -20,7 +20,7 @@ import { toast, ToastContainer } from 'react-toastify'
 import { db, auth } from "../firebase"
 import Survey from "../Survey"
 import { motion } from "framer-motion"
-
+import Geocode from "react-geocode";
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -48,6 +48,26 @@ function Home({history}) {
   const [academicTopicOther, setAcademicTopicOther] = React.useState('');
   const [surveyName, setSurveyName] = React.useState('');
   const [questions, setQuestions] = React.useState('');
+  const [lat, setLat] = useState(null);
+  const [lng, setLng] = useState(null);
+  const [status, setStatus] = useState(null);
+
+  
+  const getLocation = () => {
+    if (!navigator.geolocation) {
+      setStatus('Geolocation is not supported by your browser');
+    } else {
+      setStatus('Locating...');
+      navigator.geolocation.getCurrentPosition((position) => {
+        setStatus(null);
+        setLat(position.coords.latitude);
+        setLng(position.coords.longitude);
+      }, () => {
+        setStatus('Unable to retrieve your location');
+      });
+    }
+  }
+
 
   const handleChange = (event) => {
     setAcademicField(event.target.value);
@@ -103,6 +123,81 @@ function Home({history}) {
     setQuestions("");
     }
   }
+
+
+  // set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
+Geocode.setApiKey("AIzaSyDCDCEXLhqk7UKW8QG0gd8Q6E7brwxVAcE");
+
+// set response language. Defaults to english.
+Geocode.setLanguage("en");
+
+// set response region. Its optional.
+// A Geocoding request with region=es (Spain) will return the Spanish city.
+Geocode.setRegion("es");
+
+// set location_type filter . Its optional.
+// google geocoder returns more that one address for given lat/lng.
+// In some case we need one address as response for which google itself provides a location_type filter.
+// So we can easily parse the result for fetching address components
+// ROOFTOP, RANGE_INTERPOLATED, GEOMETRIC_CENTER, APPROXIMATE are the accepted values.
+// And according to the below google docs in description, ROOFTOP param returns the most accurate result.
+Geocode.setLocationType("ROOFTOP");
+
+// Enable or disable logs. Its optional.
+Geocode.enableDebug();
+
+// Get address from latitude & longitude.
+Geocode.fromLatLng("48.8583701", "2.2922926").then(
+  (response) => {
+    const address = response.results[0].formatted_address;
+    console.log(address);
+  },
+  (error) => {
+    console.error(error);
+  }
+);
+
+
+// Get formatted address, city, state, country from latitude & longitude when
+// Geocode.setLocationType("ROOFTOP") enabled
+// the below parser will work for most of the countries
+Geocode.fromLatLng("48.8583701", "2.2922926").then(
+  (response) => {
+    const address = response.results[0].formatted_address;
+    let city, state, country;
+    for (let i = 0; i < response.results[0].address_components.length; i++) {
+      for (let j = 0; j < response.results[0].address_components[i].types.length; j++) {
+        switch (response.results[0].address_components[i].types[j]) {
+          case "locality":
+            city = response.results[0].address_components[i].long_name;
+            break;
+          case "administrative_area_level_1":
+            state = response.results[0].address_components[i].long_name;
+            break;
+          case "country":
+            country = response.results[0].address_components[i].long_name;
+            break;
+        }
+      }
+    }
+    console.log(city, state, country);
+    console.log(address);
+  },
+  (error) => {
+    console.error(error);
+  }
+);
+
+// Get latitude & longitude from address.
+Geocode.fromAddress("Eiffel Tower").then(
+  (response) => {
+    const { lat, lng } = response.results[0].geometry.location;
+    console.log(lat, lng);
+  },
+  (error) => {
+    console.error(error);
+  }
+);
  
     return (
         <body>
@@ -133,7 +228,13 @@ function Home({history}) {
                             <div>
                             {/* <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,cursor: "pointer"}}><span ><a style={{color: "#000"}} onClick={handleClickOpen}>START NEW SURVEY</a></span></div> */}
                             <motion.button animate={{ rotateZ: 360 }} onClick={handleClickOpen} style={{marginLeft: 10,marginTop:10,width:300}} class="custom-btn btn-3"><span style={{fontSize:13,fontWeight:"900"}}>START NEW SURVEY</span></motion.button>
-                           
+                               {/* <div className="App">
+      <button onClick={getLocation}>Get Location</button>
+      <h1>Coordinates</h1>
+      <p>{status}</p>
+      {lat && <p>Latitude: {lat}</p>}
+      {lng && <p>Longitude: {lng}</p>}
+    </div> */}
                                {/* <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,marginTop:10,cursor: "pointer"}}><span><a style={{color: "#000"}} href="/Ongoingsurveys">ONGOING SURVEYS</a></span></div>
                                <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,marginTop:10,cursor: "pointer"}}><span><a style={{color: "#000"}} href="/researchfindings">RESEARCH FINDINGS</a></span></div>
                                <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,marginTop:10,cursor: "pointer"}}><span><a style={{color: "#000"}} href="/recommendedbooks">RECOMMENDED BOOKS</a></span></div>
