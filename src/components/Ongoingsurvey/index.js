@@ -20,6 +20,7 @@ import SearchBar from "material-ui-search-bar";
 function Ongoingsurvey({history}) {
   let {user} = useSelector((state)=> ({...state}));
   const [posts, setPosts] = useState([]);
+  const [input, setInput] = useState("");
 
   if(!user){
       history.push("/signIn")
@@ -39,14 +40,10 @@ function Ongoingsurvey({history}) {
         <body >
             <Header/>
             <div className="OngoingBody">
-                <div style={{textAlign: "center",fontSize:30,fontWeight:"600",alignSelf: "center",justifyContent:"center"}}><span>ONGOING SURVEYS</span>
-                          <SearchBar 
-    value=""
-    placeholder="Search Survey..."
-  />
+                <div style={{textAlign: "center",fontSize:30,fontWeight:"600"}}><span>ONGOING SURVEYS</span>
                 </div>
-                
-                <div style={{marginTop:10}}>
+ 
+                <div style={{marginTop:0}}>
                 <Paper sx={{ width: '100%', overflow: 'hidden' }}>
                 <TableContainer sx={{ maxHeight: 440 }}>
       <Table aria-label="collapsible table"
