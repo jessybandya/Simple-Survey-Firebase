@@ -11,6 +11,7 @@ import Paper from '@mui/material/Paper';
 import { useSelector,useDispatch } from 'react-redux';
 import Posts from './Posts';
 import {auth,db} from './../firebase'
+import SearchBar from "material-ui-search-bar";
 
 
 
@@ -39,7 +40,11 @@ function Ongoingsurvey({history}) {
             <Header/>
             <div className="OngoingBody">
                 <div style={{textAlign: "center",fontSize:30,fontWeight:"600"}}><span>RESEARCH FINDINGS</span></div>
-                <div>
+                 <SearchBar 
+    value=""
+    placeholder="Search Survey..."
+  />
+                <div style={{marginTop:10}}>
                 <Paper sx={{ width: '100%', overflow: 'hidden' }}>
                 <TableContainer sx={{ maxHeight: 440 }}>
       <Table aria-label="collapsible table"

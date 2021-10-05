@@ -222,7 +222,7 @@ function Recommendedbooks({history}) {
                     
                 {/* <Box sx={{ pb: 7 }} ref={ref}> */}
                 <div className="RecommendedBody">
-     <div style={{textAlign: "center",fontSize:30,fontWeight:"600"}}><span>RECOMMENDED BOOKS</span></div>
+     <div style={{textAlign: "center",fontSize:30,fontWeight:"600"}}><span>RESEARCH PAPERS AND BOOKS</span></div>
 
      <Paper sx={{ width: '100%', overflow: 'hidden' }}>
                 <TableContainer sx={{ maxHeight: 440 }}>
