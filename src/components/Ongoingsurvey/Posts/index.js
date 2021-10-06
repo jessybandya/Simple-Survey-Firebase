@@ -45,14 +45,22 @@ function Posts({ postId,  ownerEmail, ownerId, ownerUsername, questions, timesta
   const [value, setValue] = React.useState('female');
 const [answers, setAnswer] = React.useState({})
   const [questions1, setQuestions]= React.useState([]);
-
+  const [numberOfSurvey, setNumberOfSurvey] = React.useState(0)
 
   function addMoreQuestionField(quiz,answer){
       return function(event) {
+      setQuestions(questions=> [...questions, {questionText: quiz, options : [{optionText: answer}]}]);
+
         
-      setQuestions(questions=> [...questions, {questionText: quiz, options : [{optionText: answer}], open: true}]);
       }
   }
+
+    useEffect(() => {
+      db.collection('surveys').doc(postId).collection("responses").where("reply","==", true)
+     .onSnapshot(snapshot => (
+      setNumberOfSurvey(snapshot.docs.length)
+     ))
+  }, []);
 
 
 
@@ -65,7 +73,7 @@ function onRadio(questionId) {
 }
   const handleChange = (event) => {
     event.preventDefault()
-    setValue(event.target.value);
+    setQuestions(event.target.value);
   };
 
 
@@ -189,7 +197,7 @@ function onRadio(questionId) {
                 <TableCell component="th" scope="row">
                   {formTitle}
                 </TableCell>
-                <TableCell align="right">401</TableCell>
+                <TableCell align="right">{numberOfSurvey}</TableCell>
 
               </TableRow>
               <TableRow>
@@ -265,11 +273,10 @@ function onRadio(questionId) {
 <div key={i}>
     
     <Typography gutterBottom>
-        
           <TextField
           id="outlined-textarea"
-          label="Question"
           defaultValue= {item.questionText}
+          label={`Question ${i+1}`}
           InputProps={{
             readOnly: true,
           }}
@@ -285,8 +292,10 @@ function onRadio(questionId) {
         item.options.map((subRowData,k) =>
         <div >
  
- <div class="form-check">
-  <input class="form-check-input" checked  type="radio" onChange={addMoreQuestionField(item.questionText,subRowData.optionText)}
+ <div   class="form-check">
+  <input class="form-check-input"  type="radio" name="flexRadioDefault" id="flexRadioDefault1"
+           onChange={addMoreQuestionField(item.questionText,subRowData.optionText)}       
+
    name="flexRadioDefault" 
    id="flexRadioDefault1"/>
 
@@ -294,6 +303,8 @@ function onRadio(questionId) {
     {subRowData.optionText}
   </label>
 </div>
+
+
 
         </div>
         )

@@ -42,6 +42,7 @@ function Posts({ postId,  ownerEmail, ownerId, ownerUsername, questions, timesta
     const [ans, setAns] = React.useState([])
     const [reply, setReply] = useState([]);
     let {user} = useSelector((state)=> ({...state}));
+  const [numberOfSurvey, setNumberOfSurvey] = React.useState(0)
 
   const [value, setValue] = React.useState('female');
 
@@ -49,6 +50,12 @@ function Posts({ postId,  ownerEmail, ownerId, ownerUsername, questions, timesta
     setValue(event.target.value);
   };
 
+    useEffect(() => {
+      db.collection('surveys').doc(postId).collection("responses").where("reply","==", true)
+     .onSnapshot(snapshot => (
+      setNumberOfSurvey(snapshot.docs.length)
+     ))
+  }, []);
     
    const responseReturn = (event) => {
     event.preventDefault();
@@ -166,7 +173,7 @@ function Posts({ postId,  ownerEmail, ownerId, ownerUsername, questions, timesta
                 <TableCell component="th" scope="row">
                   {formTitle}
                 </TableCell>
-                <TableCell align="right">401</TableCell>
+                <TableCell align="right">{numberOfSurvey}</TableCell>
 
               </TableRow>
               <TableRow>
