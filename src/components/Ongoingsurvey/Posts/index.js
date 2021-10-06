@@ -44,6 +44,16 @@ function Posts({ postId,  ownerEmail, ownerId, ownerUsername, questions, timesta
     let {user} = useSelector((state)=> ({...state}));
   const [value, setValue] = React.useState('female');
 const [answers, setAnswer] = React.useState({})
+  const [questions1, setQuestions]= React.useState([]);
+
+
+  function addMoreQuestionField(quiz,answer){
+      return function(event) {
+        
+      setQuestions(questions=> [...questions, {questionText: quiz, options : [{optionText: answer}], open: true}]);
+      }
+  }
+
 
 
 function onRadio(questionId) {
@@ -76,15 +86,14 @@ function onRadio(questionId) {
               fromUsername: `${user.email.split('@')[0]}` || auth?.currentUser?.displayName,
               fromEmail: user?.email || auth?.currentUser?.email,
               fromId:auth?.currentUser?.uid,
-              answers,
+              questions1,
                   read: false,
-                  read1: true,
+                  reply: true,
                   formId: postId,
                   ownerFormId: ownerId,
       
              
             }).then(ref => alert("Thank you the response has been submitted successfully\nThe information provided shall be treated confidential"))
-            setReply("");
         }
       }
     )
@@ -277,10 +286,9 @@ function onRadio(questionId) {
         <div >
  
  <div class="form-check">
-
-  <input class="form-check-input" 
-  type="radio" onChange={onRadio(subRowData.optionText)} 
-  name="flexRadioDefault" id="flexRadioDefault1"/>
+  <input class="form-check-input" checked  type="radio" onChange={addMoreQuestionField(item.questionText,subRowData.optionText)}
+   name="flexRadioDefault" 
+   id="flexRadioDefault1"/>
 
   <label class="form-check-label" for="flexRadioDefault1">
     {subRowData.optionText}
