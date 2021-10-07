@@ -48,25 +48,10 @@ function Home({history}) {
   const [academicTopicOther, setAcademicTopicOther] = React.useState('');
   const [surveyName, setSurveyName] = React.useState('');
   const [questions, setQuestions] = React.useState('');
-  const [lat, setLat] = useState(null);
-  const [lng, setLng] = useState(null);
-  const [status, setStatus] = useState(null);
 
-  
-  const getLocation = () => {
-    if (!navigator.geolocation) {
-      setStatus('Geolocation is not supported by your browser');
-    } else {
-      setStatus('Locating...');
-      navigator.geolocation.getCurrentPosition((position) => {
-        setStatus(null);
-        setLat(position.coords.latitude);
-        setLng(position.coords.longitude);
-      }, () => {
-        setStatus('Unable to retrieve your location');
-      });
-    }
-  }
+
+
+ 
 
 
   const handleChange = (event) => {
@@ -115,6 +100,7 @@ function Home({history}) {
       ownerUsername: `${user.email.split('@')[0]}` || auth?.currentUser?.displayName,
       active:true,
       reade:false,
+
  
     }).then(ref => toast.success("Survey Form submitted successfully"))
     setAcademicField("");
@@ -198,6 +184,8 @@ Geocode.fromAddress("Eiffel Tower").then(
     console.error(error);
   }
 );
+
+
  
     return (
         <body>
@@ -222,12 +210,13 @@ Geocode.fromAddress("Eiffel Tower").then(
                 </>
               )}
 
-            
+
 
              {user &&(
                             <div>
                             {/* <div style={{border: "2px solid #0476D0",width:300,height:40,textAlign: "center",fontWeight:"700",fontSize: 20,cursor: "pointer"}}><span ><a style={{color: "#000"}} onClick={handleClickOpen}>START NEW SURVEY</a></span></div> */}
                             <motion.button animate={{ rotateZ: 360 }} onClick={handleClickOpen} style={{marginLeft: 10,marginTop:10,width:300}} class="custom-btn btn-3"><span style={{fontSize:13,fontWeight:"900"}}>START NEW SURVEY</span></motion.button>
+ 
                                {/* <div className="App">
       <button onClick={getLocation}>Get Location</button>
       <h1>Coordinates</h1>

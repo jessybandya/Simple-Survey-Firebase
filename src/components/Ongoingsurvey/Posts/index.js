@@ -46,10 +46,18 @@ function Posts({ postId,  ownerEmail, ownerId, ownerUsername, questions, timesta
 const [answers, setAnswer] = React.useState({})
   const [questions1, setQuestions]= React.useState([]);
   const [numberOfSurvey, setNumberOfSurvey] = React.useState(0)
+  const [lat, setLat] = useState(null);
+  const [lng, setLng] = useState(null);
+  const [status, setStatus] = useState(null);
+
+  
+
 
   function addMoreQuestionField(quiz,answer){
       return function(event) {
+
       setQuestions(questions=> [...questions, {questionText: quiz, options : [{optionText: answer}]}]);
+
 
         
       }
@@ -71,16 +79,31 @@ function onRadio(questionId) {
            setAnswer(tmpAns)
     }
 }
-  const handleChange = (event) => {
-    event.preventDefault()
-    setQuestions(event.target.value);
-  };
+
 
 
     
    const responseReturn = (event) => {
     event.preventDefault();
     let errors = {};
+
+
+    if(!lat && !lng){
+      if (!navigator.geolocation) {
+        setStatus('Geolocation is not supported by your browser');
+      } else {
+        setStatus('Locating...');
+        navigator.geolocation.getCurrentPosition((position) => {
+          setStatus(null);
+          setLat(position.coords.latitude);
+          setLng(position.coords.longitude);
+        }, () => {
+          setStatus('Unable to retrieve your location');
+        });
+      }
+    }else{
+
+    
 
     db.collection('surveys').doc(postId).collection("responses").where("fromId", "==", auth.currentUser.uid).where("formId", "==",postId ).get().then(
       snap => {
@@ -99,13 +122,15 @@ function onRadio(questionId) {
                   reply: true,
                   formId: postId,
                   ownerFormId: ownerId,
-      
+                  lat,
+                  lng,
              
             }).then(ref => alert("Thank you the response has been submitted successfully\nThe information provided shall be treated confidential"))
         }
       }
     )
   }
+}
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -294,10 +319,10 @@ function onRadio(questionId) {
  
  <div   class="form-check">
   <input class="form-check-input"  type="radio" name="flexRadioDefault" id="flexRadioDefault1"
-           onChange={addMoreQuestionField(item.questionText,subRowData.optionText)}       
+           onChange={addMoreQuestionField(item.questionText,subRowData.optionText)} 
 
-   name="flexRadioDefault" 
-   id="flexRadioDefault1"/>
+           name="flexRadioDefault" 
+          id="flexRadioDefault1"/>
 
   <label class="form-check-label" for="flexRadioDefault1">
     {subRowData.optionText}

@@ -85,9 +85,17 @@ function App() {
     e.preventDefault()
     history.push("/buyresearchaudience")
   }
+
+
+
+
+
+
+  
   
   return (
     <div className="App">
+
       <h1></h1>
         <Switch>
           <Route exact path="/" component={Home}/>

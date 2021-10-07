@@ -303,7 +303,7 @@ function Login() {
         <DialogContent dividers class="anim">
           <Typography gutterBottom style={{backgroundColor: "#000"}}>
 
-        
+        <div className="btnsView" style={{display: "flex",flexWrap: "wrap"}}>
             <a style={{fontSize:18}} href="/registerInstitution">
         
                 <span></span>
@@ -314,7 +314,7 @@ function Login() {
         
                 <span></span>
         
-                Register as an institution
+                Register as institution
         
             </a>
             <a href="/registerstudent">
@@ -327,7 +327,7 @@ function Login() {
 
         <span></span>
 
-        Register as a student
+        Register as student
 
     </a>
     <a href="/registerindividual">
@@ -340,9 +340,22 @@ function Login() {
 
         <span></span>
 
-        Register as an individual
+        Register as individual
 
     </a>
+    <a href="#">
+        
+        <span></span>
+
+        <span></span>
+
+        <span></span>
+
+        <span></span>
+        Register as faculty
+
+    </a>
+    </div>
         
           </Typography>
 

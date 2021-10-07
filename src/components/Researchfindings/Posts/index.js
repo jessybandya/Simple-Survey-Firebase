@@ -44,11 +44,11 @@ function Posts({ postId,  ownerEmail, ownerId, ownerUsername, questions, timesta
     let {user} = useSelector((state)=> ({...state}));
   const [numberOfSurvey, setNumberOfSurvey] = React.useState(0)
 
-  const [value, setValue] = React.useState('female');
-
-  const handleChange = (event) => {
-    setValue(event.target.value);
+  const handleToggle = value => () => {
+    this.setState({ checked: value });
   };
+  // const [value, setValue] = React.useState('female');
+
 
     useEffect(() => {
       db.collection('surveys').doc(postId).collection("responses").where("reply","==", true)
