@@ -50,7 +50,7 @@ import TableRow from '@mui/material/TableRow';
 import { auth } from "../firebase"
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-
+import Charts from '../Charts';
 
 
 
@@ -644,11 +644,11 @@ const handleCloseDashboard = () => {
         </div>
         </BootstrapDialogTitle>
         <DialogContent dividers>
-        <Typography gutterBottom>
+        <Typography gutterBottom style={{marginTop:-50}}>
  
 
 
-
+       <Charts   />
 
           </Typography>
 

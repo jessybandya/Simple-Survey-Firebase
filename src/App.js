@@ -32,6 +32,10 @@ import CancelPresentationIcon from '@mui/icons-material/CancelPresentation';
 import SpeedIcon from '@mui/icons-material/Speed';
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+import "@progress/kendo-theme-material/dist/all.css";
+import "hammerjs";
+
+
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {

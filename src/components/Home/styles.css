@@ -407,6 +407,8 @@
      7px 7px 20px 0px rgba(0,0,0,.1),
      4px 4px 5px 0px rgba(0,0,0,.1);
     outline: none;
+    border: none;
+
   }
 
 
@@ -414,13 +416,15 @@
 
 
   .btn-3 {
-  background: #3ceff8;
+    background: #696969;
+  background: linear-gradient(0deg, rgba(0,172,238,1) 0%, #0476D0 100%);
     width: 150px;
     height: 45px;
     line-height: 42px;
     padding: 0;
     border: none;
-    
+    outline: none;
+
   }
   .btn-3 span {
     position: relative;
