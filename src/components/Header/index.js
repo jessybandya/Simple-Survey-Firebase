@@ -520,10 +520,11 @@ const handleClose = () => {
     <div class="row">
         <div class="col-md-4">
         {auth?.currentUser?.photoURL ? (
-  <img alt="" style={{width:300,borderRadius:300/2,objectFit: "contain"}} title="" class="img-circle img-thumbnail isTooltip" src={auth?.currentUser?.photoURL}  data-original-title="Usuario"/> 
+  <img alt="" style={{width:600,borderRadius:600/2,objectFit: "contain"}} title="" class="img-circle img-thumbnail isTooltip" src={auth?.currentUser?.photoURL}  data-original-title="Usuario"/> 
 
             ):(
-      <Avatar {...stringAvatar(`${user?.email}`)} /> 
+              <img alt="" style={{width:300,borderRadius:300/2,objectFit: "contain"}} title="" class="img-circle img-thumbnail isTooltip" src="https://cdn.pngsumo.com/default-image-png-picture-710222-default-image-png-default-png-265_265.png" data-original-title="Usuario"/> 
+
             )}
             <ul title="Ratings" class="list-inline ratings text-center">
                 <li><a href="#"><span class="glyphicon glyphicon-star">Bio</span></a></li>
