@@ -50,17 +50,17 @@ const [answers, setAnswer] = React.useState({})
   const [lng, setLng] = useState(null);
   const [status, setStatus] = useState(null);
 
-  
-
-
+ 
   function addMoreQuestionField(quiz,answer){
-      return function(event) {
+      console.log("q" +quiz)
+      console.log("a" + answer)
+      // return function(event) {
 
-      setQuestions(questions=> [...questions, {questionText: quiz, options : [{optionText: answer}]}]);
+      // setQuestions(questions=> [...questions, {questionText: quiz, options : [{optionText: answer}]}]);
 
 
         
-      }
+      // }
   }
 
     useEffect(() => {
@@ -319,7 +319,7 @@ function onRadio(questionId) {
  
  <div   class="form-check">
   <input class="form-check-input"  type="radio" name="flexRadioDefault" id="flexRadioDefault1"
-           onChange={addMoreQuestionField(item.questionText,subRowData.optionText)} 
+          onChange={addMoreQuestionField(item.questionText,subRowData.optionText)}   
 
            name="flexRadioDefault" 
           id="flexRadioDefault1"/>

@@ -47,12 +47,11 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { auth } from "../firebase"
+import { auth,db } from "../firebase"
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Charts from '../Charts';
-
-
+import  {useState, useEffect} from 'react'
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -183,6 +182,7 @@ export default function Header() {
 // Table
 const [open, setOpen] = React.useState(false);
 const [dashboard, setDashboard] = React.useState(false);
+const [updateProfile, setUpdateProfile] = React.useState(false);
 
 const handleClickOpen = () => {
   setOpen(true);
@@ -190,6 +190,10 @@ const handleClickOpen = () => {
 
 const handleClickDashboardOpen = () => {
   setDashboard(true);
+};
+
+const handleClickUpdateProfiledOpen = () => {
+  setUpdateProfile(true);
 };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -209,6 +213,9 @@ const handleClose = () => {
 };
 const handleCloseDashboard = () => {
   setDashboard(false);
+};
+const handleCloseUpdateProfile = () => {
+  setUpdateProfile(false);
 };
 
   const isMenuOpen = Boolean(anchorEl);
@@ -249,6 +256,29 @@ const handleCloseDashboard = () => {
     });
     history.push("/signIn")
   }
+
+    const [profileUserData, setProfileUserData] = useState('');
+    useEffect(() => {
+        db.collection('users').doc(`${auth?.currentUser?.uid}`).onSnapshot((doc) => {
+            setProfileUserData(doc.data());
+        });
+    }, [])
+
+const [username, setUsername] = useState(`${profileUserData?.displayName}`)
+
+
+
+const profileUpdate = (e) => {
+   e.preventDefault()
+
+db.collection("users").doc(`${auth?.currentUser?.uid}`).update({
+  displayName: username
+}).then(function() {
+  alert("Successfull updated the profile");
+});
+
+}
+
 
 
   const menuId = 'primary-search-account-menu';
@@ -578,8 +608,10 @@ const handleCloseDashboard = () => {
                             </strong>
                         </td>
                         <td class="text-primary">
+                        
                         {auth?.currentUser?.email ? (
-  <span>{auth?.currentUser?.email}</span>
+  <span>{auth?.currentUser?.email}
+  </span>
             ):(
   <span>{`${user?.email}`}</span>
             )} 
@@ -622,8 +654,8 @@ const handleCloseDashboard = () => {
         <Typography gutterBottom style={{marginTop:20}}>
           <i style={{fontWeight:"600"}}>" Survey and test a prospective action before undertaking it. Before you proceed, step back and look at the big picture, lest you act rashly on raw impulse."</i>
           </Typography>
-          <Button style={{fontWeight:"600",marginTop:0,border: "1px solid #000"}} >
-            Update
+          <Button onClick={handleClickUpdateProfiledOpen} style={{fontWeight:"600",marginTop:0,border: "1px solid #000"}} >
+            Update Profile
           </Button>
         </DialogActions>
         </DialogContent>
@@ -650,6 +682,96 @@ const handleCloseDashboard = () => {
 
        <Charts   />
 
+          </Typography>
+
+
+          <DialogActions style={{flexDirection: "column"}}>
+        <Typography gutterBottom style={{marginTop:20}}>
+          <i style={{fontWeight:"600"}}>" Survey and test a prospective action before undertaking it. Before you proceed, step back and look at the big picture, lest you act rashly on raw impulse."</i>
+          </Typography>
+
+        </DialogActions>
+        </DialogContent>
+ 
+      </BootstrapDialog>
+
+
+
+
+      {/* Update Profile */}
+
+          <BootstrapDialog
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={updateProfile}
+      >
+        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleCloseUpdateProfile}>
+          <div style={{textAlign: "center"}}>
+        <span>MY Profile Update</span>
+        </div>
+        </BootstrapDialogTitle>
+        <DialogContent dividers>
+        <Typography gutterBottom>
+
+
+
+
+<div class="wrapper bg-white mt-sm-5">
+    <h4 class="pb-4 border-bottom">Account settings</h4>
+    <div class="d-flex align-items-start py-3 border-bottom"> 
+    
+    <img src="https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="img" alt=""/>
+        <div class="pl-sm-4 pl-2" id="img-section"> <b>Profile Photo</b>
+            <p>Accepted file type .png. Less than 1MB</p> <button class="btn button border"><b>Upload</b></button>
+        </div>
+    </div>
+    <div class="py-2">
+            <div class="row py-2">
+            <div class="col-md-6 pt-md-0 pt-3"> <label for="lastname">Username</label> <input type="text" class="bg-light form-control" value={username}
+            onChange={(e) => {
+                                setUsername(e.target.value) }}
+                                 /> </div>
+        </div>
+        <div class="row py-2">
+            <div class="col-md-6"> <label for="firstname">First Name</label> <input type="text" class="bg-light form-control" placeholder="Steve"/> </div>
+            <div class="col-md-6 pt-md-0 pt-3"> <label for="lastname">Last Name</label> <input type="text" class="bg-light form-control" placeholder="Smith"/> </div>
+        </div>
+        <div class="row py-2">
+            <div class="col-md-6"> <label for="email">Location</label> <input type="text" class="bg-light form-control" placeholder="Location"/> </div>
+            <div class="col-md-6 pt-md-0 pt-3"> <label for="phone">Place Of Work</label> <input type="tel" class="bg-light form-control" placeholder="Place of work"/> </div>
+        </div>
+                <div class="row py-2">
+            <div class="col-md-6"> <label for="email">School</label> <input type="text" class="bg-light form-control" placeholder="School"/> </div>
+            <div class="col-md-6 pt-md-0 pt-3"> <label for="phone">Bio</label> <input type="tel" class="bg-light form-control" placeholder="Bio"/> </div>
+        </div>
+        <div class="row py-2">
+            <div class="col-md-6 pt-md-0 pt-3"> <label for="phone">DOB</label> <input type="tel" class="bg-light form-control" placeholder="12-10-1999"/> </div>
+        </div>
+        {/* <div class="row py-2">
+            <div class="col-md-6"> <label for="country">Country</label> <select name="country" id="country" class="bg-light">
+                    <option value="india" selected>India</option>
+                    <option value="usa">USA</option>
+                    <option value="uk">UK</option>
+                    <option value="uae">UAE</option>
+                </select> </div>
+            <div class="col-md-6 pt-md-0 pt-3" id="lang"> <label for="language">Language</label>
+                <div class="arrow"> <select name="language" id="language" class="bg-light">
+                        <option value="english" selected>English</option>
+                        <option value="english_us">English (United States)</option>
+                        <option value="enguk">English UK</option>
+                        <option value="arab">Arabic</option>
+                    </select> </div>
+            </div>
+        </div> */}
+        <div class="py-3 pb-4 border-bottom"> <button onClick={profileUpdate} class="btn btn-primary mr-3">Save Changes</button> <button class="btn border button">Cancel</button> </div>
+        <div class="d-sm-flex align-items-center pt-3" id="deactivate">
+            <div> <b>Deactivate your account</b>
+                <p>Details about your company account and password</p>
+            </div>
+            <div class="ml-auto"> <button class="btn danger">Deactivate</button> </div>
+        </div>
+    </div>
+</div>
           </Typography>
 
 
