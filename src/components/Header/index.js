@@ -182,12 +182,15 @@ export default function Header() {
   
 // Table
 const [open, setOpen] = React.useState(false);
+const [dashboard, setDashboard] = React.useState(false);
 
 const handleClickOpen = () => {
   setOpen(true);
 };
 
-
+const handleClickDashboardOpen = () => {
+  setDashboard(true);
+};
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -204,7 +207,9 @@ const handleClickOpen = () => {
 const handleClose = () => {
   setOpen(false);
 };
-
+const handleCloseDashboard = () => {
+  setDashboard(false);
+};
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -326,7 +331,9 @@ const handleClose = () => {
 
       {user &&(
         <>
-              <MenuItem>
+              <MenuItem
+           onClick={handleClickDashboardOpen}
+              >
               <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                 <Badge badgeContent={0} color="error">
                   <PriceChangeIcon />
@@ -421,6 +428,7 @@ const handleClose = () => {
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
+              onClick={handleClickDashboardOpen}
             >
               {/* <Badge badgeContent={17} color="error">
                 <NotificationsIcon />
@@ -477,46 +485,7 @@ const handleClose = () => {
         </BootstrapDialogTitle>
         <DialogContent dividers>
         <Typography gutterBottom>
-        {/* <div style={{margin: "auto",width: "20%",padding: 10}}>
-          <div>
-            {auth?.currentUser?.photoURL ? (
-  <Avatar src={auth?.currentUser?.photoURL} style={{ width: 56, height: 56 }} /> 
-            ):(
-      <Avatar {...stringAvatar(`${user?.email}`)} /> 
-            )}
 
-           
-            </div>
-        </div>
-
-          </Typography>
-          <Typography gutterBottom>
-        <div style={{textAlign: "center"}}>
-          <span>
-          {auth?.currentUser?.email ? (
-  <span>{auth?.currentUser?.email}</span>
-            ):(
-  <span>{`${user?.email}`}</span>
-            )}
-          </span>
-        </div>
-
-          </Typography>
-          <Typography gutterBottom>
-        <div style={{textAlign: "center"}}>
-         <span>
-          {auth?.currentUser?.displayName ? (
-  <span>{auth?.currentUser?.displayName}</span>
-            ):(
-  <span>{`${user?.email?.split('@')[0]}`}</span>
-            )}
-          </span>
-        </div> */}
-
-
-
-{/* <div class="container bootstrap snippets bootdey">
-<div class="panel-body inf-content"> */}
     <div class="row">
         <div class="col-md-4">
         {auth?.currentUser?.photoURL ? (
@@ -656,6 +625,39 @@ const handleClose = () => {
           <Button style={{fontWeight:"600",marginTop:0,border: "1px solid #000"}} >
             Update
           </Button>
+        </DialogActions>
+        </DialogContent>
+ 
+      </BootstrapDialog>
+
+
+
+      <BootstrapDialog
+        onClose={handleCloseDashboard}
+        aria-labelledby="customized-dialog-title"
+        open={dashboard}
+        sx={{width: "100%"}}
+      >
+        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleCloseDashboard}>
+          <div style={{textAlign: "center"}}>
+        <span>MY SURVEYS</span>
+        </div>
+        </BootstrapDialogTitle>
+        <DialogContent dividers>
+        <Typography gutterBottom>
+ 
+
+
+
+
+          </Typography>
+
+
+          <DialogActions style={{flexDirection: "column"}}>
+        <Typography gutterBottom style={{marginTop:20}}>
+          <i style={{fontWeight:"600"}}>" Survey and test a prospective action before undertaking it. Before you proceed, step back and look at the big picture, lest you act rashly on raw impulse."</i>
+          </Typography>
+
         </DialogActions>
         </DialogContent>
  
