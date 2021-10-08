@@ -112,7 +112,7 @@ function Home({history}) {
 
 
   // set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
-Geocode.setApiKey("AIzaSyDCDCEXLhqk7UKW8QG0gd8Q6E7brwxVAcE");
+Geocode.setApiKey("AIzaSyAwV1-Ekdy98EBFcGu48k9kf1KaNi4jhUY");
 
 // set response language. Defaults to english.
 Geocode.setLanguage("en");
