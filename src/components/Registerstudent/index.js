@@ -3,7 +3,7 @@ import validator from 'validator'
 import Header from '../Header'
 import "./styles.css"
 import img from "../../assets/jedd.jpg"
-import { auth } from "../firebase";
+import { auth,db } from "../firebase";
 import { toast, ToastContainer } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"
 import {  googleProvider,facebookProvider,GithubProvider, TwitterProvider } from '../firebase';
@@ -56,91 +56,156 @@ function Registerstudent({history}) {
 
 
     
+    
     const googleLogin = async () =>{
-        auth
-        .signInWithPopup(googleProvider)
-        .then( async(result)=>{
-         const {user} = result;
-         const idTokenResult = await user.getIdTokenResult();
-         dispatch({
-          type: 'LOGGED_IN_USER',
-          payload: {
-            email: user.email,
-            token: idTokenResult.token,
-          },
-  
-        });
-        history.push('/')
+      auth
+      .signInWithPopup(googleProvider)
+      .then( async(result)=>{
+       const {user} = result;
+       const idTokenResult = await user.getIdTokenResult();
+       dispatch({
+        type: 'LOGGED_IN_USER',
+        payload: {
+          email: user.email,
+          token: idTokenResult.token,
+        },
+
+      })
+      }).then((s) => {
+        db.collection('users').doc(auth?.currentUser?.uid).set({
+          uid: auth?.currentUser?.uid,
+          username: auth?.currentUser?.displayName,
+          email: auth?.currentUser?.email,
+          profilePhoto: auth?.currentUser?.photoURL,
+          firstName: "",
+          lastName: "",
+          placeOfWork:"",
+          school: "",
+          dateOfBirth:"",
+          read: true,
+          timestamp: Date.now()
         })
-        .catch((err) => {
-          toast.error(err.message)
+            .then((r) => {
+                history.push("/")
+            })
+    })
+      .catch((err) => {
+        toast.error(err.message)
+      })
+    }
+
+
+    const twitterLogin = async () =>{
+      auth
+      .signInWithPopup(TwitterProvider)
+      .then( async(result)=>{
+       const {user} = result;
+       const idTokenResult = await user.getIdTokenResult();
+       dispatch({
+        type: 'LOGGED_IN_USER',
+        payload: {
+          email: user.email,
+          token: idTokenResult.token,
+        },
+
+      })
+      }).then((s) => {
+        db.collection('users').doc(auth?.currentUser?.uid).set({
+            uid: auth?.currentUser?.uid,
+            username: auth?.currentUser?.displayName,
+            email: auth?.currentUser?.email,
+            profilePhoto: auth?.currentUser?.photoURL,
+            firstName: "",
+            lastName: "",
+            placeOfWork:"",
+            school: "",
+            dateOfBirth:"",
+            read: true,
+            timestamp: Date.now()
         })
-      }
-  
-  
-      const twitterLogin = async () =>{
-        auth
-        .signInWithPopup(TwitterProvider)
-        .then( async(result)=>{
-         const {user} = result;
-         const idTokenResult = await user.getIdTokenResult();
-         dispatch({
-          type: 'LOGGED_IN_USER',
-          payload: {
-            email: user.email,
-            token: idTokenResult.token,
-          },
-  
-        });
-        history.push('/')
+            .then((r) => {
+                history.push("/")
+            })
+    })
+      .catch((err) => {
+        toast.error(err.message)
+      })
+    }
+
+    const facebookLogin = async () =>{
+      auth
+      .signInWithPopup(facebookProvider)
+      .then( async(result)=>{
+       const {user} = result;
+       const idTokenResult = await user.getIdTokenResult();
+       dispatch({
+        type: 'LOGGED_IN_USER',
+        payload: {
+          email: user.email,
+          token: idTokenResult.token,
+        },
+
+      })
+      }).then((s) => {
+        db.collection('users').doc(auth?.currentUser?.uid).set({
+          uid: auth?.currentUser?.uid,
+          username: auth?.currentUser?.displayName,
+          email: auth?.currentUser?.email,
+          profilePhoto: auth?.currentUser?.photoURL,
+          firstName: "",
+          lastName: "",
+          placeOfWork:"",
+          school: "",
+          dateOfBirth:"",
+          read: true,
+          timestamp: Date.now()
         })
-        .catch((err) => {
-          toast.error(err.message)
+            .then((r) => {
+                history.push("/")
+            })
+    })
+      .catch((err) => {
+        toast.error(err.message)
+      })
+    }
+
+
+    const githubLogin = async () =>{
+      auth
+      .signInWithPopup(GithubProvider)
+      .then( async(result)=>{
+       const {user} = result;
+       const idTokenResult = await user.getIdTokenResult();
+       dispatch({
+        type: 'LOGGED_IN_USER',
+        payload: {
+          email: user.email,
+          token: idTokenResult.token,
+        },
+
+      })
+      }).then((s) => {
+        db.collection('users').doc(auth?.currentUser?.uid).set({
+          uid: auth?.currentUser?.uid,
+          username: auth?.currentUser?.displayName,
+          email: auth?.currentUser?.email,
+          profilePhoto: auth?.currentUser?.photoURL,
+          firstName: "",
+          lastName: "",
+          placeOfWork:"",
+          school: "",
+          dateOfBirth:"",
+          read: true,
+          timestamp: Date.now()
         })
-      }
-  
-      const facebookLogin = async () =>{
-        auth
-        .signInWithPopup(facebookProvider)
-        .then( async(result)=>{
-         const {user} = result;
-         const idTokenResult = await user.getIdTokenResult();
-         dispatch({
-          type: 'LOGGED_IN_USER',
-          payload: {
-            email: user.email,
-            token: idTokenResult.token,
-          },
-  
-        });
-        history.push('/')
-        })
-        .catch((err) => {
-          toast.error(err.message)
-        })
-      }
-  
-  
-      const githubLogin = async () =>{
-        auth
-        .signInWithPopup(GithubProvider)
-        .then( async(result)=>{
-         const {user} = result;
-         const idTokenResult = await user.getIdTokenResult();
-         dispatch({
-          type: 'LOGGED_IN_USER',
-          payload: {
-            email: user.email,
-            token: idTokenResult.token,
-          },
-  
-        });
-        history.push('/')
-        })
-        .catch((err) => {
-          toast.error(err.message)
-        })
-      }
+            .then((r) => {
+                history.push("/")
+            })
+    })
+      .catch((err) => {
+        toast.error(err.message)
+      })
+    }
 
 
     return (
