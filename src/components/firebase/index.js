@@ -19,7 +19,6 @@ const firebaseConfig = {
    const facebookProvider = new firebase.auth.FacebookAuthProvider();
    const TwitterProvider = new firebase.auth.TwitterAuthProvider();
    const GithubProvider = new firebase.auth.GithubAuthProvider();
-
    const storage = firebase.storage();
   export default {auth, db, storage};
   export  {db, googleProvider, facebookProvider, TwitterProvider,GithubProvider};

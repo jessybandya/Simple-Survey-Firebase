@@ -31,10 +31,13 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-
+import Modal from "../../Modal"
 import {Grid} from '@material-ui/core';
 import Checkbox from '@mui/material/Checkbox';
 import { produce } from "immer"
+import CircularProgress from '@mui/material/CircularProgress';
+
+
 
 function Posts({ postId,  ownerEmail, ownerId, ownerUsername, questions, timestamp, formDescription, formTitle, read}) {
     const [open, setOpen] = React.useState(false);
@@ -51,14 +54,13 @@ const [answers, setAnswer] = React.useState({})
   const [status, setStatus] = useState(null);
   const [surveyChecked, setSurveyChecked] = useState("");
   const [loading, setLoading] = useState(false)
+  
   // const [valueChecked, setSurveyChecked] = useState(false);
 
  
-  const addMoreQuestionField = (quiz,answer) =>{ 
+  const addMoreQuestionField = (quiz,answer,type) =>{ 
     setSurveyChecked(answer)
-    console.log("Quiz: ", quiz)
-    setQuestions({optionText: answer, question: quiz})
-      
+    setQuestions(questions=> [...questions, {questionText: quiz,type, options : [{optionText: answer}], open: true}]);
   }
 
     useEffect(() => {
@@ -215,7 +217,32 @@ function onRadio(questionId) {
 
      if(loading){
        return(
-        <div>Loading...</div>
+
+        <BootstrapDialog
+        onClose={handleClose1}
+        aria-labelledby="customized-dialog-title"
+        open={open1}
+       
+      >
+
+        <DialogContent 
+         style={{backgroundColor: "trasparency"}}          
+dividers>
+        <Typography gutterBottom >
+        
+<div style={{alignItems: "center",display: "flex"}}>
+  <div><CircularProgress /></div>
+  <div style={{marginLeft:10}}> Loading... </div>
+</div>
+
+    
+        </Typography>
+  
+
+        </DialogContent>
+
+      </BootstrapDialog>
+        
        )
      }else{
       return (
@@ -279,7 +306,8 @@ function onRadio(questionId) {
   
           MODAL FORM
           </BootstrapDialogTitle>
-          <DialogContent dividers>
+          <DialogContent           style={{height: 800 }}
+ dividers>
           <Typography gutterBottom>
           
           <Grid style={{borderTop: '10px solid teal', borderRadius: 10,marginTop:0}}
@@ -330,10 +358,11 @@ function onRadio(questionId) {
           <div >
    
    <div   class="form-check">
+     
     <input class="form-check-input"  type="radio" name="flexRadioDefault" id="flexRadioDefault1"
-            // onClick={() => addMoreQuestionField(item.questionText, subRowData.optionText)}  
-            checked={subRowData.optionText}
-       onChange={(e) => setQuestions(e.target.value)}
+            onClick={(type) => addMoreQuestionField(item.questionText, subRowData.optionText,type= "optionRadio")}  
+            checked={surveyChecked === subRowData.optionText ? true : false}
+      //  onChange={(e) => setQuestions(e.target.value)}
   
              name="flexRadioDefault" 
             id="flexRadioDefault1"/>

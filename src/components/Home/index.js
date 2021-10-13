@@ -21,7 +21,7 @@ import { db, auth } from "../firebase"
 import Survey from "../Survey"
 import { motion } from "framer-motion"
 import Geocode from "react-geocode";
-
+import { useParams } from "react-router-dom"
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -49,7 +49,7 @@ function Home({history}) {
   const [surveyName, setSurveyName] = React.useState('');
   const [questions, setQuestions] = React.useState('');
   const google = window.google;
-
+  const { uid } = useParams()
 
 
  
@@ -193,7 +193,7 @@ function Home({history}) {
  
     return (
         <body>
-            <Header/>
+            <Header uid={uid}/>
 
 <div className="login">
       <div className="loginForm">

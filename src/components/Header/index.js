@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React,{useContext,useState,useEffect} from 'react'
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -51,8 +51,6 @@ import { auth,db } from "../firebase"
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Charts from '../Charts';
-import  {useState, useEffect} from 'react'
-
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuDialogContent-root': {
@@ -184,6 +182,7 @@ const [open, setOpen] = React.useState(false);
 const [dashboard, setDashboard] = React.useState(false);
 const [updateProfile, setUpdateProfile] = React.useState(false);
 
+
 const handleClickOpen = () => {
   setOpen(true);
 };
@@ -257,14 +256,16 @@ const handleCloseUpdateProfile = () => {
     history.push("/signIn")
   }
 
-  const [username, setUsername] = useState("")
+  const [username, setUsername] = useState(``)
+  const [currentUserId, setCurrentUserId] = useState('')
+    const [profileUserData, setProfileUserData] = useState(``);
 
-    const [profileUserData, setProfileUserData] = useState('');
 
+    
     useEffect(() => {
-      // const q = query(collection(db, "users"), where("uid", "==", "zZk159XSVBhWzESee3uiAPyO6Ut2"));
+      // const q = query(collection(db, "users"), where("uid", "==", "uXMHFw9teTSzJFiVNUj34QpCm1E3"));
       // const query = await doc(q)
-      // console.log()
+      // // console.log()
         // db.collection('users').doc(`${auth?.currentUser?.uid}`).onSnapshot((doc) => {
         //     setProfileUserData(doc.data());
         //         console.log("Username:", doc.value)
@@ -275,7 +276,33 @@ const handleCloseUpdateProfile = () => {
         //  console.log(snapshot)
         //     })
 
-    }, [])
+        const userId = auth?.currentUser?.uid
+
+        setCurrentUserId(userId)
+
+        fetchUser()
+
+
+
+    }, [currentUserId])
+
+    const fetchUser = async () => {
+      console.log("Current User Id: ",`${auth?.currentUser?.uid}`)
+
+      var docRef = db.collection("users").doc(`${auth?.currentUser?.uid}`);
+      docRef.get().then((doc) => {
+        if (doc.exists) {
+            console.log("Document data:", doc.data());
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch((error) => {
+        console.log("Error getting document:", error);
+    });
+    
+}
+      
 
 
 
@@ -285,8 +312,9 @@ const profileUpdate = (e) => {
    e.preventDefault()
 
 db.collection("users").doc(`${auth?.currentUser?.uid}`).update({
-  displayName: username
+  username: username
 }).then(function() {
+  console.log("Updated Username: ", `${auth?.currentUser?.uid}`)
   alert("Successfull updated the profile");
 });
 

@@ -34,6 +34,7 @@ import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import "@progress/kendo-theme-material/dist/all.css";
 import "hammerjs";
+import Header from './components/Header';
 
 
 
