@@ -49,18 +49,16 @@ const [answers, setAnswer] = React.useState({})
   const [lat, setLat] = useState(null);
   const [lng, setLng] = useState(null);
   const [status, setStatus] = useState(null);
+  const [surveyChecked, setSurveyChecked] = useState("");
+  const [loading, setLoading] = useState(false)
+  // const [valueChecked, setSurveyChecked] = useState(false);
 
  
-  function addMoreQuestionField(quiz,answer){
-      console.log("q" +quiz)
-      console.log("a" + answer)
-      // return function(event) {
-
-      // setQuestions(questions=> [...questions, {questionText: quiz, options : [{optionText: answer}]}]);
-
-
-        
-      // }
+  const addMoreQuestionField = (quiz,answer) =>{ 
+    setSurveyChecked(answer)
+    console.log("Quiz: ", quiz)
+    setQuestions({optionText: answer, question: quiz})
+      
   }
 
     useEffect(() => {
@@ -68,7 +66,7 @@ const [answers, setAnswer] = React.useState({})
      .onSnapshot(snapshot => (
       setNumberOfSurvey(snapshot.docs.length)
      ))
-  }, []);
+  }, [numberOfSurvey]);
 
 
 
@@ -84,6 +82,8 @@ function onRadio(questionId) {
 
     
    const responseReturn = (event) => {
+
+    console.log("quesons ",questions1)
     event.preventDefault();
     let errors = {};
 
@@ -104,7 +104,8 @@ function onRadio(questionId) {
     }else{
 
     
-
+  if(questions1.length !== 0){
+    setLoading(true)
     db.collection('surveys').doc(postId).collection("responses").where("fromId", "==", auth.currentUser.uid).where("formId", "==",postId ).get().then(
       snap => {
         if (snap.docs.length > 0) {
@@ -117,7 +118,7 @@ function onRadio(questionId) {
               fromUsername: `${user.email.split('@')[0]}` || auth?.currentUser?.displayName,
               fromEmail: user?.email || auth?.currentUser?.email,
               fromId:auth?.currentUser?.uid,
-              questions1,
+              questions1: questions1,
                   read: false,
                   reply: true,
                   formId: postId,
@@ -125,11 +126,16 @@ function onRadio(questionId) {
                   lat,
                   lng,
              
-            }).then(ref => alert("Thank you the response has been submitted successfully\nThe information provided shall be treated confidential"))
+            }).then(ref =>{
+              setLoading(false)
+              alert("Thank you the response has been submitted successfully\nThe information provided shall be treated confidential")
+            })
         }
       }
     )
   }
+  }
+    
 }
 
     const handleClickOpen = () => {
@@ -206,158 +212,168 @@ function onRadio(questionId) {
      setReply(...[reply])
      }
       
-  return (
-      <>
-            <React.Fragment>
-              <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-                <TableCell>
-                  <IconButton
-                    aria-label="expand row"
-                    size="small"
-                    onClick={() => setOpen(!open)}
-                  >
-                    {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                  </IconButton>
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {formTitle}
-                </TableCell>
-                <TableCell align="right">{numberOfSurvey}</TableCell>
 
-              </TableRow>
-              <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0,border:"1px solid #0476D0" }} colSpan={6}>
-                  <Collapse in={open} timeout="auto" unmountOnExit>
-                    <Box sx={{ margin: 1 }}>
-                      <Typography variant="h6" gutterBottom component="div">
-                      </Typography>
-                      <Table size="small" aria-label="purchases">
-                        <TableHead>
-                          <TableRow>
-                            <TableCell style={{fontWeight:"600",color:"#0476D0"}}>Date Modified</TableCell>
-                            <TableCell style={{fontWeight:"600",color:"#0476D0"}}>Owner Username</TableCell>
-                            <TableCell style={{fontWeight:"600",color:"#0476D0"}} align="right">Status</TableCell>
-                            <TableCell style={{fontWeight:"600",color:"#0476D0"}} align="right">More</TableCell>
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            <TableRow >
-                              <TableCell component="th" scope="row">
-                                {date.toDateString()}, {date.toLocaleTimeString()}
-                              </TableCell>
-                              <TableCell>{ownerUsername}</TableCell>
-                              <TableCell align="right">Open</TableCell>
-                              <TableCell align="right">
-                                  <button onClick={handleClickOpen1}  style={{width:80,backgroundColor:"#0476D0",color:"#fff",border:"none"}}>Respond</button>
-                              </TableCell>
-                            </TableRow>
-                        </TableBody>
-                      </Table>
-                    </Box>
-                  </Collapse>
-                </TableCell>
-              </TableRow>
-            </React.Fragment>
-            <BootstrapDialog
-        onClose={handleClose1}
-        aria-labelledby="customized-dialog-title"
-        open={open1}
-      >
-        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose1}>
-
-        MODAL FORM
-        </BootstrapDialogTitle>
-        <DialogContent dividers>
-        <Typography gutterBottom>
-        
-        <Grid style={{borderTop: '10px solid teal', borderRadius: 10,marginTop:0}}
-
->
-    <div>
-        <div>
-          <Paper elevation={2} style={{width:'100%'}}>
-            <div style={{display: 'flex',flexDirection:'column', alignItems:'flex-start', marginLeft: '10px', paddingTop: '10px', paddingBottom: '30px'}}>
-              <Typography variant="h4" style={{fontFamily:'sans-serif Roboto', marginBottom:"15px"}}>
-                {formTitle}
-              </Typography>
-              <Typography variant="subtitle1">
-                  {formDescription}
-              </Typography>
-            </div>
-          </Paper>
-        </div> 
-    </div>       
-</Grid>  
-
-        </Typography>
+     if(loading){
+       return(
+        <div>Loading...</div>
+       )
+     }else{
+      return (
+        <>
+              <React.Fragment>
+                <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+                  <TableCell>
+                    <IconButton
+                      aria-label="expand row"
+                      size="small"
+                      onClick={() => setOpen(!open)}
+                    >
+                      {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                    </IconButton>
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {formTitle}
+                  </TableCell>
+                  <TableCell align="right">{numberOfSurvey}</TableCell>
   
-  <hr/>
-
-
-{questions.map((item,i) =>
-<div key={i}>
-    
-    <Typography gutterBottom>
-          <TextField
-          id="outlined-textarea"
-          defaultValue= {item.questionText}
-          label={`Question ${i+1}`}
-          InputProps={{
-            readOnly: true,
-          }}
-          style={{width: "100%"}}
-        />
-
+                </TableRow>
+                <TableRow>
+                  <TableCell style={{ paddingBottom: 0, paddingTop: 0,border:"1px solid #0476D0" }} colSpan={6}>
+                    <Collapse in={open} timeout="auto" unmountOnExit>
+                      <Box sx={{ margin: 1 }}>
+                        <Typography variant="h6" gutterBottom component="div">
+                        </Typography>
+                        <Table size="small" aria-label="purchases">
+                          <TableHead>
+                            <TableRow>
+                              <TableCell style={{fontWeight:"600",color:"#0476D0"}}>Date Modified</TableCell>
+                              <TableCell style={{fontWeight:"600",color:"#0476D0"}}>Owner Username</TableCell>
+                              <TableCell style={{fontWeight:"600",color:"#0476D0"}} align="right">Status</TableCell>
+                              <TableCell style={{fontWeight:"600",color:"#0476D0"}} align="right">More</TableCell>
+                            </TableRow>
+                          </TableHead>
+                          <TableBody>
+                              <TableRow >
+                                <TableCell component="th" scope="row">
+                                  {date.toDateString()}, {date.toLocaleTimeString()}
+                                </TableCell>
+                                <TableCell>{ownerUsername}</TableCell>
+                                <TableCell align="right">Open</TableCell>
+                                <TableCell align="right">
+                                    <button onClick={handleClickOpen1}  style={{width:80,backgroundColor:"#0476D0",color:"#fff",border:"none"}}>Respond</button>
+                                </TableCell>
+                              </TableRow>
+                          </TableBody>
+                        </Table>
+                      </Box>
+                    </Collapse>
+                  </TableCell>
+                </TableRow>
+              </React.Fragment>
+              <BootstrapDialog
+          onClose={handleClose1}
+          aria-labelledby="customized-dialog-title"
+          open={open1}
+        >
+          <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose1}>
+  
+          MODAL FORM
+          </BootstrapDialogTitle>
+          <DialogContent dividers>
+          <Typography gutterBottom>
+          
+          <Grid style={{borderTop: '10px solid teal', borderRadius: 10,marginTop:0}}
+  
+  >
+      <div>
+          <div>
+            <Paper elevation={2} style={{width:'100%'}}>
+              <div style={{display: 'flex',flexDirection:'column', alignItems:'flex-start', marginLeft: '10px', paddingTop: '10px', paddingBottom: '30px'}}>
+                <Typography variant="h4" style={{fontFamily:'sans-serif Roboto', marginBottom:"15px"}}>
+                  {formTitle}
+                </Typography>
+                <Typography variant="subtitle1">
+                    {formDescription}
+                </Typography>
+              </div>
+            </Paper>
+          </div> 
+      </div>       
+  </Grid>  
+  
           </Typography>
-    {
     
-    (typeof(item.options) == 'object') ?
-    <ul>
-        {
-        item.options.map((subRowData,k) =>
-        <div >
- 
- <div   class="form-check">
-  <input class="form-check-input"  type="radio" name="flexRadioDefault" id="flexRadioDefault1"
-          onChange={addMoreQuestionField(item.questionText,subRowData.optionText)}   
-
-           name="flexRadioDefault" 
-          id="flexRadioDefault1"/>
-
-  <label class="form-check-label" for="flexRadioDefault1">
-    {subRowData.optionText}
-  </label>
-</div>
-
-
-
-        </div>
-        )
+    <hr/>
+  
+  
+  {questions.map((item,i) =>
+  <div key={i}>
+      
+      <Typography gutterBottom>
+            <TextField
+            id="outlined-textarea"
+            defaultValue= {item.questionText}
+            label={`Question ${i+1}`}
+            InputProps={{
+              readOnly: true,
+            }}
+            style={{width: "100%"}}
+          />
+  
+            </Typography>
+      {
+      
+      (typeof(item.options) == 'object') ?
+      <ul>
+          {
+          item.options.map((subRowData,k) =>
+          <div >
    
-        }
-    </ul>   
-    :
-    null
-    }
+   <div   class="form-check">
+    <input class="form-check-input"  type="radio" name="flexRadioDefault" id="flexRadioDefault1"
+            // onClick={() => addMoreQuestionField(item.questionText, subRowData.optionText)}  
+            checked={subRowData.optionText}
+       onChange={(e) => setQuestions(e.target.value)}
+  
+             name="flexRadioDefault" 
+            id="flexRadioDefault1"/>
+  
+    <label class="form-check-label" for="flexRadioDefault1">
+      {subRowData.optionText}
+    </label>
+  </div>
+  
+  
+  
+          </div>
+          )
+     
+          }
+      </ul>   
+      :
+      null
+      }
+  
+  </div>
+  
+  )}
+  
+   
+  
+          </DialogContent>
+          <DialogActions style={{flexDirection: "column"}}>
+          <Typography gutterBottom style={{marginTop:20}}>
+            <i style={{fontWeight:"600"}}>" Survey and test a prospective action before undertaking it. Before you proceed, step back and look at the big picture, lest you act rashly on raw impulse."</i>
+            </Typography>
+            <Button style={{fontWeight:"600",marginTop:0}} autoFocus onClick={responseReturn}>
+              Respond
+            </Button>
+          </DialogActions>
+        </BootstrapDialog>
+            </>
+    )
+     }
 
-</div>
-
-)}
-
- 
-
-        </DialogContent>
-        <DialogActions style={{flexDirection: "column"}}>
-        <Typography gutterBottom style={{marginTop:20}}>
-          <i style={{fontWeight:"600"}}>" Survey and test a prospective action before undertaking it. Before you proceed, step back and look at the big picture, lest you act rashly on raw impulse."</i>
-          </Typography>
-          <Button style={{fontWeight:"600",marginTop:0}} autoFocus onClick={responseReturn}>
-            Respond
-          </Button>
-        </DialogActions>
-      </BootstrapDialog>
-          </>
-  )
 }
 
 export default Posts

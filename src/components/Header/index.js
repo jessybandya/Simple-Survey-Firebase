@@ -257,18 +257,31 @@ const handleCloseUpdateProfile = () => {
     history.push("/signIn")
   }
 
+  const [username, setUsername] = useState("")
+
     const [profileUserData, setProfileUserData] = useState('');
+
     useEffect(() => {
-        db.collection('users').doc(`${auth?.currentUser?.uid}`).onSnapshot((doc) => {
-            setProfileUserData(doc.data());
-        });
+      // const q = query(collection(db, "users"), where("uid", "==", "zZk159XSVBhWzESee3uiAPyO6Ut2"));
+      // const query = await doc(q)
+      // console.log()
+        // db.collection('users').doc(`${auth?.currentUser?.uid}`).onSnapshot((doc) => {
+        //     setProfileUserData(doc.data());
+        //         console.log("Username:", doc.value)
+        //     setUsername(doc.data.displayName)
+        // });
+
+        // db.collection('users').where("uid", "==", `${auth?.currentUser?.uid}`).onSnapshot(snapshot => {
+        //  console.log(snapshot)
+        //     })
+
     }, [])
 
-const [username, setUsername] = useState(`${profileUserData?.displayName}`)
 
 
 
 const profileUpdate = (e) => {
+  console.log(`${auth?.currentUser?.uid}`)
    e.preventDefault()
 
 db.collection("users").doc(`${auth?.currentUser?.uid}`).update({

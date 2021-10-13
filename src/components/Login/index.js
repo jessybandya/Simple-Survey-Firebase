@@ -12,7 +12,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import { useHistory } from 'react-router';
-import { auth, googleProvider,facebookProvider,GithubProvider, TwitterProvider } from '../firebase';
+import { auth,db, googleProvider,facebookProvider,GithubProvider, TwitterProvider } from '../firebase';
 import { toast, ToastContainer } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"
 import { useDispatch } from 'react-redux';
@@ -133,9 +133,25 @@ function Login() {
           token: idTokenResult.token,
         },
 
-      });
-      history.push('/')
       })
+      }).then((s) => {
+        db.collection('users').doc(auth?.currentUser?.uid).set({
+          uid: auth?.currentUser?.uid,
+          username: auth?.currentUser?.displayName,
+          email: auth?.currentUser?.email,
+          profilePhoto: auth?.currentUser?.photoURL,
+          firstName: "",
+          lastName: "",
+          placeOfWork:"",
+          school: "",
+          dateOfBirth:"",
+          read: true,
+          timestamp: Date.now()
+        })
+            .then((r) => {
+                history.push("/")
+            })
+    })
       .catch((err) => {
         toast.error(err.message)
       })
@@ -155,9 +171,25 @@ function Login() {
           token: idTokenResult.token,
         },
 
-      });
-      history.push('/')
       })
+      }).then((s) => {
+        db.collection('users').doc(auth?.currentUser?.uid).set({
+            uid: auth?.currentUser?.uid,
+            username: auth?.currentUser?.displayName,
+            email: auth?.currentUser?.email,
+            profilePhoto: auth?.currentUser?.photoURL,
+            firstName: "",
+            lastName: "",
+            placeOfWork:"",
+            school: "",
+            dateOfBirth:"",
+            read: true,
+            timestamp: Date.now()
+        })
+            .then((r) => {
+                history.push("/")
+            })
+    })
       .catch((err) => {
         toast.error(err.message)
       })
@@ -176,9 +208,25 @@ function Login() {
           token: idTokenResult.token,
         },
 
-      });
-      history.push('/')
       })
+      }).then((s) => {
+        db.collection('users').doc(auth?.currentUser?.uid).set({
+          uid: auth?.currentUser?.uid,
+          username: auth?.currentUser?.displayName,
+          email: auth?.currentUser?.email,
+          profilePhoto: auth?.currentUser?.photoURL,
+          firstName: "",
+          lastName: "",
+          placeOfWork:"",
+          school: "",
+          dateOfBirth:"",
+          read: true,
+          timestamp: Date.now()
+        })
+            .then((r) => {
+                history.push("/")
+            })
+    })
       .catch((err) => {
         toast.error(err.message)
       })
@@ -198,9 +246,25 @@ function Login() {
           token: idTokenResult.token,
         },
 
-      });
-      history.push('/')
       })
+      }).then((s) => {
+        db.collection('users').doc(auth?.currentUser?.uid).set({
+          uid: auth?.currentUser?.uid,
+          username: auth?.currentUser?.displayName,
+          email: auth?.currentUser?.email,
+          profilePhoto: auth?.currentUser?.photoURL,
+          firstName: "",
+          lastName: "",
+          placeOfWork:"",
+          school: "",
+          dateOfBirth:"",
+          read: true,
+          timestamp: Date.now()
+        })
+            .then((r) => {
+                history.push("/")
+            })
+    })
       .catch((err) => {
         toast.error(err.message)
       })
