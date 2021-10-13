@@ -111,6 +111,7 @@ function onRadio(questionId) {
     db.collection('surveys').doc(postId).collection("responses").where("fromId", "==", auth.currentUser.uid).where("formId", "==",postId ).get().then(
       snap => {
         if (snap.docs.length > 0) {
+          setLoading(false)
           alert("You have participated already!")
         }
         else {
