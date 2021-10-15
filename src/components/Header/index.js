@@ -364,11 +364,11 @@ if (101 - firstName.length < 0 || firstName.length === 0) {
 const firstNameSet = (e) => {
   setFirstName(e.target.value)
   if (101 - e.target.value.length < 0 || e.target.value.length === 0) {
-      $('.saveButton')[0].style.backgroundColor = '#3A3B3C';
-      $('.saveButton')[0].style.opacity = 0.4;
+      $('.saveButton')[1].style.backgroundColor = '#3A3B3C';
+      $('.saveButton')[1].style.opacity = 0.4;
   } else {
-      $('.saveButton')[0].style.opacity = 1;
-      $('.saveButton')[0].style.backgroundColor = '#2D88FF';
+      $('.saveButton')[1].style.opacity = 1;
+      $('.saveButton')[1].style.backgroundColor = '#2D88FF';
   }
 }
 useEffect(() => {
@@ -406,11 +406,11 @@ if (101 - lastName.length < 0 || lastName.length === 0) {
 const lastNameSet = (e) => {
   setlastName(e.target.value)
   if (101 - e.target.value.length < 0 || e.target.value.length === 0) {
-      $('.saveButton')[0].style.backgroundColor = '#3A3B3C';
-      $('.saveButton')[0].style.opacity = 0.4;
+      $('.saveButton')[2].style.backgroundColor = '#3A3B3C';
+      $('.saveButton')[2].style.opacity = 0.4;
   } else {
-      $('.saveButton')[0].style.opacity = 1;
-      $('.saveButton')[0].style.backgroundColor = '#2D88FF';
+      $('.saveButton')[2].style.opacity = 1;
+      $('.saveButton')[2].style.backgroundColor = '#2D88FF';
   }
 }
 
@@ -450,11 +450,11 @@ if (101 - location.length < 0 || location.length === 0) {
 const locationSet = (e) => {
   setLocation(e.target.value)
   if (101 - e.target.value.length < 0 || e.target.value.length === 0) {
-      $('.saveButton')[0].style.backgroundColor = '#3A3B3C';
-      $('.saveButton')[0].style.opacity = 0.4;
+      $('.saveButton')[3].style.backgroundColor = '#3A3B3C';
+      $('.saveButton')[3].style.opacity = 0.4;
   } else {
-      $('.saveButton')[0].style.opacity = 1;
-      $('.saveButton')[0].style.backgroundColor = '#2D88FF';
+      $('.saveButton')[3].style.opacity = 1;
+      $('.saveButton')[3].style.backgroundColor = '#2D88FF';
   }
 }
 
@@ -494,11 +494,11 @@ if (101 - placeOfWork.length < 0 || placeOfWork.length === 0) {
 const placeOfWorkSet = (e) => {
   setPlaceOfWork(e.target.value)
   if (101 - e.target.value.length < 0 || e.target.value.length === 0) {
-      $('.saveButton')[0].style.backgroundColor = '#3A3B3C';
-      $('.saveButton')[0].style.opacity = 0.4;
+      $('.saveButton')[4].style.backgroundColor = '#3A3B3C';
+      $('.saveButton')[4].style.opacity = 0.4;
   } else {
-      $('.saveButton')[0].style.opacity = 1;
-      $('.saveButton')[0].style.backgroundColor = '#2D88FF';
+      $('.saveButton')[4].style.opacity = 1;
+      $('.saveButton')[4].style.backgroundColor = '#2D88FF';
   }
 }
 
@@ -539,11 +539,11 @@ if (101 - school.length < 0 || school.length === 0) {
 const schoolSet = (e) => {
   setSchool(e.target.value)
   if (101 - e.target.value.length < 0 || e.target.value.length === 0) {
-      $('.saveButton')[0].style.backgroundColor = '#3A3B3C';
-      $('.saveButton')[0].style.opacity = 0.4;
+      $('.saveButton')[5].style.backgroundColor = '#3A3B3C';
+      $('.saveButton')[5].style.opacity = 0.4;
   } else {
-      $('.saveButton')[0].style.opacity = 1;
-      $('.saveButton')[0].style.backgroundColor = '#2D88FF';
+      $('.saveButton')[5].style.opacity = 1;
+      $('.saveButton')[5].style.backgroundColor = '#2D88FF';
   }
 }
 
@@ -584,11 +584,11 @@ if (101 - bio.length < 0 || bio.length === 0) {
 const bioSet = (e) => {
   setBio(e.target.value)
   if (101 - e.target.value.length < 0 || e.target.value.length === 0) {
-      $('.saveButton')[0].style.backgroundColor = '#3A3B3C';
-      $('.saveButton')[0].style.opacity = 0.4;
+      $('.saveButton')[6].style.backgroundColor = '#3A3B3C';
+      $('.saveButton')[6].style.opacity = 0.4;
   } else {
-      $('.saveButton')[0].style.opacity = 1;
-      $('.saveButton')[0].style.backgroundColor = '#2D88FF';
+      $('.saveButton')[6].style.opacity = 1;
+      $('.saveButton')[6].style.backgroundColor = '#2D88FF';
   }
 }
 
@@ -630,11 +630,11 @@ if (101 - birthday.length < 0 || birthday.length === 0) {
 const birthdaySet = (e) => {
   setBirthday(e.target.value)
   if (101 - e.target.value.length < 0 || e.target.value.length === 0) {
-      $('.saveButton')[0].style.backgroundColor = '#3A3B3C';
-      $('.saveButton')[0].style.opacity = 0.4;
+      $('.saveButton')[7].style.backgroundColor = '#3A3B3C';
+      $('.saveButton')[7].style.opacity = 0.4;
   } else {
-      $('.saveButton')[0].style.opacity = 1;
-      $('.saveButton')[0].style.backgroundColor = '#2D88FF';
+      $('.saveButton')[7].style.opacity = 1;
+      $('.saveButton')[7].style.backgroundColor = '#2D88FF';
   }
 }
 
