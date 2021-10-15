@@ -51,7 +51,21 @@ if(user !== null){
                     await user.updatePassword(password);
                     const idTokenResult = await user.getIdTokenResult();
     
-    
+                    db.collection('users').doc(user.uid).set({
+                        uid: user.uid,
+                        username: "",
+                        email: user.email,
+                        profilePhoto: "",
+                        firstName: "",
+                        lastName: "",
+                        placeOfWork:"",
+                        school: "",
+                        dateOfBirth:"",
+                        read: true,
+                        location:"",
+                        bio:"",
+                        timestamp: Date.now()
+                    })   
                     //redirect
                     history.push('/')
                 }

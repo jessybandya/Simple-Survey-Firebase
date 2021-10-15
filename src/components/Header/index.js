@@ -55,6 +55,7 @@ import $ from 'jquery';
 import EditIcon from '@mui/icons-material/Edit';
 import { toast, ToastContainer } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"
+import { getAuth, deleteUser } from "firebase/auth";
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -654,74 +655,18 @@ if (birthdayPresent === false) {
 }, [])
 
 
+const deleteUser1 = (e) => {
+  e.preventDefault()
+
+  toast.success("Sorry!\nWe're Still working on this...")
+}
 
  
-useEffect(() => {
-      // const q = query(collection(db, "users"), where("uid", "==", "uXMHFw9teTSzJFiVNUj34QpCm1E3"));
-      // const query = await doc(q)
-      // // console.log()
-        // db.collection('users').doc(`${auth?.currentUser?.uid}`).onSnapshot((doc) => {
-        //     setProfileUserData(doc.data());
-        //         console.log("Username:", doc.value)
-        //     setUsername(doc.data.displayName)
-        // });
-
-        // db.collection('users').where("uid", "==", `${auth?.currentUser?.uid}`).onSnapshot(snapshot => {
-        //  console.log(snapshot)
-        //     })
-
-        // const userId = auth?.currentUser?.uid
-
-        // setCurrentUserId(userId)
-
-        // fetchUser()
-
-
-
-    }, [])
-
-
-    // const userData = AsyncStorage.setItem("userData", user)
-    // const userData = AsycStorage.getItem("userData")
-    // "state" => setUserData(userData)
-    // "ourFunction" => fetchUser() {
-    // "you set the userdata from state"
-    // } 
-    
-    
-//     const fetchUser = async () => {
-//       console.log("Current User Id: ",`${currentUserId}`)
-
-//       var docRef = db.collection("users").doc(`${currentUserId}`);
-//       docRef.get().then((doc) => {
-//         if (doc.exists) {
-//             console.log("Document data:", doc.data());
-//         } else {
-//             // doc.data() will be undefined in this case
-//             console.log("No such document!");
-//         }
-//     }).catch((error) => {
-//         console.log("Error getting document:", error);
-//     });
-    
-// }
-      
 
 
 
 
-const profileUpdate = (e) => {
-  console.log(`${auth?.currentUser?.uid}`)
-   e.preventDefault()
 
-db.collection("users").doc(`${auth?.currentUser?.uid}`).update({
-  username: username
-}).then(function() {
-  console.log("Updated Username: ", `${auth?.currentUser?.uid}`)
-  alert("Successfull updated the profile");
-});
-
-}
 
 
 
@@ -1053,7 +998,7 @@ db.collection("users").doc(`${auth?.currentUser?.uid}`).update({
                             </strong>
                         </td>
                         <td class="text-primary">
-                        {profileUserData?.birthday}
+                        {profileUserData?.dateOfBirth}
                         </td>
                     </tr>                                    
                 </tbody>
@@ -1274,7 +1219,7 @@ db.collection("users").doc(`${auth?.currentUser?.uid}`).update({
         <div class="row py-2">
         <div class="col-md-6 pt-md-0 pt-3"> <label for="">Date Of Birth</label> 
             <div style={{display: 'flex',alignItems: "center"}}>
-            <div><input type="text"  onClick={addBirthday}  class="bg-light form-control" value={`${profileUserData?.dateOfBirth}`}/>
+            <div><input type="text"  onClick={addBirthday}  class="bg-light form-control" value={`${profileUserData?.birthday}`}/>
             </div>
             <div><EditIcon onClick={addBirthday} className="birthday"/>
             </div>
@@ -1295,7 +1240,7 @@ db.collection("users").doc(`${auth?.currentUser?.uid}`).update({
             <div> <b>Deactivate your account</b>
                 <p>Details about your company account and password</p>
             </div>
-            <div class="ml-auto"> <button class="btn danger">Deactivate</button> </div>
+            <div class="ml-auto"> <button onClick={deleteUser1} class="btn danger">Deactivate</button> </div>
         </div>
     </div>
 </div>

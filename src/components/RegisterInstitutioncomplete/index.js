@@ -3,7 +3,7 @@ import validator from 'validator'
 import Header from '../Header'
 import "./styles.css"
 import img from "../../assets/jedd.jpg"
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import { toast, ToastContainer } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"
 import { useSelector,useDispatch } from 'react-redux';
@@ -48,8 +48,22 @@ function RegisterInstitutioncomplete({history}) {
                     let user = auth.currentUser
                     await user.updatePassword(password);
                     const idTokenResult = await user.getIdTokenResult();
-    
-    
+
+                    db.collection('users').doc(user.uid).set({
+                        uid: user.uid,
+                        username: "",
+                        email: user.email,
+                        profilePhoto: "",
+                        firstName: "",
+                        lastName: "",
+                        placeOfWork:"",
+                        school: "",
+                        dateOfBirth:"",
+                        read: true,
+                        location:"",
+                        bio:"",
+                        timestamp: Date.now()
+                    })    
                     //redirect
                     history.push('/')
                 }
@@ -63,18 +77,7 @@ function RegisterInstitutioncomplete({history}) {
 
 
 
-    //     if (!email.trim()) {
-    //         errors.email = alert(`Student Email field is empty!`)
-    //   }else{
-    //     auth.createUserWithEmailAndPassword(email , password)
-    //     .then((userCredential)=>{
-    //         // send verification mail.
-    //       userCredential.user.sendEmailVerification();
-    //       auth.signOut();
-    //       alert(`Verification link has been sent to ${email}\nThank you.`);
-    //     })
-    //     .catch(alert);
-    //   }
+ 
 
 
     }
