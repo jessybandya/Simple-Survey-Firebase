@@ -51,6 +51,11 @@ import { auth,db } from "../firebase"
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Charts from '../Charts';
+import $ from 'jquery';
+import EditIcon from '@mui/icons-material/Edit';
+import { toast, ToastContainer } from 'react-toastify'
+import "react-toastify/dist/ReactToastify.css"
+
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuDialogContent-root': {
@@ -176,7 +181,24 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Header() {
 
-  
+  const [bio, setBio] = useState('');
+  const [bioPresent, setBioPresent] = useState(false)
+  const [username, setUsername] = useState('');
+  const [usernamePresent, setUsernamePresent] = useState(false)
+  const [firstName, setFirstName] = useState('');
+  const [firstNamePresent, setFirstNamePresent] = useState(false)
+  const [lastName, setlastName] = useState('');
+  const [lastNamePresent, setlastNamePresent] = useState(false)
+  const [location, setLocation] = useState('');
+  const [locationPresent, setlocationPresent] = useState(false)
+  const [placeOfWork, setPlaceOfWork] = useState('');
+  const [placeOfWorkPresent, setPlaceOfWorkPresent] = useState(false)
+  const [school, setSchool] = useState('');
+  const [schoolPresent, setSchoolPresent] = useState(false)
+  const [birthday, setBirthday] = useState('');
+  const [birthdayPresent, setBirthdayPresent] = useState(false)
+  const [scroll, setScroll] = React.useState('paper');
+
 // Table
 const [open, setOpen] = React.useState(false);
 const [dashboard, setDashboard] = React.useState(false);
@@ -254,15 +276,378 @@ const handleCloseUpdateProfile = () => {
       payload: null,
     });
     history.push("/signIn")
+    window.localStorage.removeItem("getCurrentUserId");
+
   }
 
-  const [username, setUsername] = useState(``)
-  const [currentUserId, setCurrentUserId] = useState('')
-    const [profileUserData, setProfileUserData] = useState(``);
+
+    const [profileUserData, setProfileUserData] = useState();
+   var test = profileUserData?.username
+   console.log("Uid: ",test)
 
 
-    
-    useEffect(() => {
+   const currentUserId= `${auth?.currentUser?.uid}`
+   console.log("CurrentUser Uid: ", `${currentUserId}`)
+// username
+   const addUsername = () => {
+     $('.username')[0].style.display = 'none';
+     $('.usernameFields')[0].style.display = 'flex';
+ }
+ 
+ const collapseUsername = () => {
+     $('.username')[0].style.display = 'block';
+     $('.usernameFields')[0].style.display = 'none';
+ }
+ 
+ const usernameUpdate = () => {
+   if (101 - username.length < 0 || username.length === 0) {
+       return;
+   } else {
+       db.collection('users').doc(currentUserId).update({
+         username: username
+       }).then(
+        toast.success("Username been successfully updated")
+        )
+   }
+ }
+ 
+ const usernameSet = (e) => {
+     setUsername(e.target.value)
+     if (101 - e.target.value.length < 0 || e.target.value.length === 0) {
+         $('.saveButton')[0].style.backgroundColor = '#3A3B3C';
+         $('.saveButton')[0].style.opacity = 0.4;
+     } else {
+         $('.saveButton')[0].style.opacity = 1;
+         $('.saveButton')[0].style.backgroundColor = '#2D88FF';
+     }
+ }
+ 
+ useEffect(() => {
+   if (usernamePresent === false) {
+       console.log()
+   } else {
+       $('.username')[0].innerText = "Edit";
+       $('.usernameText')[0].innerText = username;
+   }
+ }, [usernamePresent])
+
+
+// First Name
+const addFirstName = () => {
+  $('.firstName')[0].style.display = 'none';
+  $('.firstNameFields')[0].style.display = 'flex';
+}
+const collapseFirstName = () => {
+  $('.firstName')[0].style.display = 'block';
+  $('.firstNameFields')[0].style.display = 'none';
+}
+const firstNameUpdate = () => {
+if (101 - firstName.length < 0 || firstName.length === 0) {
+    return;
+} else {
+    db.collection('users').doc(currentUserId).update({
+      firstName: firstName
+    }).then(
+      toast.success("First name been successfully updated")
+    )
+}
+}
+const firstNameSet = (e) => {
+  setFirstName(e.target.value)
+  if (101 - e.target.value.length < 0 || e.target.value.length === 0) {
+      $('.saveButton')[0].style.backgroundColor = '#3A3B3C';
+      $('.saveButton')[0].style.opacity = 0.4;
+  } else {
+      $('.saveButton')[0].style.opacity = 1;
+      $('.saveButton')[0].style.backgroundColor = '#2D88FF';
+  }
+}
+useEffect(() => {
+if (firstNamePresent === false) {
+    console.log()
+} else {
+    $('.firstName')[0].innerText = "Edit";
+    $('.firstNameText')[0].innerText = firstName;
+}
+}, [firstNamePresent])
+
+// Last Name
+const addLastName = () => {
+  $('.lastName')[0].style.display = 'none';
+  $('.lastNameFields')[0].style.display = 'flex';
+}
+
+const collapseLastName = () => {
+  $('.lastName')[0].style.display = 'block';
+  $('.lastNameFields')[0].style.display = 'none';
+}
+
+const lastNameUpdate = () => {
+if (101 - lastName.length < 0 || lastName.length === 0) {
+    return;
+} else {
+    db.collection('users').doc(currentUserId).update({
+      lastName: lastName
+    }).then(
+      toast.success("Last name been successfully updated")
+    )
+}
+}
+
+const lastNameSet = (e) => {
+  setlastName(e.target.value)
+  if (101 - e.target.value.length < 0 || e.target.value.length === 0) {
+      $('.saveButton')[0].style.backgroundColor = '#3A3B3C';
+      $('.saveButton')[0].style.opacity = 0.4;
+  } else {
+      $('.saveButton')[0].style.opacity = 1;
+      $('.saveButton')[0].style.backgroundColor = '#2D88FF';
+  }
+}
+
+useEffect(() => {
+if (lastNamePresent === false) {
+    console.log()
+} else {
+    $('.lastName')[0].innerText = "Edit";
+    $('.lastNameText')[0].innerText = lastName;
+}
+}, [lastNamePresent])
+
+
+// Location
+const addLocation = () => {
+  $('.location')[0].style.display = 'none';
+  $('.locationFields')[0].style.display = 'flex';
+}
+
+const collapseLocation = () => {
+  $('.location')[0].style.display = 'block';
+  $('.locationFields')[0].style.display = 'none';
+}
+
+const locationUpdate = () => {
+if (101 - location.length < 0 || location.length === 0) {
+    return;
+} else {
+    db.collection('users').doc(currentUserId).update({
+      location: location
+    }).then(
+      toast.success("Location been successfully updated")
+    )
+}
+}
+
+const locationSet = (e) => {
+  setLocation(e.target.value)
+  if (101 - e.target.value.length < 0 || e.target.value.length === 0) {
+      $('.saveButton')[0].style.backgroundColor = '#3A3B3C';
+      $('.saveButton')[0].style.opacity = 0.4;
+  } else {
+      $('.saveButton')[0].style.opacity = 1;
+      $('.saveButton')[0].style.backgroundColor = '#2D88FF';
+  }
+}
+
+useEffect(() => {
+if (locationPresent === false) {
+    console.log()
+} else {
+    $('.location')[0].innerText = "Edit";
+    $('.locationText')[0].innerText = location;
+}
+}, [locationPresent])
+
+
+// Place Of Work
+const addPlaceOfWork = () => {
+  $('.placeOfWork')[0].style.display = 'none';
+  $('.placeOfWorkFields')[0].style.display = 'flex';
+}
+
+const collapsePlaceOfWork = () => {
+  $('.placeOfWork')[0].style.display = 'block';
+  $('.placeOfWorkFields')[0].style.display = 'none';
+}
+
+const placeOfWorkUpdate = () => {
+if (101 - placeOfWork.length < 0 || placeOfWork.length === 0) {
+    return;
+} else {
+    db.collection('users').doc(currentUserId).update({
+      placeOfWork: placeOfWork
+    }).then(
+      toast.success("Work place been successfully updated")
+    )
+}
+}
+
+const placeOfWorkSet = (e) => {
+  setPlaceOfWork(e.target.value)
+  if (101 - e.target.value.length < 0 || e.target.value.length === 0) {
+      $('.saveButton')[0].style.backgroundColor = '#3A3B3C';
+      $('.saveButton')[0].style.opacity = 0.4;
+  } else {
+      $('.saveButton')[0].style.opacity = 1;
+      $('.saveButton')[0].style.backgroundColor = '#2D88FF';
+  }
+}
+
+useEffect(() => {
+if (placeOfWorkPresent === false) {
+    console.log()
+} else {
+    $('.placeOfWork')[0].innerText = "Edit";
+    $('.placeOfWorkText')[0].innerText = placeOfWork;
+}
+}, [placeOfWorkPresent])
+
+
+
+// School
+const addSchool = () => {
+  $('.school')[0].style.display = 'none';
+  $('.schoolFields')[0].style.display = 'flex';
+}
+
+const collapseSchool = () => {
+  $('.school')[0].style.display = 'block';
+  $('.schoolFields')[0].style.display = 'none';
+}
+
+const schoolUpdate = () => {
+if (101 - school.length < 0 || school.length === 0) {
+    return;
+} else {
+    db.collection('users').doc(currentUserId).update({
+      school: school
+    }).then(
+      toast.success("School been successfully updated")
+    )
+}
+}
+
+const schoolSet = (e) => {
+  setSchool(e.target.value)
+  if (101 - e.target.value.length < 0 || e.target.value.length === 0) {
+      $('.saveButton')[0].style.backgroundColor = '#3A3B3C';
+      $('.saveButton')[0].style.opacity = 0.4;
+  } else {
+      $('.saveButton')[0].style.opacity = 1;
+      $('.saveButton')[0].style.backgroundColor = '#2D88FF';
+  }
+}
+
+useEffect(() => {
+if (schoolPresent === false) {
+    console.log()
+} else {
+    $('.school')[0].innerText = "Edit";
+    $('.schoolText')[0].innerText = school;
+}
+}, [schoolPresent])
+
+
+
+// Bio
+const addbio = () => {
+  $('.bio')[0].style.display = 'none';
+  $('.bioFields')[0].style.display = 'flex';
+}
+
+const collapsebio = () => {
+  $('.bio')[0].style.display = 'block';
+  $('.bioFields')[0].style.display = 'none';
+}
+
+const bioUpdate = () => {
+if (101 - bio.length < 0 || bio.length === 0) {
+    return;
+} else {
+    db.collection('users').doc(currentUserId).update({
+      bio: bio
+    }).then(
+      toast.success("Bio been successfully updated")
+    )
+}
+}
+
+const bioSet = (e) => {
+  setBio(e.target.value)
+  if (101 - e.target.value.length < 0 || e.target.value.length === 0) {
+      $('.saveButton')[0].style.backgroundColor = '#3A3B3C';
+      $('.saveButton')[0].style.opacity = 0.4;
+  } else {
+      $('.saveButton')[0].style.opacity = 1;
+      $('.saveButton')[0].style.backgroundColor = '#2D88FF';
+  }
+}
+
+useEffect(() => {
+if (bioPresent === false) {
+    console.log()
+} else {
+    $('.bio')[0].innerText = "Edit";
+    $('.bioText')[0].innerText = bio;
+}
+}, [bioPresent])
+
+
+
+
+// Birthday
+const addBirthday = () => {
+  $('.birthday')[0].style.display = 'none';
+  $('.birthdayFields')[0].style.display = 'flex';
+}
+
+const collapseBirthday = () => {
+  $('.birthday')[0].style.display = 'block';
+  $('.birthdayFields')[0].style.display = 'none';
+}
+
+const birthdayUpdate = () => {
+if (101 - birthday.length < 0 || birthday.length === 0) {
+    return;
+} else {
+    db.collection('users').doc(currentUserId).update({
+      birthday: birthday
+    }).then(
+      toast.success("Birth date been successfully updated")
+    )
+}
+}
+
+const birthdaySet = (e) => {
+  setBirthday(e.target.value)
+  if (101 - e.target.value.length < 0 || e.target.value.length === 0) {
+      $('.saveButton')[0].style.backgroundColor = '#3A3B3C';
+      $('.saveButton')[0].style.opacity = 0.4;
+  } else {
+      $('.saveButton')[0].style.opacity = 1;
+      $('.saveButton')[0].style.backgroundColor = '#2D88FF';
+  }
+}
+
+useEffect(() => {
+if (birthdayPresent === false) {
+    console.log()
+} else {
+    $('.birthday')[0].innerText = "Edit";
+    $('.birthdayText')[0].innerText = birthday;
+}
+}, [birthdayPresent])
+
+   useEffect(() => {
+    db.collection('users').doc(`${currentUserId}`).onSnapshot((doc) => {
+        setProfileUserData(doc.data());
+    });
+}, [])
+
+
+
+ 
+useEffect(() => {
       // const q = query(collection(db, "users"), where("uid", "==", "uXMHFw9teTSzJFiVNUj34QpCm1E3"));
       // const query = await doc(q)
       // // console.log()
@@ -276,32 +661,41 @@ const handleCloseUpdateProfile = () => {
         //  console.log(snapshot)
         //     })
 
-        const userId = auth?.currentUser?.uid
+        // const userId = auth?.currentUser?.uid
 
-        setCurrentUserId(userId)
+        // setCurrentUserId(userId)
 
-        fetchUser()
+        // fetchUser()
 
 
 
-    }, [currentUserId])
+    }, [])
 
-    const fetchUser = async () => {
-      console.log("Current User Id: ",`${auth?.currentUser?.uid}`)
 
-      var docRef = db.collection("users").doc(`${auth?.currentUser?.uid}`);
-      docRef.get().then((doc) => {
-        if (doc.exists) {
-            console.log("Document data:", doc.data());
-        } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-        }
-    }).catch((error) => {
-        console.log("Error getting document:", error);
-    });
+    // const userData = AsyncStorage.setItem("userData", user)
+    // const userData = AsycStorage.getItem("userData")
+    // "state" => setUserData(userData)
+    // "ourFunction" => fetchUser() {
+    // "you set the userdata from state"
+    // } 
     
-}
+    
+//     const fetchUser = async () => {
+//       console.log("Current User Id: ",`${currentUserId}`)
+
+//       var docRef = db.collection("users").doc(`${currentUserId}`);
+//       docRef.get().then((doc) => {
+//         if (doc.exists) {
+//             console.log("Document data:", doc.data());
+//         } else {
+//             // doc.data() will be undefined in this case
+//             console.log("No such document!");
+//         }
+//     }).catch((error) => {
+//         console.log("Error getting document:", error);
+//     });
+    
+// }
       
 
 
@@ -463,27 +857,15 @@ db.collection("users").doc(`${auth?.currentUser?.uid}`).update({
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
           <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              {/* <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge> */}
               <span style={{fontSize:20}}>RESEARCH</span>
             </IconButton>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              {/* <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge> */}
               <span style={{fontSize:20}}>PLANS AND PRICING</span>
             </IconButton>
 
 
             {!user &&(
             <IconButton
-            //   size="large"
-            //   edge="end"
-            //   aria-label="account of current user"
-            //   aria-controls={menuId}
-            //   aria-haspopup="true"
-            //   onClick={handleProfileMenuOpen}
               color="inherit"
             >
               {/* <AccountCircle /> */}
@@ -567,8 +949,8 @@ db.collection("users").doc(`${auth?.currentUser?.uid}`).update({
 
             )}
             <ul title="Ratings" class="list-inline ratings text-center">
-                <li><a href="#"><span class="glyphicon glyphicon-star">Bio</span></a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-star">Location</span></a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-star">{profileUserData?.bio}</span></a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-star">{profileUserData?.location}</span></a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
@@ -589,11 +971,7 @@ db.collection("users").doc(`${auth?.currentUser?.uid}`).update({
                         </td>
                         <td class="text-primary">
                             {/* Bootdey      */}
-                            {auth?.currentUser?.email ? (
-  <span>{auth?.currentUser?.displayName?.split(' ')[0]}</span>
-            ):(
-  <span>{`${user?.email}`}</span>
-            )} 
+                            {profileUserData?.firstName}
                         </td>
                     </tr>
                     <tr>        
@@ -605,11 +983,7 @@ db.collection("users").doc(`${auth?.currentUser?.uid}`).update({
                         </td>
                         <td class="text-primary">
                             {/* Bootstrap   */}
-                            {auth?.currentUser?.email ? (
-  <span>{auth?.currentUser?.displayName?.split(' ')[1]}</span>
-            ):(
-  <span>{`${user?.email}`}</span>
-            )} 
+                            {profileUserData?.lastName}
                         </td>
                     </tr>
 
@@ -621,11 +995,7 @@ db.collection("users").doc(`${auth?.currentUser?.uid}`).update({
                             </strong>
                         </td>
                         <td class="text-primary">
-                        {auth?.currentUser?.displayName ? (
-  <span>{auth?.currentUser?.displayName}</span>
-            ):(
-  <span>{`${user?.email?.split('@')[0]}`}</span>
-            )} 
+                        {profileUserData?.username} 
                         </td>
                     </tr>
 
@@ -639,6 +1009,7 @@ db.collection("users").doc(`${auth?.currentUser?.uid}`).update({
                         </td>
                         <td class="text-primary">
                             {/* Admin */}
+                            {profileUserData?.placeOfWork}
                         </td>
                     </tr>
                     <tr>        
@@ -650,12 +1021,7 @@ db.collection("users").doc(`${auth?.currentUser?.uid}`).update({
                         </td>
                         <td class="text-primary">
                         
-                        {auth?.currentUser?.email ? (
-  <span>{auth?.currentUser?.email}
-  </span>
-            ):(
-  <span>{`${user?.email}`}</span>
-            )} 
+                        {profileUserData?.email}
                         </td>
                     </tr>
                     <tr>        
@@ -667,6 +1033,7 @@ db.collection("users").doc(`${auth?.currentUser?.uid}`).update({
                         </td>
                         <td class="text-primary">
                             {/*  */}
+                            {profileUserData?.school}
                         </td>
                     </tr>
                     <tr>        
@@ -677,7 +1044,7 @@ db.collection("users").doc(`${auth?.currentUser?.uid}`).update({
                             </strong>
                         </td>
                         <td class="text-primary">
-                             20 jul 20014 
+                        {profileUserData?.birthday}
                         </td>
                     </tr>                                    
                 </tbody>
@@ -746,6 +1113,8 @@ db.collection("users").doc(`${auth?.currentUser?.uid}`).update({
         aria-labelledby="customized-dialog-title"
         open={updateProfile}
       >
+            <ToastContainer/>
+
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleCloseUpdateProfile}>
           <div style={{textAlign: "center"}}>
         <span>MY Profile Update</span>
@@ -768,43 +1137,151 @@ db.collection("users").doc(`${auth?.currentUser?.uid}`).update({
     </div>
     <div class="py-2">
             <div class="row py-2">
-            <div class="col-md-6 pt-md-0 pt-3"> <label for="lastname">Username</label> <input type="text" class="bg-light form-control" value={username}
-            onChange={(e) => {
-                                setUsername(e.target.value) }}
-                                 /> </div>
-        </div>
-        <div class="row py-2">
-            <div class="col-md-6"> <label for="firstname">First Name</label> <input type="text" class="bg-light form-control" placeholder="Steve"/> </div>
-            <div class="col-md-6 pt-md-0 pt-3"> <label for="lastname">Last Name</label> <input type="text" class="bg-light form-control" placeholder="Smith"/> </div>
-        </div>
-        <div class="row py-2">
-            <div class="col-md-6"> <label for="email">Location</label> <input type="text" class="bg-light form-control" placeholder="Location"/> </div>
-            <div class="col-md-6 pt-md-0 pt-3"> <label for="phone">Place Of Work</label> <input type="tel" class="bg-light form-control" placeholder="Place of work"/> </div>
-        </div>
-                <div class="row py-2">
-            <div class="col-md-6"> <label for="email">School</label> <input type="text" class="bg-light form-control" placeholder="School"/> </div>
-            <div class="col-md-6 pt-md-0 pt-3"> <label for="phone">Bio</label> <input type="tel" class="bg-light form-control" placeholder="Bio"/> </div>
-        </div>
-        <div class="row py-2">
-            <div class="col-md-6 pt-md-0 pt-3"> <label for="phone">DOB</label> <input type="tel" class="bg-light form-control" placeholder="12-10-1999"/> </div>
-        </div>
-        {/* <div class="row py-2">
-            <div class="col-md-6"> <label for="country">Country</label> <select name="country" id="country" class="bg-light">
-                    <option value="india" selected>India</option>
-                    <option value="usa">USA</option>
-                    <option value="uk">UK</option>
-                    <option value="uae">UAE</option>
-                </select> </div>
-            <div class="col-md-6 pt-md-0 pt-3" id="lang"> <label for="language">Language</label>
-                <div class="arrow"> <select name="language" id="language" class="bg-light">
-                        <option value="english" selected>English</option>
-                        <option value="english_us">English (United States)</option>
-                        <option value="enguk">English UK</option>
-                        <option value="arab">Arabic</option>
-                    </select> </div>
+            <div class="col-md-6 pt-md-0 pt-3"> <label for="">Username</label> 
+            <div style={{display: 'flex',alignItems: "center"}}>
+            <div><input type="text"   class="bg-light form-control" value={`${profileUserData?.username}`}/>
             </div>
-        </div> */}
-        <div class="py-3 pb-4 border-bottom"> <button onClick={profileUpdate} class="btn btn-primary mr-3">Save Changes</button> <button class="btn border button">Cancel</button> </div>
+            <div><EditIcon onClick={addUsername} className="username"/>
+            </div>
+            </div>
+                <div className="usernameFields">
+                    <textarea value={username} placeholder="Describe who you are" onChange={usernameSet} className="bioInput" />
+                    <p>{`${101 - username.length} characters remaining`}</p>
+                    <div className="cancelAndSaveButtons">
+                        <button onClick={collapseUsername} >Cancel</button>
+                        <button onClick={usernameUpdate} className="saveButton">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row py-2">
+        <div class="col-md-6 pt-md-0 pt-3"> <label for="">First Name</label> 
+            <div style={{display: 'flex',alignItems: "center"}}>
+            <div><input type="text"   class="bg-light form-control" value={`${profileUserData?.firstName}`}/>
+            </div>
+            <div><EditIcon onClick={addFirstName} className="firstName"/>
+            </div>
+            </div>
+
+                <div className="firstNameFields">
+                    <textarea value={firstName} placeholder="Update your first name" onChange={firstNameSet} className="bioInput" />
+                    <p>{`${101 - firstName.length} characters remaining`}</p>
+                    <div className="cancelAndSaveButtons">
+                        <button onClick={collapseFirstName} >Cancel</button>
+                        <button onClick={firstNameUpdate} className="saveButton">Save</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 pt-md-0 pt-3"> <label for="">Last Name</label> 
+            <div style={{display: 'flex',alignItems: "center"}}>
+            <div><input type="text"  class="bg-light form-control" value={`${profileUserData?.lastName}`}/>
+            </div>
+            <div><EditIcon onClick={addLastName} className="lastName"/>
+            </div>
+            </div>
+
+                <div className="lastNameFields">
+                    <textarea value={lastName} placeholder="Update your last name" onChange={lastNameSet} className="bioInput" />
+                    <p>{`${101 - lastName.length} characters remaining`}</p>
+                    <div className="cancelAndSaveButtons">
+                        <button onClick={collapseLastName} >Cancel</button>
+                        <button onClick={lastNameUpdate} className="saveButton">Save</button>
+                    </div>
+                </div>
+            </div>        </div>
+        <div class="row py-2">
+        <div class="col-md-6 pt-md-0 pt-3"> <label for="">Location</label> 
+            <div style={{display: 'flex',alignItems: "center"}}>
+            <div><input type="text"  class="bg-light form-control" value={`${profileUserData?.location}`}/>
+            </div>
+            <div><EditIcon onClick={addLocation} className="location"/>
+            </div>
+            </div>
+
+                <div className="locationFields">
+                    <textarea value={location} placeholder="Update your location" onChange={locationSet} className="bioInput" />
+                    <p>{`${101 - location.length} characters remaining`}</p>
+                    <div className="cancelAndSaveButtons">
+                        <button onClick={collapseLocation} >Cancel</button>
+                        <button onClick={locationUpdate} className="saveButton">Save</button>
+                    </div>
+                </div>
+            </div>           
+            
+            <div class="col-md-6 pt-md-0 pt-3"> <label for="">Place Of Work</label> 
+            <div style={{display: 'flex',alignItems: "center"}}>
+            <div><input type="text"  class="bg-light form-control" value={`${profileUserData?.placeOfWork}`}/>
+            </div>
+            <div><EditIcon onClick={addPlaceOfWork} className="placeOfWork"/>
+            </div>
+            </div>
+
+                <div className="placeOfWorkFields">
+                    <textarea value={placeOfWork} placeholder="Update your place of work" onChange={placeOfWorkSet} className="bioInput" />
+                    <p>{`${101 - placeOfWork.length} characters remaining`}</p>
+                    <div className="cancelAndSaveButtons">
+                        <button onClick={collapsePlaceOfWork} >Cancel</button>
+                        <button onClick={placeOfWorkUpdate} className="saveButton">Save</button>
+                    </div>
+                </div>
+            </div>      
+            
+              </div>
+                <div class="row py-2">
+            <div class="col-md-6 pt-md-0 pt-3"> <label for="">School</label> 
+            <div style={{display: 'flex',alignItems: "center"}}>
+            <div><input type="text"  class="bg-light form-control" value={`${profileUserData?.school}`}/>
+            </div>
+            <div><EditIcon onClick={addSchool} className="school"/>
+            </div>
+            </div>
+
+                <div className="schoolFields">
+                    <textarea value={school} placeholder="Update your school" onChange={schoolSet} className="bioInput" />
+                    <p>{`${101 - school.length} characters remaining`}</p>
+                    <div className="cancelAndSaveButtons">
+                        <button onClick={collapseSchool} >Cancel</button>
+                        <button onClick={schoolUpdate} className="saveButton">Save</button>
+                    </div>
+                </div>
+            </div>            <div class="col-md-6 pt-md-0 pt-3"> <label for="">Bio</label> 
+            <div style={{display: 'flex',alignItems: "center"}}>
+            <div><input type="text" value={bio} onClick={addbio}  onChange={bioSet} class="bg-light form-control" placeholder={`${profileUserData?.bio}`}/>
+            </div>
+            <div><EditIcon onClick={addbio} className="bio"/>
+            </div>
+            </div>
+
+                <div className="bioFields">
+                    <textarea value={bio} placeholder="Updtate your username" onChange={bioSet} className="bioInput" />
+                    <p>{`${101 - bio.length} characters remaining`}</p>
+                    <div className="cancelAndSaveButtons">
+                        <button onClick={collapsebio} >Cancel</button>
+                        <button onClick={bioUpdate} className="saveButton">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row py-2">
+        <div class="col-md-6 pt-md-0 pt-3"> <label for="">Date Of Birth</label> 
+            <div style={{display: 'flex',alignItems: "center"}}>
+            <div><input type="text" value={birthday} onClick={addBirthday}  onChange={birthdaySet} class="bg-light form-control" placeholder={`${profileUserData?.dateOfBirth}`}/>
+            </div>
+            <div><EditIcon onClick={addBirthday} className="birthday"/>
+            </div>
+            </div>
+
+                <div className="birthdayFields">
+                    <textarea value={birthday} placeholder="Update your username" onChange={birthdaySet} className="bioInput" />
+                    <p>{`${101 - birthday.length} characters remaining`}</p>
+                    <div className="cancelAndSaveButtons">
+                        <button onClick={collapseBirthday} >Cancel</button>
+                        <button onClick={birthdayUpdate} className="saveButton">Save</button>
+                    </div>
+                </div>
+            </div>        
+            </div>
+        <div class="py-3 pb-4 border-bottom">  <button class="btn border button">Cancel</button> </div>
         <div class="d-sm-flex align-items-center pt-3" id="deactivate">
             <div> <b>Deactivate your account</b>
                 <p>Details about your company account and password</p>

@@ -63,6 +63,8 @@ function Registerindividual({history}) {
                                   school: "",
                                   dateOfBirth:"",
                                   read: true,
+                                  location:"",
+                                  bio:"",
                                   timestamp: Date.now()
                                 })
                                     .then((r) => {
@@ -114,6 +116,8 @@ function Registerindividual({history}) {
           school: "",
           dateOfBirth:"",
           read: true,
+          location:"",
+          bio:"",
           timestamp: Date.now()
         })
             .then((r) => {
@@ -152,6 +156,8 @@ function Registerindividual({history}) {
             school: "",
             dateOfBirth:"",
             read: true,
+            location:"",
+            bio:"",
             timestamp: Date.now()
         })
             .then((r) => {
@@ -189,6 +195,8 @@ function Registerindividual({history}) {
           school: "",
           dateOfBirth:"",
           read: true,
+          location:"",
+          bio:"",
           timestamp: Date.now()
         })
             .then((r) => {
@@ -227,6 +235,8 @@ function Registerindividual({history}) {
           school: "",
           dateOfBirth:"",
           read: true,
+          location:"",
+          bio:"",
           timestamp: Date.now()
         })
             .then((r) => {

@@ -204,3 +204,111 @@ select:focus {
         line-height: 18px
     }
 }
+
+
+.bioFields {
+  display: none;
+  flex-direction: column;
+  place-items: center;
+}
+
+.usernameFields{
+  display: none;
+  flex-direction: column;
+  place-items: center;
+}
+
+.firstNameFields{
+  display: none;
+  flex-direction: column;
+  place-items: center;
+}
+.lastNameFields{
+  display: none;
+  flex-direction: column;
+  place-items: center;
+}
+
+.locationFields{
+  display: none;
+  flex-direction: column;
+  place-items: center;
+}
+
+.placeOfWorkFields{
+  display: none;
+  flex-direction: column;
+  place-items: center;
+}
+
+.schoolFields{
+  display: none;
+  flex-direction: column;
+  place-items: center;
+}
+
+.birthdayFields{
+  display: none;
+  flex-direction: column;
+  place-items: center;
+}
+
+.bioInput {
+background-color: #a6a9ad;
+border: none;
+min-height: 50px;
+height: fit-content;
+outline: none;
+border-radius: 5px;
+width: 200px;
+margin-top: 10px;
+color: #fff;
+text-align: center;
+padding-left: 10px;
+padding-top: 5px;
+font-weight: 700;
+}
+
+.bioFields p {
+  font-weight: 400;
+  font-size: 13px;
+  color: #b0c4d8;
+  float: right;
+  margin-left: 40px;
+}
+
+.cancelAndSaveButtons button {
+  background-color: #3A3B3C;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  margin-left: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.cancelAndSaveButtons button:hover {
+background-color: #535353;
+}
+
+.cancelAndSaveButtons {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  float: right;
+  margin-left: 50px;
+}
+
+.saveButton {
+  opacity: 0.4;
+  outline: none;
+}
+
+.saveButton:hover {
+  background-color: #3A3B3C;
+}
+
+.bioText {
+  text-align: center;
+  color: #AAADB2;
+}

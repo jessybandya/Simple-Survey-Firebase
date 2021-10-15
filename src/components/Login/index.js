@@ -146,11 +146,15 @@ function Login() {
           school: "",
           dateOfBirth:"",
           read: true,
+          location:"",
+          bio:"",
           timestamp: Date.now()
         })
             .then((r) => {
                 history.push("/")
             })
+            window.localStorage.setItem('getCurrentUserId', auth?.currentUser?.uid)
+
     })
       .catch((err) => {
         toast.error(err.message)
@@ -184,6 +188,8 @@ function Login() {
             school: "",
             dateOfBirth:"",
             read: true,
+            location:"",
+            bio:"",
             timestamp: Date.now()
         })
             .then((r) => {
@@ -221,6 +227,8 @@ function Login() {
           school: "",
           dateOfBirth:"",
           read: true,
+          location:"",
+          bio:"",
           timestamp: Date.now()
         })
             .then((r) => {
@@ -259,6 +267,8 @@ function Login() {
           school: "",
           dateOfBirth:"",
           read: true,
+          location:"",
+          bio:"",
           timestamp: Date.now()
         })
             .then((r) => {

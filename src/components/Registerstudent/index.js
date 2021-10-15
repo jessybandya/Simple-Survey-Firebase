@@ -83,6 +83,8 @@ function Registerstudent({history}) {
           school: "",
           dateOfBirth:"",
           read: true,
+          location:"",
+          bio:"",
           timestamp: Date.now()
         })
             .then((r) => {
@@ -121,6 +123,8 @@ function Registerstudent({history}) {
             school: "",
             dateOfBirth:"",
             read: true,
+            location:"",
+            bio:"",
             timestamp: Date.now()
         })
             .then((r) => {
@@ -158,6 +162,8 @@ function Registerstudent({history}) {
           school: "",
           dateOfBirth:"",
           read: true,
+          location:"",
+          bio:"",
           timestamp: Date.now()
         })
             .then((r) => {
@@ -196,6 +202,8 @@ function Registerstudent({history}) {
           school: "",
           dateOfBirth:"",
           read: true,
+          location:"",
+          bio:"",
           timestamp: Date.now()
         })
             .then((r) => {
