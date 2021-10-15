@@ -3,7 +3,7 @@ import validator from 'validator'
 import Header from '../Header'
 import "./styles.css"
 import img from "../../assets/jedd.jpg"
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import { toast, ToastContainer } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"
 import { useSelector,useDispatch } from 'react-redux';
