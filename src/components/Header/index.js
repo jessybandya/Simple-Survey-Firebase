@@ -303,11 +303,20 @@ const handleCloseUpdateProfile = () => {
    if (101 - username.length < 0 || username.length === 0) {
        return;
    } else {
-       db.collection('users').doc(currentUserId).update({
-         username: username
-       }).then(
-        toast.success("Username been successfully updated")
-        )
+    db.collection('users').where("username", "==", username).get().then((resultSnapShot) => {
+
+      if (resultSnapShot.size == 0) {
+        //Proceed
+        db.collection('users').doc(currentUserId).update({
+          username: username
+        }).then(
+         toast.success("Username been successfully updated")
+         )
+      }else{
+        toast.error(`Username ${username} already in use`)
+      }
+    })
+
    }
  }
  
