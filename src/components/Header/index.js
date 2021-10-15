@@ -1148,7 +1148,7 @@ db.collection("users").doc(`${auth?.currentUser?.uid}`).update({
             <div class="row py-2">
             <div class="col-md-6 pt-md-0 pt-3"> <label for="">Username</label> 
             <div style={{display: 'flex',alignItems: "center"}}>
-            <div><input type="text"   class="bg-light form-control" value={`${profileUserData?.username}`}/>
+            <div><input type="text"   class="bg-light form-control" onClick={addUsername} value={`${profileUserData?.username}`}/>
             </div>
             <div><EditIcon onClick={addUsername} className="username"/>
             </div>
@@ -1166,7 +1166,7 @@ db.collection("users").doc(`${auth?.currentUser?.uid}`).update({
         <div class="row py-2">
         <div class="col-md-6 pt-md-0 pt-3"> <label for="">First Name</label> 
             <div style={{display: 'flex',alignItems: "center"}}>
-            <div><input type="text"   class="bg-light form-control" value={`${profileUserData?.firstName}`}/>
+            <div><input type="text"  onClick={addFirstName} class="bg-light form-control" value={`${profileUserData?.firstName}`}/>
             </div>
             <div><EditIcon onClick={addFirstName} className="firstName"/>
             </div>
@@ -1183,7 +1183,7 @@ db.collection("users").doc(`${auth?.currentUser?.uid}`).update({
             </div>
             <div class="col-md-6 pt-md-0 pt-3"> <label for="">Last Name</label> 
             <div style={{display: 'flex',alignItems: "center"}}>
-            <div><input type="text"  class="bg-light form-control" value={`${profileUserData?.lastName}`}/>
+            <div><input type="text"  class="bg-light form-control" onClick={addLastName} value={`${profileUserData?.lastName}`}/>
             </div>
             <div><EditIcon onClick={addLastName} className="lastName"/>
             </div>
@@ -1201,7 +1201,7 @@ db.collection("users").doc(`${auth?.currentUser?.uid}`).update({
         <div class="row py-2">
         <div class="col-md-6 pt-md-0 pt-3"> <label for="">Location</label> 
             <div style={{display: 'flex',alignItems: "center"}}>
-            <div><input type="text"  class="bg-light form-control" value={`${profileUserData?.location}`}/>
+            <div><input type="text"  class="bg-light form-control" onClick={addLocation} value={`${profileUserData?.location}`}/>
             </div>
             <div><EditIcon onClick={addLocation} className="location"/>
             </div>
@@ -1219,7 +1219,7 @@ db.collection("users").doc(`${auth?.currentUser?.uid}`).update({
             
             <div class="col-md-6 pt-md-0 pt-3"> <label for="">Place Of Work</label> 
             <div style={{display: 'flex',alignItems: "center"}}>
-            <div><input type="text"  class="bg-light form-control" value={`${profileUserData?.placeOfWork}`}/>
+            <div><input type="text"  class="bg-light form-control" onClick={addPlaceOfWork} value={`${profileUserData?.placeOfWork}`}/>
             </div>
             <div><EditIcon onClick={addPlaceOfWork} className="placeOfWork"/>
             </div>
@@ -1239,7 +1239,7 @@ db.collection("users").doc(`${auth?.currentUser?.uid}`).update({
                 <div class="row py-2">
             <div class="col-md-6 pt-md-0 pt-3"> <label for="">School</label> 
             <div style={{display: 'flex',alignItems: "center"}}>
-            <div><input type="text"  class="bg-light form-control" value={`${profileUserData?.school}`}/>
+            <div><input type="text" onClick={addSchool} class="bg-light form-control" value={`${profileUserData?.school}`}/>
             </div>
             <div><EditIcon onClick={addSchool} className="school"/>
             </div>
@@ -1255,7 +1255,7 @@ db.collection("users").doc(`${auth?.currentUser?.uid}`).update({
                 </div>
             </div>            <div class="col-md-6 pt-md-0 pt-3"> <label for="">Bio</label> 
             <div style={{display: 'flex',alignItems: "center"}}>
-            <div><input type="text" value={bio} onClick={addbio}  onChange={bioSet} class="bg-light form-control" placeholder={`${profileUserData?.bio}`}/>
+            <div><input type="text"  onClick={addbio}  class="bg-light form-control" value={`${profileUserData?.bio}`}/>
             </div>
             <div><EditIcon onClick={addbio} className="bio"/>
             </div>
@@ -1274,7 +1274,7 @@ db.collection("users").doc(`${auth?.currentUser?.uid}`).update({
         <div class="row py-2">
         <div class="col-md-6 pt-md-0 pt-3"> <label for="">Date Of Birth</label> 
             <div style={{display: 'flex',alignItems: "center"}}>
-            <div><input type="text" value={birthday} onClick={addBirthday}  onChange={birthdaySet} class="bg-light form-control" placeholder={`${profileUserData?.dateOfBirth}`}/>
+            <div><input type="text"  onClick={addBirthday}  class="bg-light form-control" value={`${profileUserData?.dateOfBirth}`}/>
             </div>
             <div><EditIcon onClick={addBirthday} className="birthday"/>
             </div>
@@ -1290,7 +1290,7 @@ db.collection("users").doc(`${auth?.currentUser?.uid}`).update({
                 </div>
             </div>        
             </div>
-        <div class="py-3 pb-4 border-bottom">  <button class="btn border button">Cancel</button> </div>
+        <div class="py-3 pb-4 border-bottom">  <button onClick={handleCloseUpdateProfile} class="btn border button">Cancel</button> </div>
         <div class="d-sm-flex align-items-center pt-3" id="deactivate">
             <div> <b>Deactivate your account</b>
                 <p>Details about your company account and password</p>
